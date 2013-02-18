@@ -1,0 +1,416 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>module ti.uia.sysbios.LoggingSetup</title>
+<meta name="googlebot" content="noindex,nofollow">
+<link rel="stylesheet" type="text/css" href="../../../src.css"/>
+</head>
+<body>
+<pre class=src>
+     1    <span class="comment">/* --COPYRIGHT--,BSD
+</span>     2    <span class="comment"> * Copyright (c) $(CPYYEAR), Texas Instruments Incorporated
+</span>     3    <span class="comment"> * All rights reserved.
+</span>     4    <span class="comment"> *
+</span>     5    <span class="comment"> * Redistribution and use in source and binary forms, with or without
+</span>     6    <span class="comment"> * modification, are permitted provided that the following conditions
+</span>     7    <span class="comment"> * are met:
+</span>     8    <span class="comment"> *
+</span>     9    <span class="comment"> * *  Redistributions of source code must retain the above copyright
+</span>    10    <span class="comment"> *    notice, this list of conditions and the following disclaimer.
+</span>    11    <span class="comment"> *
+</span>    12    <span class="comment"> * *  Redistributions in binary form must reproduce the above copyright
+</span>    13    <span class="comment"> *    notice, this list of conditions and the following disclaimer in the
+</span>    14    <span class="comment"> *    documentation and/or other materials provided with the distribution.
+</span>    15    <span class="comment"> *
+</span>    16    <span class="comment"> * *  Neither the name of Texas Instruments Incorporated nor the names of
+</span>    17    <span class="comment"> *    its contributors may be used to endorse or promote products derived
+</span>    18    <span class="comment"> *    from this software without specific prior written permission.
+</span>    19    <span class="comment"> *
+</span>    20    <span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+</span>    21    <span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+</span>    22    <span class="comment"> * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+</span>    23    <span class="comment"> * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+</span>    24    <span class="comment"> * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+</span>    25    <span class="comment"> * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+</span>    26    <span class="comment"> * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+</span>    27    <span class="comment"> * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+</span>    28    <span class="comment"> * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+</span>    29    <span class="comment"> * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+</span>    30    <span class="comment"> * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</span>    31    <span class="comment"> * --/COPYRIGHT--*/</span>
+    32    
+    33    <span class="comment">/*
+</span>    34    <span class="comment"> *  ======== LoggingSetup.xdc ========
+</span>    35    <span class="comment"> */</span>
+    36    
+    37    <span class=key>package</span> ti.uia.sysbios;
+    38    
+    39    <span class="xdoc">/*!
+</span>    40    <span class="xdoc"> *  ======== LoggingSetup ========
+</span>    41    <span class="xdoc"> *  Module to aid in configuring SYSBIOS logging using UIA and System Analyzer
+</span>    42    <span class="xdoc"> * <b>@p</b>
+</span>    43    <span class="xdoc"> * The LoggingSetup module automates the process of configuring an application
+</span>    44    <span class="xdoc"> * to use UIA events, and configures SYS/BIOS modules to capture user-specified
+</span>    45    <span class="xdoc"> * information such as CPU Load, Task Load and Task Execution so that it can
+</span>    46    <span class="xdoc"> * be displayed by System Analyzer.  It also automates the creation of 
+</span>    47    <span class="xdoc"> * infrastructure modules such as loggers, the ServiceManager and RTA modules
+</span>    48    <span class="xdoc"> * to enable the capture and upload of the events over a user-specified transport.
+</span>    49    <span class="xdoc"> * Both JTAG and Non-JTAG transports are supported.
+</span>    50    <span class="xdoc"> * <b>@p</b>
+</span>    51    <span class="xdoc"> *  The following configuration script demonstrates the use of the LoggingSetup
+</span>    52    <span class="xdoc"> *  module in the XDC configuration file for the application:
+</span>    53    <span class="xdoc"> *
+</span>    54    <span class="xdoc"> * <b>@a(Example)</b>
+</span>    55    <span class="xdoc"> * Example 1: Configuring an application to use the default settings provided
+</span>    56    <span class="xdoc"> * by LoggingSetup.  The following default settings are automatically applied:
+</span>    57    <span class="xdoc"> * <b>@p(blist)</b>
+</span>    58    <span class="xdoc"> *    - Logging UIA events from user-provided C code.  User provided C code is
+</span>    59    <span class="xdoc"> *    treated as part of the xdc.runtime.Main module.  A circular buffer with
+</span>    60    <span class="xdoc"> *    a buffer size of 32 KBytes is enabled by default to support this.
+</span>    61    <span class="xdoc"> *   - Event logging is enabled for the SYS/BIOS Load and Task modules in order to 
+</span>    62    <span class="xdoc"> *   allow System Analyzer to display CPU Load, Task Load, and Task Execution 
+</span>    63    <span class="xdoc"> *   information.  Logging of SWI and HWI events is disabled by default.
+</span>    64    <span class="xdoc"> *   In order to optimize event capture and minimize event loss, two loggers 
+</span>    65    <span class="xdoc"> *   are created: one to store events from the SYS/BIOS Load module
+</span>    66    <span class="xdoc"> *   and the other to store events from other SYS/BIOS modules.
+</span>    67    <span class="xdoc"> *   - Multicore event correlation is enabled by default.  This enables the
+</span>    68    <span class="xdoc"> *    LogSync module and creation of a dedicated logger for sync point events
+</span>    69    <span class="xdoc"> *    with a circular buffer size of 8 KBytes.
+</span>    70    <span class="xdoc"> *   - The Event Upload Mode is configured for NONJTAG_AND_JTAGSTOPMODE.  This
+</span>    71    <span class="xdoc"> *    allows events to be uploaded in real-time via the Non-JTAG transport
+</span>    72    <span class="xdoc"> *    specified by the ti.uia.runtime.ServiceManager module, and also be uploaded
+</span>    73    <span class="xdoc"> *    when the target halts via JTAG.  If the ServiceManager module is not
+</span>    74    <span class="xdoc"> *    used in the application, the transport falls back to JTAGSTOPMODE.
+</span>    75    <span class="xdoc"> *   - An Overflow logger will be automatically created to capture events that 
+</span>    76    <span class="xdoc"> *    occurred while the transport was waiting to upload older events to the host.
+</span>    77    <span class="xdoc"> *    The logger's circular buffer size is set to 2K Bytes.
+</span>    78    <span class="xdoc"> *  <b>@p</b> 
+</span>    79    <span class="xdoc"> *  <b>@p(code)</b>
+</span>    80    <span class="xdoc"> *  // the Log module provides logging APIs for use by the user's software
+</span>    81    <span class="xdoc"> *  var Log = xdc.useModule('xdc.runtime.Log');
+</span>    82    <span class="xdoc"> *  // the LoggingSetup module's default settings configure much of the UIA infrastructure.
+</span>    83    <span class="xdoc"> *  var LoggingSetup = xdc.useModule('ti.uia.sysbios.LoggingSetup');
+</span>    84    <span class="xdoc"> *  <b>@p</b>
+</span>    85    <span class="xdoc"> *  <b>@p(html)</b>
+</span>    86    <span class="xdoc"> *  &lt;hr /&gt;
+</span>    87    <span class="xdoc"> *  <b>@p</b>
+</span>    88    <span class="xdoc"> * <b>@a(Example)</b>
+</span>    89    <span class="xdoc"> * Example 2: A number of 'template' applications are available that 
+</span>    90    <span class="xdoc"> * provide predefined XDC configuration scripts and C code for use in new
+</span>    91    <span class="xdoc"> * projects.  These templates provide good examples of how to configure all 
+</span>    92    <span class="xdoc"> * of the various modules that are involved in setting up the UIA infrastructure,
+</span>    93    <span class="xdoc"> * including the LoggingSetup module.  The templates can be downloaded from
+</span>    94    <span class="xdoc"> * the System Analyzer Wiki site at 
+</span>    95    <span class="xdoc"> *  <b>@p(html)</b>
+</span>    96    <span class="xdoc"> *  &lt;a href="http://processors.wiki.ti.com/index.php/System_Analyzer"&gt;
+</span>    97    <span class="xdoc"> * http://processors.wiki.ti.com/index.php/System_Analyzer&lt;/a&gt;
+</span>    98    <span class="xdoc"> * <b>@p</b>
+</span>    99    <span class="xdoc"> * They can also be generated directly by CCS, using the CCS New Project 
+</span>   100    <span class="xdoc"> * Wizard.  The following steps show how to use CCSv5.0.x to generate a new project
+</span>   101    <span class="xdoc"> * that configure the NDK to provide an Ethernet transport for uploading events 
+</span>   102    <span class="xdoc"> * from the target to the host, please perform the following steps in CCS. :
+</span>   103    <span class="xdoc"> * <b>@p(blist)</b>
+</span>   104    <span class="xdoc"> *   - File / New / CCS Project : opens the 'New CCS Project' dialog
+</span>   105    <span class="xdoc"> *   - &lt;enter a name for the project&gt;
+</span>   106    <span class="xdoc"> *   - &lt;select the type of project&gt;
+</span>   107    <span class="xdoc"> *   - &lt;accept defaults for Additional Project Settings&gt;
+</span>   108    <span class="xdoc"> *   - &lt;configure the project settings for compiler options, etc.&gt;
+</span>   109    <span class="xdoc"> *   - For Project Templates, expand the UIA and System Analyzer Examples section
+</span>   110    <span class="xdoc"> *   - select evm6472: Stairstep for a single core with UIA to see how
+</span>   111    <span class="xdoc"> *   to configure the NDK to use Ethernet as a transport for UIA events and
+</span>   112    <span class="xdoc"> *   commands.  
+</span>   113    <span class="xdoc"> *  - select evm6472: MessageQ (single image for all cores) with UIA
+</span>   114    <span class="xdoc"> *   to see how to create a multicore application that uses the same application
+</span>   115    <span class="xdoc"> *   software for all cores, and uses IPC to move event data from CPU cores 1-5
+</span>   116    <span class="xdoc"> *   to CPU core 0, with CPU core 0 using the NDK for Ethernet communications
+</span>   117    <span class="xdoc"> *   with the host.
+</span>   118    <span class="xdoc"> *  <b>@p</b>
+</span>   119    <span class="xdoc"> * 
+</span>   120    <span class="xdoc"> *  <b>@p(html)</b>
+</span>   121    <span class="xdoc"> *  &lt;hr /&gt;
+</span>   122    <span class="xdoc"> */</span> 
+   123    <span class=key>metaonly</span> <span class=key>module</span> LoggingSetup 
+   124    {
+   125    
+   126        <span class="xdoc">/*!
+</span>   127    <span class="xdoc">     *  ======== UploadMode ========
+</span>   128    <span class="xdoc">     */</span>
+   129        <span class=key>enum</span> UploadMode {
+   130            UploadMode_SIMULATOR = 1, <span class="comment">/* note that simulators use probe points */</span>
+   131            UploadMode_PROBEPOINT = 2,
+   132            UploadMode_JTAGSTOPMODE = 3,
+   133            UploadMode_JTAGRUNMODE = 4,
+   134            UploadMode_NONJTAGTRANSPORT = 5,
+   135            UploadMode_NONJTAG_AND_JTAGSTOPMODE = 6,
+   136            UploadMode_STREAMER = 7,
+   137            UploadMode_IDLE = 8
+   138        }
+   139            
+   140        <span class="xdoc">/*!
+</span>   141    <span class="xdoc">     *  ======== loadLogger ========
+</span>   142    <span class="xdoc">     *  Logger used for the Load module Log events
+</span>   143    <span class="xdoc">     */</span>
+   144        <span class=key>config</span> xdc.runtime.ILogger.Handle loadLogger = <span class=key>null</span>;
+   145        
+   146        <span class="xdoc">/*!
+</span>   147    <span class="xdoc">     *  ======== loadLoggerSize ========
+</span>   148    <span class="xdoc">     *  Size (in MAUs) of logger used for the Load module Log events.
+</span>   149    <span class="xdoc">     */</span>
+   150        <span class=key>metaonly</span> <span class=key>config</span> SizeT loadLoggerSize = 512;
+   151        
+   152        <span class="xdoc">/*!
+</span>   153    <span class="xdoc">     *  ======== loadLogging ========
+</span>   154    <span class="xdoc">     *  Enable the Load module event logging.
+</span>   155    <span class="xdoc">     *
+</span>   156    <span class="xdoc">     *  If this is false, the events will be disabled. Otherwise the events 
+</span>   157    <span class="xdoc">     *  will be enabled.
+</span>   158    <span class="xdoc">     *  Use the {<b>@link</b> #loadLoggingRuntimeControl} parameter 
+</span>   159    <span class="xdoc">     *  to determine whether the state can be modified during runtime.
+</span>   160    <span class="xdoc">     */</span>
+   161        <span class=key>metaonly</span> <span class=key>config</span> Bool loadLogging = <span class=key>true</span>;
+   162        
+   163        <span class="xdoc">/*!
+</span>   164    <span class="xdoc">     *  ======== loadLoggingRuntimeControl ========
+</span>   165    <span class="xdoc">     *  Specify whether load logging can be enabled / disabled at runtime.
+</span>   166    <span class="xdoc">     *
+</span>   167    <span class="xdoc">     *  This determines what diags settings are applied to the module's diags
+</span>   168    <span class="xdoc">     *  mask. If 'false', the diags bits will be configured as 
+</span>   169    <span class="xdoc">     *  ALWAYS_ON, meaning they can't be changed at runtime. If 'true', the 
+</span>   170    <span class="xdoc">     *  bits will be configured as 'RUNTIME_ON'.
+</span>   171    <span class="xdoc">     *
+</span>   172    <span class="xdoc">     *  Use the {<b>@link</b> #loadLogging} parameter 
+</span>   173    <span class="xdoc">     *  to determine whether the event is ON or OFF. For example, the
+</span>   174    <span class="xdoc">     *  following two lines set the Load modules events to 
+</span>   175    <span class="xdoc">     *  initially be 'ALWAYS_ON'.
+</span>   176    <span class="xdoc">     *
+</span>   177    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   178    <span class="xdoc">     *  LoggingSetup.loadLogging = true;   
+</span>   179    <span class="xdoc">     *  LoggingSetup.loadLoggingRuntimeControl = false;
+</span>   180    <span class="xdoc">     *  <b>@p</b>
+</span>   181    <span class="xdoc">     */</span>
+   182        <span class=key>metaonly</span> <span class=key>config</span> Bool loadLoggingRuntimeControl = <span class=key>true</span>;
+   183        
+   184        <span class="xdoc">/*!
+</span>   185    <span class="xdoc">     *  ======== mainLogger ========
+</span>   186    <span class="xdoc">     *  Logger used for main and non-XDC modules Log events
+</span>   187    <span class="xdoc">     */</span>
+   188        <span class=key>config</span> xdc.runtime.ILogger.Handle mainLogger = <span class=key>null</span>;
+   189        
+   190        <span class="xdoc">/*!
+</span>   191    <span class="xdoc">     *  ======== mainLoggerSize ========
+</span>   192    <span class="xdoc">     *  Size (in MAUs) of logger used for the main and non-XDC modules Log events
+</span>   193    <span class="xdoc">     */</span>
+   194        <span class=key>metaonly</span> <span class=key>config</span> SizeT mainLoggerSize = 1024;
+   195        
+   196        <span class="xdoc">/*!
+</span>   197    <span class="xdoc">     *  ======== mainLogging ========
+</span>   198    <span class="xdoc">     *  Enable main and non-XDC modules event logging
+</span>   199    <span class="xdoc">     *
+</span>   200    <span class="xdoc">     *  If this is false, the events will be disabled. Otherwise the events 
+</span>   201    <span class="xdoc">     *  will be enabled.
+</span>   202    <span class="xdoc">     *  Use the {<b>@link</b> #mainLoggingRuntimeControl} parameter 
+</span>   203    <span class="xdoc">     *  to determine whether the state can be modified during runtime.
+</span>   204    <span class="xdoc">     */</span>
+   205        <span class=key>metaonly</span> <span class=key>config</span> Bool mainLogging = <span class=key>true</span>;
+   206        
+   207        <span class="xdoc">/*!
+</span>   208    <span class="xdoc">     *  ======== mainLoggingRuntimeControl ========
+</span>   209    <span class="xdoc">     *  Specify whether main logging can be enabled / disabled at runtime.
+</span>   210    <span class="xdoc">     *
+</span>   211    <span class="xdoc">     *  This determines what diags settings are applied to the module's diags
+</span>   212    <span class="xdoc">     *  mask. If 'false', the diags bits will be configured as 
+</span>   213    <span class="xdoc">     *  ALWAYS_ON, meaning they can't be changed at runtime. If 'true', the 
+</span>   214    <span class="xdoc">     *  bits will be configured as 'RUNTIME_ON'.
+</span>   215    <span class="xdoc">     *
+</span>   216    <span class="xdoc">     *  Use the {<b>@link</b> #mainLogging} parameter 
+</span>   217    <span class="xdoc">     *  to determine whether the event is ON or OFF. For example, the
+</span>   218    <span class="xdoc">     *  following two lines set the Load modules events to 
+</span>   219    <span class="xdoc">     *  initially be 'ALWAYS_ON'.
+</span>   220    <span class="xdoc">     *
+</span>   221    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   222    <span class="xdoc">     *  LoggingSetup.mainLogging = true;   
+</span>   223    <span class="xdoc">     *  LoggingSetup.mainLoggingRuntimeControl = false;
+</span>   224    <span class="xdoc">     *  <b>@p</b>
+</span>   225    <span class="xdoc">     */</span>
+   226        <span class=key>metaonly</span> <span class=key>config</span> Bool mainLoggingRuntimeControl = <span class=key>true</span>;
+   227        
+   228        <span class="xdoc">/*!
+</span>   229    <span class="xdoc">     *  ======== sysbiosLogger ========
+</span>   230    <span class="xdoc">     *  Logger used for SYSBIOS modules Log events
+</span>   231    <span class="xdoc">     */</span>
+   232        <span class=key>config</span> xdc.runtime.ILogger.Handle sysbiosLogger = <span class=key>null</span>;
+   233        
+   234        <span class="xdoc">/*!
+</span>   235    <span class="xdoc">     *  ======== sysbiosLoggerSize ========
+</span>   236    <span class="xdoc">     *  Size (in MAUs) of the logger used for the SYS/BIOS modules' Log events
+</span>   237    <span class="xdoc">     */</span>
+   238        <span class=key>metaonly</span> <span class=key>config</span> SizeT sysbiosLoggerSize = 1024;
+   239        
+   240        <span class="xdoc">/*!
+</span>   241    <span class="xdoc">     *  ======== sysbiosHwiLogging ========
+</span>   242    <span class="xdoc">     *  Enable SYSBIOS Hwi and Clock modules' event logging
+</span>   243    <span class="xdoc">     *
+</span>   244    <span class="xdoc">     *  If this is false, the events will be disabled. Otherwise the events 
+</span>   245    <span class="xdoc">     *  will be enabled.
+</span>   246    <span class="xdoc">     *  Use the {<b>@link</b> #sysbiosHwiLoggingRuntimeControl} parameter 
+</span>   247    <span class="xdoc">     *  to determine whether the state can be modified during runtime.
+</span>   248    <span class="xdoc">     */</span>
+   249        <span class=key>metaonly</span> <span class=key>config</span> Bool sysbiosHwiLogging = <span class=key>false</span>;
+   250        
+   251        <span class="xdoc">/*!
+</span>   252    <span class="xdoc">     *  ======== sysbiosHwiLoggingRuntimeControl ========
+</span>   253    <span class="xdoc">     *  Specify whether Hwi and Clock logging can be enabled / disabled at runtime
+</span>   254    <span class="xdoc">     *
+</span>   255    <span class="xdoc">     *  This determines what diags settings are applied to the module's diags
+</span>   256    <span class="xdoc">     *  mask. If 'false', the diags bits will be configured as 
+</span>   257    <span class="xdoc">     *  ALWAYS_ON, meaning they can't be changed at runtime. If 'true', the 
+</span>   258    <span class="xdoc">     *  bits will be configured as 'RUNTIME_ON'.
+</span>   259    <span class="xdoc">     *
+</span>   260    <span class="xdoc">     *  Use the {<b>@link</b> #sysbiosHwiLogging} parameter 
+</span>   261    <span class="xdoc">     *  to determine whether the event is ON or OFF. For example, the
+</span>   262    <span class="xdoc">     *  following two lines set the Load modules events to 
+</span>   263    <span class="xdoc">     *  initially be 'ALWAYS_ON'.
+</span>   264    <span class="xdoc">     *
+</span>   265    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   266    <span class="xdoc">     *  LoggingSetup.sysbiosHwiLogging = true;   
+</span>   267    <span class="xdoc">     *  LoggingSetup.sysbiosHwiLoggingRuntimeControl = false;
+</span>   268    <span class="xdoc">     *  <b>@p</b>
+</span>   269    <span class="xdoc">     */</span>
+   270        <span class=key>metaonly</span> <span class=key>config</span> Bool sysbiosHwiLoggingRuntimeControl = <span class=key>false</span>;
+   271        
+   272        <span class="xdoc">/*!
+</span>   273    <span class="xdoc">     *  ======== sysbiosSwiLogging ========
+</span>   274    <span class="xdoc">     *  Enable SYSBIOS Swi module's event logging
+</span>   275    <span class="xdoc">     *
+</span>   276    <span class="xdoc">     *  If this is false, the events will be disabled. Otherwise the events 
+</span>   277    <span class="xdoc">     *  will be enabled.
+</span>   278    <span class="xdoc">     *  Use the {<b>@link</b> #sysbiosSwiLoggingRuntimeControl} parameter 
+</span>   279    <span class="xdoc">     *  to determine whether the state can be modified during runtime.
+</span>   280    <span class="xdoc">     */</span>
+   281        <span class=key>metaonly</span> <span class=key>config</span> Bool sysbiosSwiLogging = <span class=key>false</span>;
+   282        
+   283        <span class="xdoc">/*!
+</span>   284    <span class="xdoc">     *  ======== sysbiosSwiLoggingRuntimeControl ========
+</span>   285    <span class="xdoc">     *  Specify whether Swi logging can be enabled / disabled at runtime.
+</span>   286    <span class="xdoc">     *
+</span>   287    <span class="xdoc">     *  This determines what diags settings are applied to the module's diags
+</span>   288    <span class="xdoc">     *  mask. If 'false', the diags bits will be configured as 
+</span>   289    <span class="xdoc">     *  ALWAYS_ON, meaning they can't be changed at runtime. If 'true', the 
+</span>   290    <span class="xdoc">     *  bits will be configured as 'RUNTIME_ON'.
+</span>   291    <span class="xdoc">     *
+</span>   292    <span class="xdoc">     *  Use the {<b>@link</b> #sysbiosSwiLogging} parameter 
+</span>   293    <span class="xdoc">     *  to determine whether the event is ON or OFF. For example, the
+</span>   294    <span class="xdoc">     *  following two lines set the Load modules events to 
+</span>   295    <span class="xdoc">     *  initially be 'ALWAYS_ON'.
+</span>   296    <span class="xdoc">     *
+</span>   297    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   298    <span class="xdoc">     *  LoggingSetup.sysbiosSwiLogging = true;   
+</span>   299    <span class="xdoc">     *  LoggingSetup.sysbiosSwiLoggingRuntimeControl = false;
+</span>   300    <span class="xdoc">     *  <b>@p</b>
+</span>   301    <span class="xdoc">     */</span>
+   302        <span class=key>metaonly</span> <span class=key>config</span> Bool sysbiosSwiLoggingRuntimeControl = <span class=key>false</span>;
+   303        
+   304        <span class="xdoc">/*!
+</span>   305    <span class="xdoc">     *  ======== sysbiosTaskLogging ========
+</span>   306    <span class="xdoc">     *  Enable SYSBIOS Task module's event logging
+</span>   307    <span class="xdoc">     *
+</span>   308    <span class="xdoc">     *  If this is false, the events will be disabled. Otherwise the events 
+</span>   309    <span class="xdoc">     *  will be enabled.
+</span>   310    <span class="xdoc">     *  Use the {<b>@link</b> #sysbiosTaskLoggingRuntimeControl} parameter 
+</span>   311    <span class="xdoc">     *  to determine whether the state can be modified during runtime.
+</span>   312    <span class="xdoc">     */</span>
+   313        <span class=key>metaonly</span> <span class=key>config</span> Bool sysbiosTaskLogging = <span class=key>true</span>;
+   314        
+   315        <span class="xdoc">/*!
+</span>   316    <span class="xdoc">     *  ======== sysbiosTaskLoggingRuntimeControl ========
+</span>   317    <span class="xdoc">     *  Specify whether Task logging can be enabled / disabled at runtime.
+</span>   318    <span class="xdoc">     *
+</span>   319    <span class="xdoc">     *  This determines what diags settings are applied to the module's diags
+</span>   320    <span class="xdoc">     *  mask. If 'false', the diags bits will be configured as 
+</span>   321    <span class="xdoc">     *  ALWAYS_ON, meaning they can't be changed at runtime. If 'true', the 
+</span>   322    <span class="xdoc">     *  bits will be configured as 'RUNTIME_ON'.
+</span>   323    <span class="xdoc">     *
+</span>   324    <span class="xdoc">     *  Use the {<b>@link</b> #sysbiosTaskLogging} parameter 
+</span>   325    <span class="xdoc">     *  to determine whether the event is ON or OFF. For example, the
+</span>   326    <span class="xdoc">     *  following two lines set the Load modules events to 
+</span>   327    <span class="xdoc">     *  initially be 'ALWAYS_ON'.
+</span>   328    <span class="xdoc">     *
+</span>   329    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   330    <span class="xdoc">     *  LoggingSetup.sysbiosTaskLogging = true;   
+</span>   331    <span class="xdoc">     *  LoggingSetup.sysbiosTaskLoggingRuntimeControl = false;
+</span>   332    <span class="xdoc">     *  <b>@p</b>
+</span>   333    <span class="xdoc">     */</span>
+   334        <span class=key>metaonly</span> <span class=key>config</span> Bool sysbiosTaskLoggingRuntimeControl = <span class=key>true</span>;
+   335    
+   336        <span class="xdoc">/*!
+</span>   337    <span class="xdoc">     *  ======== overflowLoggerSize ========
+</span>   338    <span class="xdoc">     *  Size of logger used for overflow events when
+</span>   339    <span class="xdoc">     *  uploadMode is either JTAGRUNMODE or NONJTAG_AND_JTAGSTOPMODE
+</span>   340    <span class="xdoc">     */</span>
+   341        <span class=key>metaonly</span> <span class=key>config</span> SizeT overflowLoggerSize = 1024;
+   342        
+   343        <span class="xdoc">/*!
+</span>   344    <span class="xdoc">     *  ========= eventUploadMode ========
+</span>   345    <span class="xdoc">     *  Event upload mode
+</span>   346    <span class="xdoc">     *  <b>@p</b>
+</span>   347    <span class="xdoc">     *  Upload_SIMULATOR: events are uploaded from the simulator 
+</span>   348    <span class="xdoc">     *  at the time the event is logged.  
+</span>   349    <span class="xdoc">     *  <b>@p(blist)</b>
+</span>   350    <span class="xdoc">     *   - Upload_PROBEPOINT: events are uploaded at the time the event 
+</span>   351    <span class="xdoc">     *  is logged. The target is briefly halted while the event is uploaded.
+</span>   352    <span class="xdoc">     *   - Upload_JTAGSTOPMODE: events are uploaded over JTAG when the target halts
+</span>   353    <span class="xdoc">     *   - Upload_JTAGRUNMODE: events are uploaded via JTAG while the target is running.
+</span>   354    <span class="xdoc">     *   - Upload_NONJTAGTRANSPORT: events are uploaded over a non-JTAG transport such
+</span>   355    <span class="xdoc">     *  as Ethernet.  <b>@see</b> RTA for info on how to use the NDK as a transport.
+</span>   356    <span class="xdoc">     *   - Upload_NONJTAG_AND_JTAGSTOPMODE: events are uploaded over a non-JTAG transport.
+</span>   357    <span class="xdoc">     *  When the target halts (e.g. due to a breakpoint), any events that have not
+</span>   358    <span class="xdoc">     *  been uploaded yet are uploaded via JTAG.
+</span>   359    <span class="xdoc">     *  <b>@p</b> 
+</span>   360    <span class="xdoc">     *  
+</span>   361    <span class="xdoc">     *  <b>@a(Example)</b>
+</span>   362    <span class="xdoc">     *  The following is an example of the configuration script used
+</span>   363    <span class="xdoc">     *  to configure the system to use LoggerCircBuf loggers in order to
+</span>   364    <span class="xdoc">     *  stream events from the target to the host while the target is running
+</span>   365    <span class="xdoc">     *  over JTAG.  (Note that this mode is only supported for CPUs that 
+</span>   366    <span class="xdoc">     *  support real-time JTAG accesses such as those in the C6X family, 
+</span>   367    <span class="xdoc">     *  e.g. C64X+ and C66 CPUs)
+</span>   368    <span class="xdoc">     *   
+</span>   369    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   370    <span class="xdoc">     *  var LoggingSetup = xdc.useModule('ti.uia.sysbios.LoggingSetup');
+</span>   371    <span class="xdoc">     *  LoggingSetup.eventUploadMode = LoggingSetup.UploadMode_JTAGRUNMODE;
+</span>   372    <span class="xdoc">     *   
+</span>   373    <span class="xdoc">     */</span>
+   374        <span class=key>metaonly</span> <span class=key>config</span> UploadMode eventUploadMode = UploadMode_JTAGSTOPMODE; 
+   375    
+   376        <span class="xdoc">/*!
+</span>   377    <span class="xdoc">     * ======== disableMulticoreEventCorrelation ========
+</span>   378    <span class="xdoc">     * Set to true for single core applications.
+</span>   379    <span class="xdoc">     * 
+</span>   380    <span class="xdoc">     * When true the LoggingSetup module will not automatically
+</span>   381    <span class="xdoc">     * include the the LogSync module.  The LogSync module is
+</span>   382    <span class="xdoc">     * required in order to enable events from multiple CPU cores
+</span>   383    <span class="xdoc">     * to be correlated with each other.
+</span>   384    <span class="xdoc">     * <b>@see</b> ti.uia.runtime.LogSync  
+</span>   385    <span class="xdoc">     * 
+</span>   386    <span class="xdoc">     */</span>
+   387        <span class=key>metaonly</span> <span class=key>config</span> Bool disableMulticoreEventCorrelation = <span class=key>false</span>;
+   388       
+   389        <span class="xdoc">/*! <b>@_nodoc</b>
+</span>   390    <span class="xdoc">     * ======== createLogger =========
+</span>   391    <span class="xdoc">     * Internal helper function that creates the type of logger
+</span>   392    <span class="xdoc">     * appropriate for the LoggingSetup.uploadMode that has been configured.
+</span>   393    <span class="xdoc">     * 
+</span>   394    <span class="xdoc">     * <b>@param(loggerSize)</b>: the size of the logger in MAUs
+</span>   395    <span class="xdoc">     * <b>@param(loggerInstanceName)</b>: the name to assign to the logger instance
+</span>   396    <span class="xdoc">     * <b>@param</b> (loggerPriority): the IUIATransfer.Priority to assign to the logger instance
+</span>   397    <span class="xdoc">     * <b>@a(return)</b> returns the logger instance that was created
+</span>   398    <span class="xdoc">     */</span>
+   399         <span class=key>metaonly</span> <span class=key>function</span> createLogger(loggerSize,loggerInstanceName,loggerPriority);
+   400    }
+   401    
+   402    <span class="comment">/*
+</span>   403    <span class="comment"> *! Revision History
+</span>   404    <span class="comment"> *! ================
+</span>   405    <span class="comment"> *! 23-Jun-2010 toddm Started revision history
+</span>   406    <span class="comment"> */</span>
+   407    
+</pre>
+</body></html>

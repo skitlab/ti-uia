@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>module ti.uia.events.UIAProfile</title>
+<meta name="googlebot" content="noindex,nofollow">
+<link rel="stylesheet" type="text/css" href="../../../src.css"/>
+</head>
+<body>
+<pre class=src>
+     1    <span class="comment">/* --COPYRIGHT--,BSD
+</span>     2    <span class="comment"> * Copyright (c) $(CPYYEAR), Texas Instruments Incorporated
+</span>     3    <span class="comment"> * All rights reserved.
+</span>     4    <span class="comment"> *
+</span>     5    <span class="comment"> * Redistribution and use in source and binary forms, with or without
+</span>     6    <span class="comment"> * modification, are permitted provided that the following conditions
+</span>     7    <span class="comment"> * are met:
+</span>     8    <span class="comment"> *
+</span>     9    <span class="comment"> * *  Redistributions of source code must retain the above copyright
+</span>    10    <span class="comment"> *    notice, this list of conditions and the following disclaimer.
+</span>    11    <span class="comment"> *
+</span>    12    <span class="comment"> * *  Redistributions in binary form must reproduce the above copyright
+</span>    13    <span class="comment"> *    notice, this list of conditions and the following disclaimer in the
+</span>    14    <span class="comment"> *    documentation and/or other materials provided with the distribution.
+</span>    15    <span class="comment"> *
+</span>    16    <span class="comment"> * *  Neither the name of Texas Instruments Incorporated nor the names of
+</span>    17    <span class="comment"> *    its contributors may be used to endorse or promote products derived
+</span>    18    <span class="comment"> *    from this software without specific prior written permission.
+</span>    19    <span class="comment"> *
+</span>    20    <span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+</span>    21    <span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+</span>    22    <span class="comment"> * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+</span>    23    <span class="comment"> * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+</span>    24    <span class="comment"> * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+</span>    25    <span class="comment"> * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+</span>    26    <span class="comment"> * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+</span>    27    <span class="comment"> * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+</span>    28    <span class="comment"> * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+</span>    29    <span class="comment"> * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+</span>    30    <span class="comment"> * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</span>    31    <span class="comment"> * --/COPYRIGHT--*/</span>
+    32    
+    33    <span class="comment">/*
+</span>    34    <span class="comment"> * ======== UIAProfile.xdc ========
+</span>    35    <span class="comment"> */</span>
+    36    
+    37    import xdc.runtime.Diags;
+    38    import xdc.runtime.Types;
+    39    import ti.uia.events.DvtTypes;
+    40    
+    41    <span class="xdoc">/*!
+</span>    42    <span class="xdoc"> * UIA Profile Events
+</span>    43    <span class="xdoc"> *
+</span>    44    <span class="xdoc"> * The UIAProfile module defines events that allow
+</span>    45    <span class="xdoc"> * tooling to analyze the performance of the software
+</span>    46    <span class="xdoc"> * (processing time, latency, etc.)
+</span>    47    <span class="xdoc"> *  
+</span>    48    <span class="xdoc"> *  The generation of UIAProfile events is controlled by a module's diagnostics
+</span>    49    <span class="xdoc"> *  mask, which is described in detail in `{<b>@link</b> xdc.runtime.Diags}`.
+</span>    50    <span class="xdoc"> * `UIAProfile_enterFunction` events are generated only when the Diags.ENTRY bit  
+</span>    51    <span class="xdoc"> *  in the module's diagnostics mask is set, and 'UIAProfile_exitFunction' events 
+</span>    52    <span class="xdoc"> *  are generated only when the Diags.EXIT bit is set.
+</span>    53    <span class="xdoc"> * 
+</span>    54    <span class="xdoc"> *  The following configuration script demonstrates how the application might
+</span>    55    <span class="xdoc"> *  control the logging of events embedded in the `Mod` module at configuration
+</span>    56    <span class="xdoc"> *  time. In this case, the configuration script arranges for the `Log`
+</span>    57    <span class="xdoc"> *  statements within modules to always generate ENTRY and EXIT events.
+</span>    58    <span class="xdoc"> *  Without these configuration statements, no events would be generated
+</span>    59    <span class="xdoc"> *  by any modules.
+</span>    60    <span class="xdoc"> *
+</span>    61    <span class="xdoc"> * <b>@a(Examples)</b>
+</span>    62    <span class="xdoc"> * Example 1: This is part of the XDC configuration file for the application:
+</span>    63    <span class="xdoc"> *
+</span>    64    <span class="xdoc"> *  <b>@p(code)</b>
+</span>    65    <span class="xdoc"> *  var UIAProfile = xdc.useModule('ti.uia.events.UIAProfile');
+</span>    66    <span class="xdoc"> *  var Diags = xdc.useModule('xdc.runtime.Diags');
+</span>    67    <span class="xdoc"> *  var LoggerSys = xdc.useModule('xdc.runtime.LoggerSys');
+</span>    68    <span class="xdoc"> *  var Defaults = xdc.useModule('xdc.runtime.Defaults');
+</span>    69    <span class="xdoc"> *  var logger = LoggerSys.create();
+</span>    70    <span class="xdoc"> *  
+</span>    71    <span class="xdoc"> *  Defaults.common$.diags_ENTRY = Diags.ALWAYS_ON; 
+</span>    72    <span class="xdoc"> *  Defaults.common$.diags_EXIT = Diags.ALWAYS_ON;
+</span>    73    <span class="xdoc"> *  Defaults.common$.logger = logger;
+</span>    74    <span class="xdoc"> *  <b>@p</b>
+</span>    75    <span class="xdoc"> *
+</span>    76    <span class="xdoc"> *  <b>@p(html)</b>
+</span>    77    <span class="xdoc"> *  &lt;hr /&gt;
+</span>    78    <span class="xdoc"> *  <b>@p</b>
+</span>    79    <span class="xdoc"> *
+</span>    80    <span class="xdoc"> *  Example 2: The following example configures a module to support logging
+</span>    81    <span class="xdoc"> *  of ENTRY and EXIT events, but defers the actual activation and deactivation of the
+</span>    82    <span class="xdoc"> *  logging until runtime. See the `{<b>@link</b> Diags#setMask Diags_setMask()}`
+</span>    83    <span class="xdoc"> *  function for details on specifying the control string.
+</span>    84    <span class="xdoc"> *
+</span>    85    <span class="xdoc"> *  This is a part of the XDC configuration file for the application:
+</span>    86    <span class="xdoc"> *
+</span>    87    <span class="xdoc"> *  <b>@p(code)</b>
+</span>    88    <span class="xdoc"> *  var UIAProfile = xdc.useModule('ti.uia.events.UIAProfile');
+</span>    89    <span class="xdoc"> *  var Diags = xdc.useModule('xdc.runtime.Diags');
+</span>    90    <span class="xdoc"> *  var Mod = xdc.useModule('my.pkg.Mod');
+</span>    91    <span class="xdoc"> *
+</span>    92    <span class="xdoc"> *  Mod.common$.diags_ENTRY = Diags.RUNTIME_OFF;
+</span>    93    <span class="xdoc"> *  Mod.common$.diags_EXIT = Diags.RUNTIME_OFF;
+</span>    94    <span class="xdoc"> *  <b>@p</b>
+</span>    95    <span class="xdoc"> *
+</span>    96    <span class="xdoc"> *  This is a part of the C code for the application.
+</span>    97    <span class="xdoc"> *  The diags_ENTRY mask is set by "E", and the diags_EXIT mask is set by "X".
+</span>    98    <span class="xdoc"> *
+</span>    99    <span class="xdoc"> *  <b>@p(code)</b>
+</span>   100    <span class="xdoc"> *  // turn on logging of ENTRY and EXIT events in the module
+</span>   101    <span class="xdoc"> *  Diags_setMask("my.pkg.Mod+EX");
+</span>   102    <span class="xdoc"> *
+</span>   103    <span class="xdoc"> *  // turn off logging of ENTRY and EXIT events in the module
+</span>   104    <span class="xdoc"> *  Diags_setMask("my.pkg.Mod-EX");
+</span>   105    <span class="xdoc"> *  <b>@p</b>
+</span>   106    <span class="xdoc"> *
+</span>   107    <span class="xdoc"> *  
+</span>   108    <span class="xdoc"> */</span>
+   109    <span class=key>module</span> UIAProfile <span class=key>inherits</span> IUIAEvent {
+   110    
+   111        <span class="xdoc">/*!
+</span>   112    <span class="xdoc">     *  ======== enterFunction ========
+</span>   113    <span class="xdoc">     *  Profiling event used to log the entry point of a function
+</span>   114    <span class="xdoc">     *
+</span>   115    <span class="xdoc">     * <b>@a(Example)</b>
+</span>   116    <span class="xdoc">     * To add entry and exit hook functions to every function 
+</span>   117    <span class="xdoc">     * 1. Use the following compiler options when compiling the source
+</span>   118    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   119    <span class="xdoc">     *  --entry_hook=functionEntryHook
+</span>   120    <span class="xdoc">     *  --entry_param=address
+</span>   121    <span class="xdoc">     *  --exit_hook=functionExitHook
+</span>   122    <span class="xdoc">     *  --exit_param=address
+</span>   123    <span class="xdoc">     *  <b>@p</b>
+</span>   124    <span class="xdoc">     * 2. Add the following c code to implement the hook functions:
+</span>   125    <span class="xdoc">     *   The first parameter (the taskHandle) is set to  0 in this example.  
+</span>   126    <span class="xdoc">     *   <b>@see</b> exitFunction for an example of how to log the current task ID
+</span>   127    <span class="xdoc">     *   for task-aware function profiling.
+</span>   128    <span class="xdoc">     *  
+</span>   129    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   130    <span class="xdoc">     *  #include &lt;xdc/runtime/Log.h&gt;
+</span>   131    <span class="xdoc">     *  #include &lt;ti/uia/events/UIAProfile.h&gt;
+</span>   132    <span class="xdoc">     *  ...
+</span>   133    <span class="xdoc">     * void functionEntryHook( void (*addr)() ){
+</span>   134    <span class="xdoc">     *    Log_write2(UIAProfile_enterFunction, 0,(IArg)addr);
+</span>   135    <span class="xdoc">     *   ...
+</span>   136    <span class="xdoc">     * void functionExitHook( void (*addr)() ){
+</span>   137    <span class="xdoc">     *    Log_write2(UIAProfile_exitFunction, 0,(IArg)addr);
+</span>   138    <span class="xdoc">     * }
+</span>   139    <span class="xdoc">     *  <b>@p</b>
+</span>   140    <span class="xdoc">     *  The following text will be displayed for the event:
+</span>   141    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   142    <span class="xdoc">     *  enterFunction: taskHandle=0x0, adrs=0x820060
+</span>   143    <span class="xdoc">     *  exitFunction: taskHandle0x0, adrs=0x820060
+</span>   144    <span class="xdoc">     *  <b>@p</b>     
+</span>   145    <span class="xdoc">     *  <b>@param(taskHandle)</b>          task handle that identifies the currently active task (use 0 if not required)
+</span>   146    <span class="xdoc">     *  <b>@param(functionAdrs)</b>        the address of a function that can differentiate this pair of start and stop events from others
+</span>   147    <span class="xdoc">     */</span>
+   148        <span class=key>config</span> xdc.runtime.Log.Event enterFunction = {
+   149            mask: Diags.ENTRY,
+   150            msg: <span class="string">"enterFunction: taskHandle=0x%x, adrs=0x%x"</span>    
+   151        };
+   152    
+   153        <span class="xdoc">/*!
+</span>   154    <span class="xdoc">     *  ======== metaEventEnterFunction ========
+</span>   155    <span class="xdoc">     *  Metadata description of the enterFunction event
+</span>   156    <span class="xdoc">     *
+</span>   157    <span class="xdoc">     *  <b>@_nodoc</b>
+</span>   158    <span class="xdoc">     */</span>
+   159        <span class=key>metaonly</span> <span class=key>config</span> DvtTypes.MetaEventDescriptor metaEventEnterFunction = {
+   160            versionId: <span class="string">"2.0"</span>,
+   161            analysisType: DvtTypes.DvtAnalysisType_START,
+   162            displayText: <span class="string">"enterFunction"</span>,
+   163            tooltipText: <span class="string">"function entry"</span>,
+   164            numParameters: 2,
+   165            paramInfo: [
+   166            {   name: <span class="string">'Qualifier'</span>,
+   167                dataDesc: DvtTypes.DvtDataDesc_INSTANCE,
+   168                dataTypeName: <span class="string">'Int'</span>,
+   169                units: <span class="string">'none'</span>,
+   170                isHidden: <span class=key>false</span>
+   171            },
+   172            {   name: <span class="string">'FunctionAdrs'</span>,
+   173                dataDesc: DvtTypes.DvtDataDesc_FUNCTIONADRS,
+   174                dataTypeName: <span class="string">'Int'</span>,
+   175                units: <span class="string">'none'</span>,
+   176                isHidden: <span class=key>false</span>
+   177            }
+   178            ]
+   179        };
+   180    
+   181    
+   182        <span class="xdoc">/*!
+</span>   183    <span class="xdoc">     *  ======== exitFunction ========
+</span>   184    <span class="xdoc">     *  Profiling event used to log the exit point of a function
+</span>   185    <span class="xdoc">     *
+</span>   186    <span class="xdoc">     * <b>@a(Example)</b>
+</span>   187    <span class="xdoc">     * To add entry and exit hook functions to every function 
+</span>   188    <span class="xdoc">     * 1. Use the following compiler options when compiling the source
+</span>   189    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   190    <span class="xdoc">     *  --entry_hook=functionEntryHook
+</span>   191    <span class="xdoc">     *  --entry_param=address
+</span>   192    <span class="xdoc">     *  --exit_hook=functionExitHook
+</span>   193    <span class="xdoc">     *  --exit_param=address
+</span>   194    <span class="xdoc">     *  <b>@p</b>
+</span>   195    <span class="xdoc">     * 2. Add the following c code to implement the hook functions:
+</span>   196    <span class="xdoc">     *   Task_selfMacro() is used to get the current task handle in this example.  
+</span>   197    <span class="xdoc">     *   <b>@see</b> enterFunction for an example of how to save CPU by logging 0 
+</span>   198    <span class="xdoc">     *   instead of the task handle if task-aware profiling is not required.
+</span>   199    <span class="xdoc">     *  
+</span>   200    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   201    <span class="xdoc">     *  #include &lt;xdc/runtime/Log.h&gt;
+</span>   202    <span class="xdoc">     *  #include &lt;ti/uia/events/UIAProfile.h&gt;
+</span>   203    <span class="xdoc">     *  #include &lt;ti/sysbios/knl/Task.h&gt;
+</span>   204    <span class="xdoc">     *  ...
+</span>   205    <span class="xdoc">     * void functionEntryHook( void (*addr)() ){
+</span>   206    <span class="xdoc">     *    Log_write2(UIAProfile_enterFunction, (IArg)Task_selfMacro(),(IArg)addr);
+</span>   207    <span class="xdoc">     *   ...
+</span>   208    <span class="xdoc">     * void functionExitHook( void (*addr)() ){
+</span>   209    <span class="xdoc">     *    Log_write2(UIAProfile_exitFunction, (IArg)Task_selfMacro(),(IArg)addr);
+</span>   210    <span class="xdoc">     * }
+</span>   211    <span class="xdoc">     *  <b>@p</b>
+</span>   212    <span class="xdoc">     *  The following text will be displayed for the event:
+</span>   213    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   214    <span class="xdoc">     *  enterFunction: taskHandle=0x0, adrs=0x820060
+</span>   215    <span class="xdoc">     *  exitFunction: taskHandle=0x0, adrs=0x820060
+</span>   216    <span class="xdoc">     *  <b>@p</b>     
+</span>   217    <span class="xdoc">     *  <b>@param(taskHandle)</b>          task handle that identifies the currently active task (use 0 if not required)
+</span>   218    <span class="xdoc">     *  <b>@param(functionAdrs)</b>        the address of a function that can differentiate this pair of start and stop events from others
+</span>   219    <span class="xdoc">     */</span>
+   220        <span class=key>config</span> xdc.runtime.Log.Event exitFunction = {
+   221            mask: Diags.EXIT,
+   222            msg: <span class="string">"exitFunction: taskHandle=0x%x, adrs=0x%x"</span>
+   223        };
+   224    
+   225        <span class="xdoc">/*!
+</span>   226    <span class="xdoc">     *  ======== metaEventExitFunction ========
+</span>   227    <span class="xdoc">     *  Metadata description of the exitFunction event
+</span>   228    <span class="xdoc">     *
+</span>   229    <span class="xdoc">     *  <b>@_nodoc</b>
+</span>   230    <span class="xdoc">     */</span>
+   231        <span class=key>metaonly</span> <span class=key>config</span> DvtTypes.MetaEventDescriptor metaEventExitFunction = {
+   232            versionId: <span class="string">"2.0"</span>,
+   233            analysisType: DvtTypes.DvtAnalysisType_STOP,
+   234            displayText: <span class="string">"exitFunction"</span>,
+   235            tooltipText: <span class="string">"Marks the end of analysis for a module instance"</span>,
+   236            numParameters: 2,
+   237            paramInfo: [
+   238            {   name: <span class="string">'Qualifier'</span>,
+   239                dataDesc: DvtTypes.DvtDataDesc_INSTANCE,
+   240                dataTypeName: <span class="string">'Int'</span>,
+   241                units: <span class="string">'none'</span>,
+   242                isHidden: <span class=key>false</span>
+   243            },
+   244            {   name: <span class="string">'FunctionAdrs'</span>,
+   245                dataDesc: DvtTypes.DvtDataDesc_FUNCTIONADRS,
+   246                dataTypeName: <span class="string">'Int'</span>,
+   247                units: <span class="string">'none'</span>,
+   248                isHidden: <span class=key>false</span>
+   249            }
+   250            ]
+   251        };
+   252        
+   253        
+   254    }
+   255    
+   256    <span class="comment">/*
+</span>   257    <span class="comment"> *! Revision History
+</span>   258    <span class="comment"> *! ================
+</span>   259    <span class="comment"> *! 23-Jun-2010 toddm Started revision history
+</span>   260    <span class="comment"> */</span>
+</pre>
+</body></html>

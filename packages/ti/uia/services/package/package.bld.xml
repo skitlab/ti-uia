@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.uia.services" version="1, 0, 0, 0" producerId="undefined">
+    <units>
+        <module name="Rta"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.uia.services.c"/>
+        <srcFile name="Rta.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/release/ti.uia.services.a64P.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.o64P.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.o64P.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.a64Pe.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.o64Pe.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.o64Pe.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.a674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.o674.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.o674.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.ae64P.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oe64P.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oe64P.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.ae66.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oe66.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oe66.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.ae66e.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oe66e.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oe66e.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.ae64Pe.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oe64Pe.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oe64Pe.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oe674.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oe674.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.ae64T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oe64T.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oe64T.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.ae9.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oe9.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oe9.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.aem3.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oem3.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oem3.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.aem4f.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oem4f.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oem4f.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.aea8f.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oea8f.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oea8f.dep" src="Rta.c"/>
+        <srcFile name="lib/release/ti.uia.services.aea8fnv.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/package/package_ti.uia.services.oea8fnv.dep" src="package/package_ti.uia.services.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.services/Rta.oea8fnv.dep" src="Rta.c"/>
+        <srcFile name="package/rel/ti_uia_services.tar.gz.dep" src="package/rel/ti_uia_services.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.C64P"
+            version="ti.targets.C64P{1,0,7.0,0"
+            platform="ti.platforms.evm6472:core0"
+            isa="64P"
+            suffix="64P"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.0.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.C64P_big_endian"
+            version="ti.targets.C64P_big_endian{1,0,7.0,0"
+            platform="ti.platforms.evmDM6437"
+            isa="64P"
+            suffix="64Pe"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.0.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="big"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.C674"
+            version="ti.targets.C674{1,0,7.0,0"
+            platform="ti.uia.examples.platforms.evmTI816X.dsp"
+            isa="674"
+            suffix="674"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.0.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C64P"
+            version="ti.targets.elf.C64P{1,0,7.2,0"
+            platform="ti.platforms.simTCI6498"
+            isa="64P"
+            suffix="e64P"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C66"
+            version="ti.targets.elf.C66{1,0,7.2,0"
+            platform="ti.platforms.evm6678:core0"
+            isa="66"
+            suffix="e66"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C66_big_endian"
+            version="ti.targets.elf.C66_big_endian{1,0,7.2,0"
+            platform="ti.platforms.simTCI6616"
+            isa="66"
+            suffix="e66e"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="big"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C64P_big_endian"
+            version="ti.targets.elf.C64P_big_endian{1,0,7.2,0"
+            platform="ti.platforms.evmDM6437"
+            isa="64P"
+            suffix="e64Pe"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="big"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.2,0"
+            platform="ti.uia.examples.platforms.evmTI816X.dsp"
+            isa="674"
+            suffix="e674"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C64T"
+            version="ti.targets.elf.C64T{1,0,7.2,0"
+            platform="ti.platforms.sdp4430"
+            isa="64T"
+            suffix="e64T"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.arm.elf.Arm9"
+            version="ti.targets.arm.elf.Arm9{1,0,4.9,0"
+            platform="ti.platforms.evmDM6446:testInst"
+            isa="v5T"
+            suffix="e9"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/arm/4.9.0/Linux"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.arm.elf.M3"
+            version="ti.targets.arm.elf.M3{1,0,4.9,0"
+            platform="ti.platforms.simDM8168"
+            isa="v7M"
+            suffix="em3"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/arm/4.9.0/Linux"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.arm.elf.M4F"
+            version="ti.targets.arm.elf.M4F{1,0,4.9,0"
+            platform="ti.platforms.stellaris:LM4FSXLH5BB:1"
+            isa="v7M4"
+            suffix="em4f"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/arm/4.9.0/Linux"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.arm.elf.A8F"
+            version="ti.targets.arm.elf.A8F{1,0,4.9,0"
+            platform="ti.platforms.sdp3430"
+            isa="v7A"
+            suffix="ea8f"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/arm/4.9.0/Linux"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.arm.elf.A8Fnv"
+            version="ti.targets.arm.elf.A8Fnv{1,0,4.9,0"
+            platform="ti.platforms.evmDM8168"
+            isa="v7A"
+            suffix="ea8fnv"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/arm/4.9.0/Linux"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.a64P"
+        profile="release"
+        target="ti.targets.C64P"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.a64Pe"
+        profile="release"
+        target="ti.targets.C64P_big_endian"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.a674"
+        profile="release"
+        target="ti.targets.C674"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.ae64P"
+        profile="release"
+        target="ti.targets.elf.C64P"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.ae66"
+        profile="release"
+        target="ti.targets.elf.C66"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.ae66e"
+        profile="release"
+        target="ti.targets.elf.C66_big_endian"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.ae64Pe"
+        profile="release"
+        target="ti.targets.elf.C64P_big_endian"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.ae64T"
+        profile="release"
+        target="ti.targets.elf.C64T"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.ae9"
+        profile="release"
+        target="ti.targets.arm.elf.Arm9"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.aem3"
+        profile="release"
+        target="ti.targets.arm.elf.M3"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.aem4f"
+        profile="release"
+        target="ti.targets.arm.elf.M4F"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.aea8f"
+        profile="release"
+        target="ti.targets.arm.elf.A8F"/>
+    <library name="lib/release/ti.uia.services"
+        pname="lib/release/ti.uia.services.aea8fnv"
+        profile="release"
+        target="ti.targets.arm.elf.A8Fnv"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_uia_services"
+        pname="../../../../exports/ti_uia_services.tar.gz"
+        label="default"
+        relScript="scripts/copyright_xml.rel">
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="package.bld"/>
+        <file name="java/package.jar"/>
+        <file name="Rta.xml"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/release/ti.uia.services.a64P"/>
+        <file name="package/package_ti.uia.services.c"/>
+        <file name="Rta.c"/>
+        <file name="lib/release/ti.uia.services.a64Pe"/>
+        <file name="lib/release/ti.uia.services.a674"/>
+        <file name="lib/release/ti.uia.services.ae64P"/>
+        <file name="lib/release/ti.uia.services.ae66"/>
+        <file name="lib/release/ti.uia.services.ae66e"/>
+        <file name="lib/release/ti.uia.services.ae64Pe"/>
+        <file name="lib/release/ti.uia.services.ae674"/>
+        <file name="lib/release/ti.uia.services.ae64T"/>
+        <file name="lib/release/ti.uia.services.ae9"/>
+        <file name="lib/release/ti.uia.services.aem3"/>
+        <file name="lib/release/ti.uia.services.aem4f"/>
+        <file name="lib/release/ti.uia.services.aea8f"/>
+        <file name="lib/release/ti.uia.services.aea8fnv"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

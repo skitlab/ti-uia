@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<gep name="LoggingSetup" title="LoggingSetup" version="1">
+
+<page name="Logging" title="UIA Logging Configuration">
+<html><body>
+<table>
+  <tr>
+    <td>
+      <form>
+        <p>The LoggingSetup module is used to aid in configuring SYS/BIOS
+           logging using UIA and System Analyzer support for your application.
+           The LoggingSetup module automates the process of configuring an
+           application to use UIA events, and configures SYS/BIOS modules to
+           capture user-specified information such as CPU Load, Task Load and
+           Task Execution so that it can be displayed by System Analyzer.  It
+           also automates the creation of infrastructure modules such as
+           loggers, the ServiceManager and RTA modules to enable the capture
+           and upload of the events over a user-specified transport.
+           Both JTAG and Non-JTAG transports are supported.
+        </p>
+        <p> </p>
+      </form>
+    </td>
+  </tr>
+  <tr><td colspan="2">
+    <control type="checkbox" label="Add LoggingSetup to my configuration" value="value:this.$used" bold="true"/></td>
+  </tr>
+  <tr></tr>
+  <tr>
+    <td>
+      <h1>SYS/BIOS Logging</h1>
+      <table>
+        <tr>
+          <td>
+            <control type="checkbox" 
+                     label="Enable Hwi logging" 
+                     enabled="value:this.$used"
+                     value="value:this.sysbiosHwiLogging" 
+                     tooltip="value:this.sysbiosHwiLogging.$summary"/>
+          </td>
+          <td>
+            <control type="checkbox" 
+                     label="Runtime control" 
+                     enabled="value:this.$used"
+                     value="value:this.sysbiosHwiLoggingRuntimeControl" 
+                     tooltip="value:this.sysbiosHwiLoggingRuntimeControl.$summary"/>
+          </td>    
+        </tr>
+        <tr>
+          <td>
+            <control type="checkbox" 
+                     label="Enable Swi logging" 
+                     enabled="value:this.$used"
+                     value="value:this.sysbiosSwiLogging" 
+                     tooltip="value:this.sysbiosSwiLogging.$summary"/>
+          </td>
+          <td>
+            <control type="checkbox" 
+                     label="Runtime control" 
+                     enabled="value:this.$used"
+                     value="value:this.sysbiosSwiLoggingRuntimeControl" 
+                     tooltip="value:this.sysbiosSwiLoggingRuntimeControl.$summary"/>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <control type="checkbox" 
+                     label="Enable Task logging" 
+                     enabled="value:this.$used"
+                     value="value:this.sysbiosTaskLogging" 
+                     tooltip="value:this.sysbiosTaskLogging.$summary"/>
+          </td>
+          <td>
+            <control type="checkbox" 
+                     label="Runtime control" 
+                     enabled="value:this.$used"
+                     value="value:this.sysbiosTaskLoggingRuntimeControl" 
+                     tooltip="value:this.sysbiosTaskLoggingRuntimeControl.$summary"/>
+          </td>
+        </tr>
+        <tr>
+          <td><form><p> </p></form></td>
+        </tr>
+        <tr>
+          <td><control type="label" label="Buffer size (MAUs)" align="left"/></td>
+          <td><control type="editbox" 
+               enabled="value:this.$used"
+               value="value:this.sysbiosLoggerSize" 
+               tooltip="value:this.sysbiosLoggerSize.$summary"/></td>
+        </tr>
+      </table>
+    </td>
+    <td>
+      <h1>SYS/BIOS Load Logging</h1>
+      <form><p>The Load records are placed in a separate logger so that they aren't overwritten by SYS/BIOS execution events. Collection of Load data can be configured with the Load module.</p></form>
+      <control type="hyperlink" link="ref:ti.sysbios.utils.Load" label="Configure Load module"/>
+      <table>
+        <tr>
+          <td><form><p> </p></form></td>
+        </tr>      
+        <tr>
+          <td>
+            <control type="checkbox" 
+                     label="Enable Load logging" 
+                     enabled="value:this.$used"
+                     value="value:this.loadLogging" 
+                     tooltip="value:this.loadLogging.$summary"/>
+          </td>
+          <td>
+            <control type="checkbox" 
+                     label="Runtime control" 
+                     enabled="value:this.$used"
+                     value="value:this.loadLoggingRuntimeControl" 
+                     tooltip="value:this.loadLoggingRuntimeControl.$summary"/>
+          </td>
+        </tr>
+        <tr>
+          <td><form><p> </p></form></td>
+        </tr>        
+        <tr>
+          <td><control type="label" label="Buffer size (MAUs)" align="left"/></td>
+          <td><control type="editbox" 
+               enabled="value:this.$used"
+               value="value:this.loadLoggerSize" 
+               tooltip="value:this.loadLoggerSize.$summary"/></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h1>Application Logging</h1>
+      <form><p>The events from Log calls from application C code are sent to the xdc.runtime.Main logger, configured here.</p></form>
+      <table>
+        <tr>
+          <td><form><p> </p></form></td>
+        </tr>     
+        <tr>
+          <td>
+            <control type="checkbox" 
+                     label="Enable Application logging" 
+                     enabled="value:this.$used"
+                     value="value:this.mainLogging" 
+                     tooltip="value:this.mainLogging.$summary"/>
+          </td>
+          <td>
+            <control type="checkbox" 
+                     label="Runtime control" 
+                     enabled="value:this.$used"
+                     value="value:this.mainLoggingRuntimeControl" 
+                     tooltip="value:this.mainLoggingRuntimeControl.$summary"/>
+          </td>
+        </tr>
+        <tr>
+          <td><form><p> </p></form></td>
+        </tr>        
+        <tr>
+          <td><control type="label" label="Buffer size (MAUs)" align="left"/></td>
+          <td><control type="editbox" 
+               enabled="value:this.$used"
+               value="value:this.mainLoggerSize" 
+               tooltip="value:this.mainLoggerSize.$summary"/></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <h1>Loggers</h1>
+      <form><p>LoggingSetup generates loggers automatically based on the below Upload Mode parameter. The loggers for Main, SYS/BIOS and Load can 
+               manually be selected also. Go to the "Advanced" tab to do this. </p></form>
+      <form><p>Please note, for some of the loggers, you may need to go to that module and configure it. For example, if you 
+               select UploadMode_Idle, you'll need to configure the ti.uia.sysbios.LoggerIdle module's transportFxn parameter.</p></form>
+      <table>
+        <tr>
+          <td><control type="label" label="Event Upload Mode" align="left"/></td>
+          <td><control type="droplist" 
+               value="value:this.eventUploadMode"
+               tooltip="value:this.eventUploadMode.$summary"/></td>
+        </tr>
+        <tr>
+          <td><control type="hyperlink" link="ref:ti.uia.runtime.ServiceMgr" label="Click here to access the ServiceMgr settings" enabled="value:this.eventUploadMode==this.UploadMode_NONJTAGTRANSPORT"/></td>
+        </tr>
+        <tr>
+          <td><control type="hyperlink" link="ref:ti.uia.sysbios.LoggerIdle" label="Click here to access the LoggerIdle settings" enabled="value:this.eventUploadMode==this.UploadMode_IDLE"/></td>
+               
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table></body></html>
+</page>
+
+<properties name="Advanced" title="All Logging Options" enabled="true" visible="true" link="this"/>
+</gep>

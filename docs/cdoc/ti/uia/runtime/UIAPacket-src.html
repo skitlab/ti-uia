@@ -1,0 +1,899 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>module ti.uia.runtime.UIAPacket</title>
+<meta name="googlebot" content="noindex,nofollow">
+<link rel="stylesheet" type="text/css" href="../../../src.css"/>
+</head>
+<body>
+<pre class=src>
+     1    <span class="comment">/* --COPYRIGHT--,BSD
+</span>     2    <span class="comment"> * Copyright (c) $(CPYYEAR), Texas Instruments Incorporated
+</span>     3    <span class="comment"> * All rights reserved.
+</span>     4    <span class="comment"> *
+</span>     5    <span class="comment"> * Redistribution and use in source and binary forms, with or without
+</span>     6    <span class="comment"> * modification, are permitted provided that the following conditions
+</span>     7    <span class="comment"> * are met:
+</span>     8    <span class="comment"> *
+</span>     9    <span class="comment"> * *  Redistributions of source code must retain the above copyright
+</span>    10    <span class="comment"> *    notice, this list of conditions and the following disclaimer.
+</span>    11    <span class="comment"> *
+</span>    12    <span class="comment"> * *  Redistributions in binary form must reproduce the above copyright
+</span>    13    <span class="comment"> *    notice, this list of conditions and the following disclaimer in the
+</span>    14    <span class="comment"> *    documentation and/or other materials provided with the distribution.
+</span>    15    <span class="comment"> *
+</span>    16    <span class="comment"> * *  Neither the name of Texas Instruments Incorporated nor the names of
+</span>    17    <span class="comment"> *    its contributors may be used to endorse or promote products derived
+</span>    18    <span class="comment"> *    from this software without specific prior written permission.
+</span>    19    <span class="comment"> *
+</span>    20    <span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+</span>    21    <span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+</span>    22    <span class="comment"> * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+</span>    23    <span class="comment"> * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+</span>    24    <span class="comment"> * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+</span>    25    <span class="comment"> * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+</span>    26    <span class="comment"> * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+</span>    27    <span class="comment"> * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+</span>    28    <span class="comment"> * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+</span>    29    <span class="comment"> * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+</span>    30    <span class="comment"> * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</span>    31    <span class="comment"> * --/COPYRIGHT--*/</span>
+    32    
+    33    <span class="comment">/*
+</span>    34    <span class="comment"> * ======== UIAPacket.xdc ========
+</span>    35    <span class="comment"> */</span>
+    36    <span class=key>package</span> ti.uia.runtime;
+    37    
+    38    import ti.uia.runtime.IUIATransfer;
+    39    
+    40    <span class="xdoc">/*!
+</span>    41    <span class="xdoc"> * ======== UIAPacket ========
+</span>    42    <span class="xdoc"> * Packet format communications between instrumentation clients
+</span>    43    <span class="xdoc"> * and instrumentation endpoints
+</span>    44    <span class="xdoc"> */</span>
+    45    @CustomHeader
+    46    <span class=key>module</span> UIAPacket {
+    47    
+    48        <span class="xdoc">/*!
+</span>    49    <span class="xdoc">     * ======== Hdr ========
+</span>    50    <span class="xdoc">     *  UIAPacket Header
+</span>    51    <span class="xdoc">     *
+</span>    52    <span class="xdoc">     *  The following is a breakdown of the packet header based on type packet.
+</span>    53    <span class="xdoc">     *
+</span>    54    <span class="xdoc">     *  The packet header is always sent in network byte (big endian) order.
+</span>    55    <span class="xdoc">     *
+</span>    56    <span class="xdoc">     *  The top 4 leftmost bits of word1 denote what type of packet this is:
+</span>    57    <span class="xdoc">     *  HdrType_Msg or HdrType_EventPkt. The contents of the packet depends on
+</span>    58    <span class="xdoc">     *  this type.
+</span>    59    <span class="xdoc">     *
+</span>    60    <span class="xdoc">     *  <b>@p(code)</b>
+</span>    61    <span class="xdoc">     *
+</span>    62    <span class="xdoc">     *  HdrType_Msg word1
+</span>    63    <span class="xdoc">     *   3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+</span>    64    <span class="xdoc">     *   1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
+</span>    65    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>    66    <span class="xdoc">     *  |H H H H|E|L L L L L L L L L L L|T T T T|S S S S S S S S S S S S|
+</span>    67    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>    68    <span class="xdoc">     *
+</span>    69    <span class="xdoc">     *  H = HdrType         (4-bits)
+</span>    70    <span class="xdoc">     *  E = Payload endian  (1-bit)
+</span>    71    <span class="xdoc">     *  L = Message Length  (11-bits)
+</span>    72    <span class="xdoc">     *  T = Message Type    (4-bits)
+</span>    73    <span class="xdoc">     *  S = Service Id      (12-bits)
+</span>    74    <span class="xdoc">     *
+</span>    75    <span class="xdoc">     *  HdrType_Msg word2
+</span>    76    <span class="xdoc">     *   3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+</span>    77    <span class="xdoc">     *   1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
+</span>    78    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>    79    <span class="xdoc">     *  |S S S S S S S S S S S S S S S S|C C C C C C C C C C C C C C C C|
+</span>    80    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>    81    <span class="xdoc">     *
+</span>    82    <span class="xdoc">     *  S = Sequence Number (16-bits)
+</span>    83    <span class="xdoc">     *  C = Command Id      (16-bits)
+</span>    84    <span class="xdoc">     *
+</span>    85    <span class="xdoc">     *  HdrType_Msg word3
+</span>    86    <span class="xdoc">     *   3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+</span>    87    <span class="xdoc">     *   1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
+</span>    88    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>    89    <span class="xdoc">     *  |T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T T|
+</span>    90    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>    91    <span class="xdoc">     *
+</span>    92    <span class="xdoc">     *  T - Tag             (32-bits)
+</span>    93    <span class="xdoc">     *
+</span>    94    <span class="xdoc">     *  HdrType_Msg word4
+</span>    95    <span class="xdoc">     *   3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+</span>    96    <span class="xdoc">     *   1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
+</span>    97    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>    98    <span class="xdoc">     *  |D D D D D D D D D D D D D D D D|S S S S S S S S S S S S S S S S|
+</span>    99    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>   100    <span class="xdoc">     *
+</span>   101    <span class="xdoc">     *  D - Destination Address (16-bits)
+</span>   102    <span class="xdoc">     *  S - Source Address      (16-bits)
+</span>   103    <span class="xdoc">     *
+</span>   104    <span class="xdoc">     *  HdrType_EventPkt word1
+</span>   105    <span class="xdoc">     *   3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+</span>   106    <span class="xdoc">     *   1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
+</span>   107    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>   108    <span class="xdoc">     *  |H H H H|E|L L L L L L L L L L L L L L L L L L L L L L L L L L L|
+</span>   109    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>   110    <span class="xdoc">     *
+</span>   111    <span class="xdoc">     *  H = HdrType         (4-bits)
+</span>   112    <span class="xdoc">     *  E = Payload endian   (1-bit)
+</span>   113    <span class="xdoc">     *  L = Event Length   (27-bits)
+</span>   114    <span class="xdoc">     *
+</span>   115    <span class="xdoc">     *  HdrType_EventPkt word2
+</span>   116    <span class="xdoc">     *   3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+</span>   117    <span class="xdoc">     *   1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
+</span>   118    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>   119    <span class="xdoc">     *  |S S S S S S S S S S S S S S S S|R R R R R R R R R R R R R R|P P|
+</span>   120    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>   121    <span class="xdoc">     *
+</span>   122    <span class="xdoc">     *  S = Sequence Number              (16-bits)
+</span>   123    <span class="xdoc">     *  R = Reserved                     (14-bits)
+</span>   124    <span class="xdoc">     *  P = Priority: Normal=0, High &gt; 0 (2-bits)
+</span>   125    <span class="xdoc">     *
+</span>   126    <span class="xdoc">     *  HdrType_EventPkt word3
+</span>   127    <span class="xdoc">     *   3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+</span>   128    <span class="xdoc">     *   1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
+</span>   129    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>   130    <span class="xdoc">     *  |D I I I I I I I I I I I I I I I M M M M M M M M M M M M M M M M|
+</span>   131    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>   132    <span class="xdoc">     *
+</span>   133    <span class="xdoc">     *  D � wasLoggerDynamicallyCreated  (1-bit:  0 = statically created, 
+</span>   134    <span class="xdoc">     *                                            1 = dynamically created )
+</span>   135    <span class="xdoc">     *  I - Logger Instance ID           (15-bits)
+</span>   136    <span class="xdoc">     *  M - Logger Module ID             (16-bits)
+</span>   137    <span class="xdoc">     *
+</span>   138    <span class="xdoc">     *  HdrType_EventPkt word4
+</span>   139    <span class="xdoc">     *   3 3 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0
+</span>   140    <span class="xdoc">     *   1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0 9 8 7 6 5 4 3 2 1 0
+</span>   141    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>   142    <span class="xdoc">     *  |D D D D D D D D D D D D D D D D|S S S S S S S S S S S S S S S S|
+</span>   143    <span class="xdoc">     *  |---------------------------------------------------------------|
+</span>   144    <span class="xdoc">     *
+</span>   145    <span class="xdoc">     *  D - Destination Address (16-bits)
+</span>   146    <span class="xdoc">     *  S - Source Address      (16-bits)
+</span>   147    <span class="xdoc">     *
+</span>   148    <span class="xdoc">     *  <b>@p</b>
+</span>   149    <span class="xdoc">     *
+</span>   150    <span class="xdoc">     */</span>
+   151        <span class=key>struct</span> Hdr {
+   152            Bits32 word1;
+   153            Bits32 word2;
+   154            Bits32 word3;
+   155            Bits32 word4;
+   156        };
+   157    
+   158        <span class="xdoc">/*!
+</span>   159    <span class="xdoc">     * ======== HdrType ========
+</span>   160    <span class="xdoc">     *  Enumeration of the various types of packet
+</span>   161    <span class="xdoc">     *  headers.  
+</span>   162    <span class="xdoc">     *
+</span>   163    <span class="xdoc">     *  Stored in a 4 bit bitfield (b31-b28) of the first word in the 
+</span>   164    <span class="xdoc">     *  packet.
+</span>   165    <span class="xdoc">     *
+</span>   166    <span class="xdoc">     *  The HdrType_InvalidData denotes that following data is invalid. 
+</span>   167    <span class="xdoc">     *  This can used to pad to the end of a buffer. Only the first word
+</span>   168    <span class="xdoc">     *  of the header is filled in. The length includes the header field.
+</span>   169    <span class="xdoc">     *
+</span>   170    <span class="xdoc">     */</span>
+   171        <span class=key>enum</span> HdrType {
+   172            HdrType_InvalidData = 0, <span class="xdoc">/*! reserved for future use */</span>
+   173            HdrType_Reserved1 = 1, <span class="xdoc">/*! reserved for future use */</span>
+   174            HdrType_Reserved2 = 2, <span class="xdoc">/*! reserved for future use  */</span>
+   175            HdrType_Reserved3 = 3, <span class="xdoc">/*! reserved for future use */</span>
+   176            HdrType_Reserved4 = 4, <span class="xdoc">/*! reserved for future use  */</span>
+   177            HdrType_Reserved5 = 5, <span class="xdoc">/*! reserved for future use */</span>
+   178            HdrType_Reserved6 = 6, <span class="xdoc">/*! reserved for future use */</span>
+   179            HdrType_Reserved7 = 7, <span class="xdoc">/*! reserved for future use */</span>
+   180            HdrType_ChannelizedData = 8, <span class="xdoc">/*! Channelized data stream */</span>
+   181            HdrType_Msg = 9, <span class="xdoc">/*! Message  (4 words header, 1 word footer) */</span>
+   182            HdrType_EventPkt = 10, <span class="xdoc">/*! Event rec. containing multiple events: 
+</span>   183    <span class="xdoc">                                  (4 word hdr, 1 word footer) */</span>
+   184            HdrType_CPUTrace = 11, <span class="xdoc">/*! CPU Trace ETB data 
+</span>   185    <span class="xdoc">                                   (4 word hdr, 1 word footer) */</span>
+   186            HdrType_STMTrace = 12, <span class="xdoc">/*! STM Trace ETB data 
+</span>   187    <span class="xdoc">                                   (4 word hdr, 1 word footer) */</span>
+   188            HdrType_USER1 = 13, <span class="xdoc">/*! User defined header type 1 */</span>
+   189            HdrType_USER2 = 14, <span class="xdoc">/*! User defined header type 2 */</span>
+   190            HdrType_USER3 = 15  <span class="xdoc">/*! User defined header type 3 */</span>
+   191        };
+   192        
+   193        <span class="xdoc">/*!
+</span>   194    <span class="xdoc">     * ======== PayloadEndian ========
+</span>   195    <span class="xdoc">     * Enumeration of payload endianness
+</span>   196    <span class="xdoc">     */</span>
+   197        <span class=key>enum</span> PayloadEndian {
+   198            PayloadEndian_LITTLE = 0, 
+   199            PayloadEndian_BIG = 1
+   200        };
+   201        
+   202        <span class="xdoc">/*!
+</span>   203    <span class="xdoc">     * ======== Footer ========
+</span>   204    <span class="xdoc">     * Packet Footer
+</span>   205    <span class="xdoc">     *
+</span>   206    <span class="xdoc">     * The packet footer is always in network byte order
+</span>   207    <span class="xdoc">     * i.e. big-endian byte ordering
+</span>   208    <span class="xdoc">     */</span>
+   209        <span class=key>struct</span> Footer
+   210        {
+   211                Int32 word1;        <span class="xdoc">/*! 16 MSBs contain msg length in Bytes, 
+</span>   212    <span class="xdoc">                                    16 LSBs contain 0x7777 */</span>
+   213        }
+   214    
+   215        <span class="xdoc">/*!
+</span>   216    <span class="xdoc">     * ======== MsgType ========
+</span>   217    <span class="xdoc">     * Message Types
+</span>   218    <span class="xdoc">     *
+</span>   219    <span class="xdoc">     * Enumeration of the various types of packets.
+</span>   220    <span class="xdoc">     * Stored in a 4 bit bitfield.
+</span>   221    <span class="xdoc">     *
+</span>   222    <span class="xdoc">     * MsgType_ACK:
+</span>   223    <span class="xdoc">     * Each packet of type CMD or DATA is immediately acknowledged by
+</span>   224    <span class="xdoc">     * sending either an ACK reply (if the packet can be processed),
+</span>   225    <span class="xdoc">     * a RESULT or PARTIALRESULT reply (if requested data can be provided
+</span>   226    <span class="xdoc">     * immediately) or a NACK reply (if the packet cannot be processed).
+</span>   227    <span class="xdoc">     * The Service that receives the command is responsible for sending
+</span>   228    <span class="xdoc">     * the ACK or NACK.  If the requested service is not available, the
+</span>   229    <span class="xdoc">     * Endpoint is responsible for sending the NACK packet.
+</span>   230    <span class="xdoc">     *
+</span>   231    <span class="xdoc">     * MsgType_CMD:
+</span>   232    <span class="xdoc">     * CMD packets are typically sent from the host to the target.
+</span>   233    <span class="xdoc">     * The receiving endpoint routes the command to the service
+</span>   234    <span class="xdoc">     * identified in the Service Id field.
+</span>   235    <span class="xdoc">     *
+</span>   236    <span class="xdoc">     * MsgType_RESULT:
+</span>   237    <span class="xdoc">     * RESULT replies are sent along with any requested data.
+</span>   238    <span class="xdoc">     * If the Service cannot reply with the requested data immediately,
+</span>   239    <span class="xdoc">     * it should return with an ACK packet and send a RESULT packet
+</span>   240    <span class="xdoc">     * that echoes the header info of the original command.
+</span>   241    <span class="xdoc">     *
+</span>   242    <span class="xdoc">     * MsgType_PARTIALRESULT:
+</span>   243    <span class="xdoc">     * PARTIALRESULT replies are sent along with any requested data when the
+</span>   244    <span class="xdoc">     * requested action can only be partly fulfilled.  Examples are when the
+</span>   245    <span class="xdoc">     * service is reporting on some ongoing operation or has been requested
+</span>   246    <span class="xdoc">     * to periodically poll some data value.
+</span>   247    <span class="xdoc">     *
+</span>   248    <span class="xdoc">     * MsgType_EVENT:
+</span>   249    <span class="xdoc">     * EVENT packets are sent to all interested parties in order to notify them
+</span>   250    <span class="xdoc">     * about state changes.   They can, for example, be used to report an error
+</span>   251    <span class="xdoc">     * that has occurred which may impact the ability of the target to continue
+</span>   252    <span class="xdoc">     * operating normally.
+</span>   253    <span class="xdoc">     *
+</span>   254    <span class="xdoc">     * MsgType_FLOWCTRL
+</span>   255    <span class="xdoc">     * FLOWCTRL packets are provided for TCF compliance.  They are used to avoid
+</span>   256    <span class="xdoc">     * flooding of communication links.  In response, endpoints can either 
+</span>   257    <span class="xdoc">     * increase or decrease rate of packets sent, although this is only loosely 
+</span>   258    <span class="xdoc">     * defined. TCF services are not directly concerned with flow control.
+</span>   259    <span class="xdoc">     * The data passed with FLOWCTRL packets reports the traffic congestion level
+</span>   260    <span class="xdoc">     * as an integer between -100 and 100, where 0 = "optimal load"
+</span>   261    <span class="xdoc">     *
+</span>   262    <span class="xdoc">     * MsgType_DATA
+</span>   263    <span class="xdoc">     * DATA packets are used for sending event log data and other streams of data.
+</span>   264    <span class="xdoc">     * Details about how this will be used are being worked out to ensure alignment
+</span>   265    <span class="xdoc">     * with BIOS RTA Log Servers.
+</span>   266    <span class="xdoc">     *
+</span>   267    <span class="xdoc">     * MsgType_NACK_BAD_DATA:
+</span>   268    <span class="xdoc">     * Negative Acknowledge due to bad data.  Sent in response to a command that 
+</span>   269    <span class="xdoc">     * had invalid data in the body of the packet.  The original data is echoed 
+</span>   270    <span class="xdoc">     * in the NACK response.
+</span>   271    <span class="xdoc">     *
+</span>   272    <span class="xdoc">     * MsgType_NACK_WITH_ERROR_CODE
+</span>   273    <span class="xdoc">     * Negative Acknowledge with Error Code. Sent along with an error code in 
+</span>   274    <span class="xdoc">     * the first word of the body of the reply that describes the error that was
+</span>   275    <span class="xdoc">     * encountered
+</span>   276    <span class="xdoc">     */</span>
+   277        <span class=key>enum</span> MsgType {
+   278            MsgType_ACK=0, <span class="xdoc">/*! Reply acknowledging receipt of CMD or DATA packet */</span>
+   279            MsgType_CMD=1, <span class="xdoc">/*! Command packets              */</span>
+   280            MsgType_RESULT=2, <span class="xdoc">/*! Result reply                */</span>
+   281            MsgType_PARTIALRESULT=3, <span class="xdoc">/*! Partial result reply */</span>
+   282            MsgType_NOTIFY=4, <span class="xdoc">/*! Notify messaage (equiv. to the EVENT packet in TCF) */</span>
+   283            MsgType_FLOWCTRL=5, <span class="xdoc">/*! Flow control packet      */</span>
+   284            MsgType_DATA=6, <span class="xdoc">/*! Data packet (used for streaming data to host) */</span>
+   285            MsgType_RESERVED7,
+   286            MsgType_RESERVED8,
+   287            MsgType_RESERVED9,
+   288            MsgType_RESERVED10,
+   289            MsgType_RESERVED11,
+   290            MsgType_RESERVED12,
+   291            MsgType_RESERVED13,
+   292            MsgType_NACK_BAD_DATA=14, <span class="xdoc">/*! Negative Acknowledge due to bad data */</span>
+   293            MsgType_NACK_WITH_ERROR_CODE=15 <span class="xdoc">/*! Negative Acknowledge -
+</span>   294    <span class="xdoc">                                            error code in msg body */</span>
+   295        };
+   296    
+   297        <span class="xdoc">/*!
+</span>   298    <span class="xdoc">     * ======== NACKErrorCode ========
+</span>   299    <span class="xdoc">     * Message Negative Acknowledge Error Codes
+</span>   300    <span class="xdoc">     *
+</span>   301    <span class="xdoc">     * Stored in the first 32b word of the data body of the packet
+</span>   302    <span class="xdoc">     * in Network Byte Order
+</span>   303    <span class="xdoc">     */</span>
+   304        <span class=key>enum</span> NACKErrorCode {
+   305            NACKErrorCode_NO_REASON_SPECIFIED=0, <span class="xdoc">/*! Use this when none of the 
+</span>   306    <span class="xdoc">                                                 defined NACK error codes are 
+</span>   307    <span class="xdoc">                                                 appropriate */</span>
+   308            NACKErrorCode_SERVICE_NOT_SUPPORTED=1, <span class="xdoc">/*! A module that handles the 
+</span>   309    <span class="xdoc">                                                   requested Service Id could 
+</span>   310    <span class="xdoc">                                                   not be found */</span>
+   311            NACKErrorCode_CMD_NOT_SUPPORTED=2, <span class="xdoc">/*! The service does not support the 
+</span>   312    <span class="xdoc">                                               specified Command Id */</span>
+   313            NACKErrorCode_QUEUE_FULL=3, <span class="xdoc">/*! Cmd couldn't be passed on to dest. end
+</span>   314    <span class="xdoc">                                        point due to a queue full condition */</span>
+   315            NACKErrorCode_BAD_ENDPOINT_ADDRESS=4, <span class="xdoc">/*! The destination end point 
+</span>   316    <span class="xdoc">                                                  address does not exists */</span>
+   317            NACKErrorCode_BAD_MESSAGE_LENGTH=5 <span class="xdoc">/*! packet lenght &gt; endpoint max. 
+</span>   318    <span class="xdoc">                                               msg length or not what is 
+</span>   319    <span class="xdoc">                                               required to service the cmd  */</span>
+   320        };
+   321        
+   322        <span class="xdoc">/*!
+</span>   323    <span class="xdoc">     *  ======== HOST ========
+</span>   324    <span class="xdoc">     *  The address of the host
+</span>   325    <span class="xdoc">     *
+</span>   326    <span class="xdoc">     *  The host address is always 0xFFFF. 
+</span>   327    <span class="xdoc">     */</span>
+   328        <span class=key>const</span> UInt16 HOST = 0xFFFF;
+   329        
+   330        <span class="xdoc">/*!
+</span>   331    <span class="xdoc">     *  ======== BROADCAST ========
+</span>   332    <span class="xdoc">     *  Used to denote a broadcast message
+</span>   333    <span class="xdoc">     *
+</span>   334    <span class="xdoc">     *  The broadcast address is always 0xFFFE. 
+</span>   335    <span class="xdoc">     */</span>
+   336        <span class=key>const</span> UInt16 BROADCAST = 0xFFFE;
+   337    
+   338        <span class="xdoc">/*!
+</span>   339    <span class="xdoc">     * ========= maxPktLengthInBytes =========
+</span>   340    <span class="xdoc">     * maximum number of bytes a packet can contain
+</span>   341    <span class="xdoc">     *
+</span>   342    <span class="xdoc">     * used to limit the amount of memory needed by the
+</span>   343    <span class="xdoc">     * packet factories in order to handle a new packet
+</span>   344    <span class="xdoc">     */</span>
+   345        <span class=key>config</span> Int maxPktLengthInBytes = 128;
+   346    
+   347        <span class="comment">/*
+</span>   348    <span class="comment">     * See section 8.2.2 of spru187n.pdf for info on bitfield packing and 
+</span>   349    <span class="comment">     * endianness. For big-endian mode, bit fields are packed into registers 
+</span>   350    <span class="comment">     * from most significant bit (MSB) to least significant bit (LSB) in the 
+</span>   351    <span class="comment">     * order in which they are defined. Bit fields are packed in memory from 
+</span>   352    <span class="comment">     * most significant byte (MSbyte) to least significant byte (LSbyte). 
+</span>   353    <span class="comment">     * For little-endian mode, bit fields are packed into registers from
+</span>   354    <span class="comment">     * the LSB to the MSB in the order in which they are defined, and packed 
+</span>   355    <span class="comment">     * in memory from LSbyte to MSbyte.
+</span>   356    <span class="comment">     *
+</span>   357    <span class="comment">     * In general, different compilers will handle bitfields in different \
+</span>   358    <span class="comment">     * (i.e. incompatible)ways.  To overcome this, the header is treated as 
+</span>   359    <span class="comment">     * an array of 32b words, and the bitfields are accessed via macros that 
+</span>   360    <span class="comment">     * handle the masking and shifting operations needed to insert or extract 
+</span>   361    <span class="comment">     * the information from the relevant bitfields
+</span>   362    <span class="comment">     */</span>
+   363    
+   364         <span class="xdoc">/*!
+</span>   365    <span class="xdoc">      * ======== swizzle ========
+</span>   366    <span class="xdoc">      * returns the value in big endian format
+</span>   367    <span class="xdoc">      */</span>
+   368        @Macro Bits32 swizzle(Bits32 value);
+   369    
+   370         <span class="xdoc">/*!
+</span>   371    <span class="xdoc">      * ======== swizzle ========
+</span>   372    <span class="xdoc">      * returns the value in big endian format
+</span>   373    <span class="xdoc">      */</span>
+   374        @Macro Bits16 swizzle16(Bits16 value);
+   375    
+   376        <span class="xdoc">/*!
+</span>   377    <span class="xdoc">     *  ======== getHdrType ========
+</span>   378    <span class="xdoc">     *  gets the packet header type from the packet header
+</span>   379    <span class="xdoc">     *
+</span>   380    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   381    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   382    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   383    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   384    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   385    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   386    <span class="xdoc">     *
+</span>   387    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   388    <span class="xdoc">     */</span>
+   389        @Macro HdrType getHdrType(Hdr *pHdr);
+   390    
+   391        <span class="xdoc">/*!
+</span>   392    <span class="xdoc">     *  ======== setHdrType ========
+</span>   393    <span class="xdoc">     *  sets the header type in the packet header
+</span>   394    <span class="xdoc">     *
+</span>   395    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   396    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   397    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   398    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   399    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   400    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   401    <span class="xdoc">     *
+</span>   402    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   403    <span class="xdoc">     *  <b>@param(HdrType hdrType)</b> the new header type
+</span>   404    <span class="xdoc">     */</span>
+   405        @Macro Void setHdrType(Hdr *pHdr, HdrType hdrType);
+   406    
+   407        <span class="xdoc">/*!
+</span>   408    <span class="xdoc">     *  ======== getPayloadEndianness ========
+</span>   409    <span class="xdoc">     *  gets the payload endianness bit from the packet header
+</span>   410    <span class="xdoc">     *
+</span>   411    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   412    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   413    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   414    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   415    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   416    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   417    <span class="xdoc">     *
+</span>   418    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   419    <span class="xdoc">     */</span>
+   420        @Macro Bits32 getPayloadEndianness(Hdr *pHdr);
+   421        
+   422        <span class="xdoc">/*!
+</span>   423    <span class="xdoc">     *  ======== setPayloadEndianness ========
+</span>   424    <span class="xdoc">     *  sets the payload endianness bit from the packet header
+</span>   425    <span class="xdoc">     *
+</span>   426    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   427    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   428    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   429    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   430    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   431    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   432    <span class="xdoc">     *
+</span>   433    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   434    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   Endianness of the payload
+</span>   435    <span class="xdoc">     */</span>
+   436        @Macro Bits32 setPayloadEndianness(Hdr *pHdr, PayloadEndian endianess);
+   437    
+   438        <span class="xdoc">/*!
+</span>   439    <span class="xdoc">     *  ======== getMsgLength ========
+</span>   440    <span class="xdoc">     *  gets the packet length (in bytes) from the packet header
+</span>   441    <span class="xdoc">     *
+</span>   442    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   443    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   444    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   445    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   446    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   447    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   448    <span class="xdoc">     *
+</span>   449    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   450    <span class="xdoc">     */</span>
+   451        @Macro Int32 getMsgLength(Hdr *pHdr);
+   452    
+   453        <span class="xdoc">/*!
+</span>   454    <span class="xdoc">     *  ======== setMsgLength ========
+</span>   455    <span class="xdoc">     *  sets the packet length (in bytes) from the packet header
+</span>   456    <span class="xdoc">     *
+</span>   457    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   458    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   459    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   460    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   461    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   462    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   463    <span class="xdoc">     *
+</span>   464    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   465    <span class="xdoc">     *  <b>@param(pktLength)</b> the new packet length
+</span>   466    <span class="xdoc">     *
+</span>   467    <span class="xdoc">     */</span>
+   468        @Macro Void setMsgLength(Hdr *pHdr, UInt16 pktLength);
+   469    
+   470        <span class="xdoc">/*!
+</span>   471    <span class="xdoc">     *  ======== getEventLength ========
+</span>   472    <span class="xdoc">     *  Gets the packet length (in bytes) from the packet header
+</span>   473    <span class="xdoc">     *
+</span>   474    <span class="xdoc">     *  Includes the packet header
+</span>   475    <span class="xdoc">     *
+</span>   476    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   477    <span class="xdoc">     */</span>
+   478        @Macro Int32 getEventLength(Hdr *pHdr);
+   479    
+   480        <span class="xdoc">/*!
+</span>   481    <span class="xdoc">     *  ======== setEventLength ========
+</span>   482    <span class="xdoc">     *  Sets the packet length (in bytes) from the packet header
+</span>   483    <span class="xdoc">     *
+</span>   484    <span class="xdoc">     *  Includes the packet header
+</span>   485    <span class="xdoc">     *
+</span>   486    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   487    <span class="xdoc">     *  <b>@param(pktLength)</b> the new packet length
+</span>   488    <span class="xdoc">     *
+</span>   489    <span class="xdoc">     */</span>
+   490        @Macro Void setEventLength(Hdr *pHdr, Bits32 pktLength);
+   491    
+   492        <span class="xdoc">/*!
+</span>   493    <span class="xdoc">     *  ======== getLength ========
+</span>   494    <span class="xdoc">     *  Gets the packet length (in bytes) from the packet header
+</span>   495    <span class="xdoc">     *
+</span>   496    <span class="xdoc">     *  Includes the packet header
+</span>   497    <span class="xdoc">     *
+</span>   498    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   499    <span class="xdoc">     */</span>
+   500        Int32 getLength(Hdr *pHdr);
+   501    
+   502        <span class="xdoc">/*!
+</span>   503    <span class="xdoc">     *  ======== getSequenceCount ========
+</span>   504    <span class="xdoc">     *  gets the sequence count from the packet header
+</span>   505    <span class="xdoc">     *
+</span>   506    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   507    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   508    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   509    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   510    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   511    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   512    <span class="xdoc">     *
+</span>   513    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   514    <span class="xdoc">     */</span>
+   515        @Macro UInt16 getSequenceCount(Hdr *pHdr);
+   516    
+   517        <span class="xdoc">/*!
+</span>   518    <span class="xdoc">     *  ======== setSequenceCount ========
+</span>   519    <span class="xdoc">     *  sets the sequence count in the packet header
+</span>   520    <span class="xdoc">     *
+</span>   521    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   522    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   523    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   524    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   525    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   526    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   527    <span class="xdoc">     *
+</span>   528    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   529    <span class="xdoc">     *  <b>@param(seqCount)</b> the new packet sequence count
+</span>   530    <span class="xdoc">     */</span>
+   531        @Macro Void setSequenceCount(Hdr *pHdr, Bits16 seqCount);
+   532    
+   533        <span class="xdoc">/*! <b>@_nodoc</b>
+</span>   534    <span class="xdoc">     *  ======== getLoggerPriority ========
+</span>   535    <span class="xdoc">     *  gets the logger priority field from the event packet header
+</span>   536    <span class="xdoc">     *
+</span>   537    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   538    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   539    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   540    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   541    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   542    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   543    <span class="xdoc">     *
+</span>   544    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   545    <span class="xdoc">     *  <b>@a(return)</b> the priority of the logger that logged the events
+</span>   546    <span class="xdoc">     *  <b>@see</b> IUIATransfer#Priority
+</span>   547    <span class="xdoc">     */</span>
+   548        @Macro IUIATransfer.Priority getLoggerPriority(Hdr *pHdr);
+   549    
+   550        <span class="xdoc">/*! <b>@_nodoc</b>
+</span>   551    <span class="xdoc">     *  ======== setLoggerPriority ========
+</span>   552    <span class="xdoc">     *  sets the logger priority field in the event packet header
+</span>   553    <span class="xdoc">     *
+</span>   554    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   555    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   556    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   557    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   558    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   559    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   560    <span class="xdoc">     *
+</span>   561    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   562    <span class="xdoc">     *  <b>@param(priority)</b> the logger priority ( <b>@see</b> IUIATransfer#Priority )
+</span>   563    <span class="xdoc">     */</span>
+   564        @Macro Void setLoggerPriority(Hdr *pHdr, IUIATransfer.Priority priority);
+   565        <span class="xdoc">/*!
+</span>   566    <span class="xdoc">     *  ======== getLoggerModuleId ========
+</span>   567    <span class="xdoc">     *  gets the logger ID from the event packet header
+</span>   568    <span class="xdoc">     *
+</span>   569    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   570    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   571    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   572    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   573    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   574    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   575    <span class="xdoc">     *
+</span>   576    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   577    <span class="xdoc">     */</span>
+   578        @Macro Bits16 getLoggerModuleId(Hdr *pHdr);
+   579    
+   580        <span class="xdoc">/*!
+</span>   581    <span class="xdoc">     *  ======== setLoggerModuleId ========
+</span>   582    <span class="xdoc">     *  sets the module ID in the event packet header
+</span>   583    <span class="xdoc">     *
+</span>   584    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   585    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   586    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   587    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   588    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   589    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   590    <span class="xdoc">     *
+</span>   591    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   592    <span class="xdoc">     *  <b>@param(loggerModuleId)</b> the moduleID of the logger that logged the events 
+</span>   593    <span class="xdoc">     */</span>
+   594        @Macro Void setLoggerModuleId(Hdr *pHdr, Bits16 loggerModuleId);
+   595    
+   596        <span class="xdoc">/*!
+</span>   597    <span class="xdoc">     *  ======== getLoggerInstanceId ========
+</span>   598    <span class="xdoc">     *  gets the logger instance ID from the event packet header
+</span>   599    <span class="xdoc">     *
+</span>   600    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   601    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   602    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   603    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   604    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   605    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   606    <span class="xdoc">     *
+</span>   607    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   608    <span class="xdoc">     */</span>
+   609        @Macro Bits16 getLoggerInstanceId(Hdr *pHdr);
+   610    
+   611        <span class="xdoc">/*!
+</span>   612    <span class="xdoc">     *  ======== setLoggerInstanceId ========
+</span>   613    <span class="xdoc">     *  sets the sequence count in the packet header
+</span>   614    <span class="xdoc">     *
+</span>   615    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   616    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   617    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   618    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   619    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   620    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   621    <span class="xdoc">     *
+</span>   622    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   623    <span class="xdoc">     *  <b>@param(seqCount)</b> the new packet sequence count
+</span>   624    <span class="xdoc">     */</span>
+   625        @Macro Void setLoggerInstanceId(Hdr *pHdr, Bits16 loggerInstanceId);
+   626        
+   627        <span class="xdoc">/*!
+</span>   628    <span class="xdoc">     *  ======== getMsgType ========
+</span>   629    <span class="xdoc">     *  gets the packet type from the packet header
+</span>   630    <span class="xdoc">     *
+</span>   631    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   632    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   633    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   634    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   635    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   636    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   637    <span class="xdoc">     *
+</span>   638    <span class="xdoc">     *  <b>@param</b>(Hdr* pHdr)   pointer to the packet header
+</span>   639    <span class="xdoc">     */</span>
+   640        @Macro MsgType getMsgType(Hdr *pHdr);
+   641    
+   642        <span class="xdoc">/*!
+</span>   643    <span class="xdoc">     *  ======== setMsgType ========
+</span>   644    <span class="xdoc">     *  sets the packet type in the packet header
+</span>   645    <span class="xdoc">     *
+</span>   646    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   647    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   648    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   649    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   650    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   651    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   652    <span class="xdoc">     *
+</span>   653    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   654    <span class="xdoc">     *  <b>@param(msgType)</b> the new packet type
+</span>   655    <span class="xdoc">     */</span>
+   656        @Macro Void setMsgType(Hdr *pHdr, MsgType msgType);
+   657    
+   658        <span class="xdoc">/*!
+</span>   659    <span class="xdoc">     *  ======== getCmdId ========
+</span>   660    <span class="xdoc">     *  gets the packet type from the packet header
+</span>   661    <span class="xdoc">     *
+</span>   662    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   663    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   664    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   665    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   666    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   667    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   668    <span class="xdoc">     *
+</span>   669    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   670    <span class="xdoc">     */</span>
+   671        @Macro UInt16 getCmdId(Hdr *pHdr);
+   672    
+   673        <span class="xdoc">/*!
+</span>   674    <span class="xdoc">     *  ======== setCmdId ========
+</span>   675    <span class="xdoc">     *  sets the command Id in the packet header
+</span>   676    <span class="xdoc">     *
+</span>   677    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   678    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   679    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   680    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   681    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   682    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   683    <span class="xdoc">     *
+</span>   684    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   685    <span class="xdoc">     *  <b>@param(cmdId)</b> the new command Id
+</span>   686    <span class="xdoc">     */</span>
+   687        @Macro Void setCmdId(Hdr *pHdr, UInt16 cmdId);
+   688    
+   689        <span class="xdoc">/*!
+</span>   690    <span class="xdoc">     *  ======== getServiceId ========
+</span>   691    <span class="xdoc">     *  gets the packet type from the packet header
+</span>   692    <span class="xdoc">     *
+</span>   693    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   694    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   695    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   696    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   697    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   698    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   699    <span class="xdoc">     *
+</span>   700    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   701    <span class="xdoc">     */</span>
+   702        @Macro UInt16 getServiceId(Hdr *pHdr);
+   703        <span class="xdoc">/*!
+</span>   704    <span class="xdoc">     *  ======== setServiceId ========
+</span>   705    <span class="xdoc">     *  sets the packet type in the packet header
+</span>   706    <span class="xdoc">     *
+</span>   707    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   708    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   709    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   710    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   711    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   712    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   713    <span class="xdoc">     *
+</span>   714    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   715    <span class="xdoc">     *  <b>@param(serviceId)</b> the new service Id
+</span>   716    <span class="xdoc">     */</span>
+   717        @Macro Void setServiceId(Hdr *pHdr, UInt16 serviceId);
+   718    
+   719        <span class="xdoc">/*!
+</span>   720    <span class="xdoc">     * ======== getTag =========
+</span>   721    <span class="xdoc">     * gets the 32b tag field from the packet header
+</span>   722    <span class="xdoc">     *
+</span>   723    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   724    <span class="xdoc">     */</span>
+   725        @Macro Bits32 getTag(Hdr *pHdr);
+   726    
+   727        <span class="xdoc">/*!
+</span>   728    <span class="xdoc">     * ======== setTag =========
+</span>   729    <span class="xdoc">     * sets the 32b tag field in the packet header
+</span>   730    <span class="xdoc">     *
+</span>   731    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   732    <span class="xdoc">     *  <b>@param(tagValue)</b> the tag value to store in the header
+</span>   733    <span class="xdoc">     */</span>
+   734        @Macro Void setTag(Hdr *pHdr, Bits32 tagValue);
+   735    
+   736        <span class="xdoc">/*!
+</span>   737    <span class="xdoc">     *  ======== getDestAdrs ========
+</span>   738    <span class="xdoc">     *  gets the packet destination address from the packet header
+</span>   739    <span class="xdoc">     *
+</span>   740    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   741    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   742    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   743    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   744    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   745    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   746    <span class="xdoc">     *
+</span>   747    <span class="xdoc">     *  Example1 :
+</span>   748    <span class="xdoc">     *   Void example1(UIAPacket_Object *obj){
+</span>   749    <span class="xdoc">     *      Int16 destAdrs = UIAPacket_getDestAdrs(&amp;obj-&gt;hdr);
+</span>   750    <span class="xdoc">     *      ...
+</span>   751    <span class="xdoc">     *   }
+</span>   752    <span class="xdoc">     *  Example2 :
+</span>   753    <span class="xdoc">     *    Void example2(UIAPacket_Hdr *pHdr){
+</span>   754    <span class="xdoc">     *      Int16 destAdrs = UIAPacket_getDestAdrs(pHdr);
+</span>   755    <span class="xdoc">     *      ...
+</span>   756    <span class="xdoc">     *    }
+</span>   757    <span class="xdoc">     *
+</span>   758    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   759    <span class="xdoc">     */</span>
+   760        @Macro UInt16 getDestAdrs(Hdr *pHdr);
+   761    
+   762        <span class="xdoc">/*!
+</span>   763    <span class="xdoc">     *  ======== setDestAdrs ========
+</span>   764    <span class="xdoc">     *  sets the packet destination address in the packet header
+</span>   765    <span class="xdoc">     *
+</span>   766    <span class="xdoc">     *  The destination address identifies which endpoint (i.e. which
+</span>   767    <span class="xdoc">     *  CPU or process) the packet should be sent to.
+</span>   768    <span class="xdoc">     *  0 is used to broadcast the packet.
+</span>   769    <span class="xdoc">     *  1 is used for point-to-point connections.
+</span>   770    <span class="xdoc">     *  Replies to a packet always use the sender address in the
+</span>   771    <span class="xdoc">     *  originating packet as the destination address.
+</span>   772    <span class="xdoc">     *  Destination addresses other than the above can be determined
+</span>   773    <span class="xdoc">     *  via a discovery process.
+</span>   774    <span class="xdoc">     *
+</span>   775    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   776    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   777    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   778    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   779    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   780    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   781    <span class="xdoc">     *
+</span>   782    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   783    <span class="xdoc">     *  <b>@param(destAdrs)</b> the new destination address
+</span>   784    <span class="xdoc">     */</span>
+   785        @Macro Void setDestAdrs(Hdr *pHdr, UInt16 destAdrs);
+   786    
+   787        <span class="xdoc">/*!
+</span>   788    <span class="xdoc">     *  ======== getSenderAdrs ========
+</span>   789    <span class="xdoc">     *  gets the packet sender address from the packet header
+</span>   790    <span class="xdoc">     *
+</span>   791    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   792    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   793    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   794    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   795    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   796    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   797    <span class="xdoc">     *
+</span>   798    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   799    <span class="xdoc">     */</span>
+   800        @Macro UInt16 getSenderAdrs(Hdr *pHdr);
+   801    
+   802        <span class="xdoc">/*!
+</span>   803    <span class="xdoc">     *  ======== setSenderAdrs ========
+</span>   804    <span class="xdoc">     *  sets the packet sender address in the packet header
+</span>   805    <span class="xdoc">     *
+</span>   806    <span class="xdoc">     *  The sender address identifies which endpoint (i.e. which
+</span>   807    <span class="xdoc">     *  CPU or process) the packet is coming from
+</span>   808    <span class="xdoc">     *  1 is used by default.
+</span>   809    <span class="xdoc">     *  Sender addresses other than 1 can be set via configuration
+</span>   810    <span class="xdoc">     *  (e.g. to identify which CPU core a packet originated from).
+</span>   811    <span class="xdoc">     *
+</span>   812    <span class="xdoc">     *  Message header is always layed out as big endian (network order).
+</span>   813    <span class="xdoc">     *  This macro is designed to work on both little endian and
+</span>   814    <span class="xdoc">     *  big endian targets, since 32b long words are consistently
+</span>   815    <span class="xdoc">     *  handled for both endianness - it is only when converting
+</span>   816    <span class="xdoc">     *  from bytes to longs that bit orders get swapped.
+</span>   817    <span class="xdoc">     *  #ifdef xdc_target__bigEndian can be used if necessary.
+</span>   818    <span class="xdoc">     *
+</span>   819    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   820    <span class="xdoc">     *  <b>@param(senderAdrs)</b> the new destination address
+</span>   821    <span class="xdoc">     */</span>
+   822        @Macro Void setSenderAdrs(Hdr *pHdr, UInt16 senderAdrs);
+   823    
+   824        <span class="xdoc">/*!
+</span>   825    <span class="xdoc">     * ======== initMsgHdr ========
+</span>   826    <span class="xdoc">     * initializes all bitfields in the message header
+</span>   827    <span class="xdoc">     *
+</span>   828    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   829    <span class="xdoc">     *  <b>@param(endianness)</b> endianness of the payload
+</span>   830    <span class="xdoc">     *  <b>@param(msgType)</b> the packet type
+</span>   831    <span class="xdoc">     *  <b>@param(msgLength)</b> the number of Bytes in the packet, including the 
+</span>   832    <span class="xdoc">     *     header and footer
+</span>   833    <span class="xdoc">     *  <b>@param(serviceId)</b> the service Id
+</span>   834    <span class="xdoc">     *  <b>@param(seqCount)</b> the sequence number for the packet
+</span>   835    <span class="xdoc">     *  <b>@param(cmdId)</b> the command Id
+</span>   836    <span class="xdoc">     *  <b>@param(tag)</b> the tag value to store in the header
+</span>   837    <span class="xdoc">     *  <b>@param(destAdrs)</b> the destination address
+</span>   838    <span class="xdoc">     *  <b>@param(senderAdrs)</b> the sender address
+</span>   839    <span class="xdoc">     */</span>
+   840        @Macro Void initMsgHdr(Hdr *pHdr, PayloadEndian endianness,
+   841                               MsgType msgType, UInt16 msgLength, 
+   842                               UInt16 serviceId, UInt16 seqCount,
+   843                               UInt16 cmdId,  UInt32 tag,
+   844                               UInt16 destAdrs, UInt16 senderAdrs);
+   845        
+   846        <span class="xdoc">/*!
+</span>   847    <span class="xdoc">     * ======== initEventRecHdr ========
+</span>   848    <span class="xdoc">     * initializes all bitfields in the message header
+</span>   849    <span class="xdoc">     *
+</span>   850    <span class="xdoc">     *  <b>@param</b>(Hdr* msgHdr)   pointer to the packet header
+</span>   851    <span class="xdoc">     *  <b>@param(endianness)</b> endianness of the payload
+</span>   852    <span class="xdoc">     *  <b>@param(eventLength)</b> the number of Bytes in the packet, including 
+</span>   853    <span class="xdoc">     *     the header and footer
+</span>   854    <span class="xdoc">     *  <b>@param(seqCount)</b> the sequence number for the packet
+</span>   855    <span class="xdoc">     *  <b>@param(priority)</b> the logger's priority
+</span>   856    <span class="xdoc">     *  <b>@param(moduleId)</b> the logger's module Id
+</span>   857    <span class="xdoc">     *  <b>@param(instanceId)</b> the logger's instanceId
+</span>   858    <span class="xdoc">     *  <b>@param(destAdrs)</b> the destination address
+</span>   859    <span class="xdoc">     *  <b>@param(senderAdrs)</b> the sender address
+</span>   860    <span class="xdoc">     */</span>
+   861        @Macro Void initEventRecHdr(Hdr *pHdr, PayloadEndian endianness,
+   862                                    UInt32 eventLength, UInt16 seqCount,
+   863                                    IUIATransfer.Priority priority, UInt16 moduleId,  
+   864                                    UInt16 instanceId, UInt16 destAdrs, 
+   865                                    UInt16 senderAdrs);
+   866                                    
+   867        <span class="xdoc">/*!
+</span>   868    <span class="xdoc">     * ======== getFooter ========
+</span>   869    <span class="xdoc">     * returns the integer to use as the packet footer
+</span>   870    <span class="xdoc">     *
+</span>   871    <span class="xdoc">     *  <b>@param</b>(Hdr* pHdr)   pointer to the packet header
+</span>   872    <span class="xdoc">     */</span>
+   873        @Macro Int32 getFooter(Hdr *pHdr);
+   874        
+   875        <span class="xdoc">/*!
+</span>   876    <span class="xdoc">     * ======== setInvalidHdr ========
+</span>   877    <span class="xdoc">     * Used to set the header type as invalid
+</span>   878    <span class="xdoc">     *
+</span>   879    <span class="xdoc">     *  <b>@param</b>(Hdr* pHdr)   pointer to the packet header
+</span>   880    <span class="xdoc">     *  <b>@param(eventLength)</b> the number of Bytes in the packet of memory
+</span>   881    <span class="xdoc">     *       that is invalid (including the first word of the 32-bit hdr)
+</span>   882    <span class="xdoc">     */</span>
+   883        @Macro Void setInvalidHdr(Hdr *pHdr, UInt32 eventLength);
+   884    }
+   885    
+   886    <span class="comment">/*
+</span>   887    <span class="comment"> *! Revision History
+</span>   888    <span class="comment"> *! ================
+</span>   889    <span class="comment"> *! 23-Jun-2010 toddm Started revision history
+</span>   890    <span class="comment"> */</span>
+</pre>
+</body></html>

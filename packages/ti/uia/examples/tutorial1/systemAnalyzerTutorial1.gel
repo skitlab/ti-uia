@@ -1,0 +1,43 @@
+/*--------------------------------------------------------------*/
+/* systemAnalyzerTutorial1.gel                                  */
+/* Version 1.0                                                  */
+/*                                                              */
+/* This GEL file is designed to be used in conjunction with     */
+/* System Analyzer Tutorial 1                                   */
+/* For information on how to use this GEL file, please see      */
+/* http://processors.wiki.ti.com/index.php/McsaTutorial1        */
+/*--------------------------------------------------------------*/
+menuitem "System Analyzer Tutorial 1";
+hotmenu Tutorial1A_Logging_Events(){
+	RunTutorial(1);
+}
+
+hotmenu Tutorial1B_Benchmarking(){
+	RunTutorial(2);
+}
+
+hotmenu Tutorial1C_ControllingEvents(){
+	RunTutorial(3);
+}
+
+hotmenu Tutorial1D_LoggingDynamicStrings(){
+    RunTutorial(4);
+}
+
+/*------------------------------------------------------------------*/
+/* Run the specified tutorial phase by updating the global variable */
+/* named "tutorialPhase" in main.c with the phase number.           */
+/* Run until the breakpoint at BKPT_TUTORIAL1 is hit.  The events   */
+/* captured by the LoggerStopMode logger will then be uploaded by   */
+/* the System Analyzer JTAG Transport infrastructure for analysis   */
+/* and display.                                                     */
+/*------------------------------------------------------------------*/
+RunTutorial(phase){
+    GEL_Halt();
+    GEL_BreakPtDel(BKPT_TUTORIAL1);
+    GEL_BreakPtAdd(BKPT_TUTORIAL1);
+    tutorialPhase = phase;
+  	GEL_Run();    
+}
+
+

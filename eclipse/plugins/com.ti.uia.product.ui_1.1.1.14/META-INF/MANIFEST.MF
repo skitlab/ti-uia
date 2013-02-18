@@ -1,0 +1,106 @@
+Manifest-Version: 1.0
+Bundle-Name: System Analyzer (UIA Target) IDE Tooling
+Created-By: 1.5.0_22 (Sun Microsystems Inc.)
+Bundle-Activator: org.eclipse.rtsc.xdctools.ui.CCSActivator
+Bundle-Vendor: Texas Instruments
+Bundle-ManifestVersion: 2
+Bundle-Localization: plugin
+Bundle-SymbolicName: com.ti.uia.product.ui;singleton:=true
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.he
+ lp,org.eclipse.rtsc.xdctools.ui
+Bundle-Version: 1.1.1.14
+Eclipse-LazyStart: true
+
+Name: resources/tutorial1/systemAnalyzerTutorial1.gel
+SHA1-Digest: Se2a+fh4k5sGtuYENvjNhLOrL1c=
+
+Name: resources/evm6472/message.c
+SHA1-Digest: ulhB0A4fDlcH2nJt4TRRoKLW7EY=
+
+Name: resources/single/stairstep.c
+SHA1-Digest: aMA1D5QmM1fS8Zhsj9lgUG3wzVo=
+
+Name: resources/single/stairstep_ProbePoint.cfg
+SHA1-Digest: +7QoCL+B/dRDXeyEFlFUL+QjxoQ=
+
+Name: resources/evm6472/message.cfg
+SHA1-Digest: p86wSPRudEwKTz+Ej6S76UvFXO0=
+
+Name: resources/single/logger.c
+SHA1-Digest: HZOgO89RSYLoHZKqHrBXTczfKlw=
+
+Name: resources/tutorial1/tutorial1c.c
+SHA1-Digest: uRzLbHq6fVKk57DaOXcRfyoy1l8=
+
+Name: resources/evmti816x/simpleTask.c
+SHA1-Digest: 69TM7gf/9nC+hZVsGgP8J3OpqQc=
+
+Name: resources/tutorial1/main.c
+SHA1-Digest: os8ulCsSsY6A5XfvUZ1sWvQ36Eo=
+
+Name: plugin.properties
+SHA1-Digest: CN4B9B1tClHd9L/LcL/rdRECfP8=
+
+Name: resources/evmti816x/vpssM3LoggerCircBuf.cfg
+SHA1-Digest: COeu9lG07exls2g9Vr9PDvX/xO4=
+
+Name: resources/evmti816x/dspLoggerSM.cfg
+SHA1-Digest: fA+l2wwcCCExG8XBLKfVJnAIF74=
+
+Name: resources/tutorial2/systemAnalyzerTutorial2.gel
+SHA1-Digest: ZxZV9JwEqHwtoT3SLdOlRhTafvU=
+
+Name: resources/evmti816x/dspLoggerCircBuf.cfg
+SHA1-Digest: us+ihnm6JzPoOiRAv4eP5+vqkBg=
+
+Name: resources/evmti816x/videoM3LoggerSM.cfg
+SHA1-Digest: ttB8LQ3chL5Kx10AGI6PcMckxsk=
+
+Name: resources/tutorial1/tutorial1a.c
+SHA1-Digest: 09HU93rCFNH79no7PdExeQROQhw=
+
+Name: resources/single/stairstep_JTAGRunMode.cfg
+SHA1-Digest: O/HNJou/8FEg1JNtKRV7WbwQsiA=
+
+Name: resources/single/stairstep_Simulator.cfg
+SHA1-Digest: SbjoqR+MnNzmesjCVN2tAT07CAk=
+
+Name: resources/single/stairstep_JTAGStopMode.cfg
+SHA1-Digest: pF0V4MCptTVP6pcDDN8oFIhbuV8=
+
+Name: plugin.xml
+SHA1-Digest: /26WzaBezqXD2AHzCX0GRkQs2qw=
+
+Name: resources/evmti816x/videoM3LoggerCircBuf.cfg
+SHA1-Digest: 54lzCvm0jlOcQckUbSg6wq+TUgY=
+
+Name: resources/evmti816x/vpssM3LoggerSM.cfg
+SHA1-Digest: nTAhEvEAd7LFdRxSAEu+4Gym2CY=
+
+Name: resources/tutorial2/systemAnalyzerTutorial2.cfg
+SHA1-Digest: eSf297Kc+ftOknSC3wVTPgOHbRg=
+
+Name: resources/tutorial1/tutorial1b.c
+SHA1-Digest: 9w6vVLY63xBNL8xSNlEykK7LOMU=
+
+Name: resources/tutorial1/systemAnalyzerTutorial1.cfg
+SHA1-Digest: admH1PvWgD8+c/tmMYkHcrKbm/0=
+
+Name: resources/single/logger.cfg
+SHA1-Digest: XwDZaoXpk6e0mZk1SZLTyeWfN/s=
+
+Name: toc.xml
+SHA1-Digest: 9TNu0uZW4DOIyF6sevr51H2lBR8=
+
+Name: resources/single/stairstep_Ethernet.cfg
+SHA1-Digest: yvWwkHbMCRZQYUf1icPWOWNk1zI=
+
+Name: resources/tutorial2/main.c
+SHA1-Digest: 1tFwvmx7Bv0WtDWrnSggsjFzlr8=
+
+Name: resources/tutorial1/tutorial1d.c
+SHA1-Digest: AgpspMHglT1rrfP+mmT8yFCjDeE=
+
+Name: toc_top.xml
+SHA1-Digest: FcPKFRVnlJl6s3bOX3JpdLdBeKo=
+

@@ -1,0 +1,46 @@
+/*--------------------------------------------------------------*/
+/* systemAnalyzerTutorial2.gel                                            */
+/* Version 1.0                                                  */
+/*                                                              */
+/* This GEL file is designed to be used in conjunction with     */
+/* System Analyzer Tutorial 2                                   */
+/* For information on how to use this GEL file, please see      */
+/* http://processors.wiki.ti.com/index.php/McsaTutorial2        */
+/*--------------------------------------------------------------*/
+menuitem "System Analyzer Tutorial 2";
+
+slider Slider_1(0, 32767, 1, 1, value)
+{
+    if ((GEL_IsHalted())||(GEL_IsInRealtimeMode())){
+        if (!GEL_IsInRealtimeMode()){
+        	GEL_EnableRealtime();
+        }
+        if (GEL_IsInRealtimeMode()){
+           slider1Value = value - 16384;
+    	   if (GEL_IsHalted()){
+    	      GEL_Run();
+    	   }
+    	} else {
+    	   GEL_TextOut("System Analyzer Tutorial 2 can only be run on emulation targets that support real-time JTAG accesses.\n");
+    	   GEL_TextOut("Please choose a different tutorial or run the program on a different target.\n");
+    	}
+    } 
+}
+
+slider Slider_2(0, 32767, 1, 1, value)
+{
+    if ((GEL_IsHalted())||(GEL_IsInRealtimeMode())){
+        if (!GEL_IsInRealtimeMode()){
+        	GEL_EnableRealtime();
+        }
+        if (GEL_IsInRealtimeMode()){
+           slider2Value = value-16384;
+    	   if (GEL_IsHalted()){
+    	      GEL_Run();
+    	   }
+    	} else {
+    	   GEL_TextOut("System Analyzer Tutorial 2 can only be run on emulation targets that support real-time JTAG accesses.\n");
+    	   GEL_TextOut("Please choose a different tutorial or run the program on a different target.\n");
+    	}
+    } 
+}

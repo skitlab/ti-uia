@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.uia.family.c64p" version="1, 0, 0, 0" producerId="undefined">
+    <units>
+        <module name="GemTraceSync"/>
+        <module name="TimestampC6472Timer"/>
+        <module name="TimestampC6474Timer"/>
+        <module name="TimestampC64XLocal"/>
+    </units>
+    <sources>
+        <srcFile name="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="GemTraceSync.c"/>
+        <srcFile name="TimestampC6472Timer.c"/>
+        <srcFile name="TimestampC6474Timer.c"/>
+        <srcFile name="TimestampC64XLocal.c"/>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="lib/release/ti.uia.family.c64p.a64P.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/package/package_ti.uia.family.c64p.o64P.dep" src="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/GemTraceSync.o64P.dep" src="GemTraceSync.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6472Timer.o64P.dep" src="TimestampC6472Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6474Timer.o64P.dep" src="TimestampC6474Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC64XLocal.o64P.dep" src="TimestampC64XLocal.c"/>
+        <srcFile name="lib/release/ti.uia.family.c64p.a64Pe.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/package/package_ti.uia.family.c64p.o64Pe.dep" src="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/GemTraceSync.o64Pe.dep" src="GemTraceSync.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6472Timer.o64Pe.dep" src="TimestampC6472Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6474Timer.o64Pe.dep" src="TimestampC6474Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC64XLocal.o64Pe.dep" src="TimestampC64XLocal.c"/>
+        <srcFile name="lib/release/ti.uia.family.c64p.a674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/package/package_ti.uia.family.c64p.o674.dep" src="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/GemTraceSync.o674.dep" src="GemTraceSync.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6472Timer.o674.dep" src="TimestampC6472Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6474Timer.o674.dep" src="TimestampC6474Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC64XLocal.o674.dep" src="TimestampC64XLocal.c"/>
+        <srcFile name="lib/release/ti.uia.family.c64p.ae64P.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/package/package_ti.uia.family.c64p.oe64P.dep" src="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/GemTraceSync.oe64P.dep" src="GemTraceSync.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6472Timer.oe64P.dep" src="TimestampC6472Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6474Timer.oe64P.dep" src="TimestampC6474Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC64XLocal.oe64P.dep" src="TimestampC64XLocal.c"/>
+        <srcFile name="lib/release/ti.uia.family.c64p.ae66.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/package/package_ti.uia.family.c64p.oe66.dep" src="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/GemTraceSync.oe66.dep" src="GemTraceSync.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6472Timer.oe66.dep" src="TimestampC6472Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6474Timer.oe66.dep" src="TimestampC6474Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC64XLocal.oe66.dep" src="TimestampC64XLocal.c"/>
+        <srcFile name="lib/release/ti.uia.family.c64p.ae66e.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/package/package_ti.uia.family.c64p.oe66e.dep" src="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/GemTraceSync.oe66e.dep" src="GemTraceSync.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6472Timer.oe66e.dep" src="TimestampC6472Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6474Timer.oe66e.dep" src="TimestampC6474Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC64XLocal.oe66e.dep" src="TimestampC64XLocal.c"/>
+        <srcFile name="lib/release/ti.uia.family.c64p.ae64Pe.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/package/package_ti.uia.family.c64p.oe64Pe.dep" src="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/GemTraceSync.oe64Pe.dep" src="GemTraceSync.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6472Timer.oe64Pe.dep" src="TimestampC6472Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6474Timer.oe64Pe.dep" src="TimestampC6474Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC64XLocal.oe64Pe.dep" src="TimestampC64XLocal.c"/>
+        <srcFile name="lib/release/ti.uia.family.c64p.ae674.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/package/package_ti.uia.family.c64p.oe674.dep" src="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/GemTraceSync.oe674.dep" src="GemTraceSync.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6472Timer.oe674.dep" src="TimestampC6472Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6474Timer.oe674.dep" src="TimestampC6474Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC64XLocal.oe674.dep" src="TimestampC64XLocal.c"/>
+        <srcFile name="lib/release/ti.uia.family.c64p.ae64T.mak" src="package.bld"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/package/package_ti.uia.family.c64p.oe64T.dep" src="package/package_ti.uia.family.c64p.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/GemTraceSync.oe64T.dep" src="GemTraceSync.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6472Timer.oe64T.dep" src="TimestampC6472Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC6474Timer.oe64T.dep" src="TimestampC6474Timer.c"/>
+        <srcFile name="package/lib/lib/release/ti.uia.family.c64p/TimestampC64XLocal.oe64T.dep" src="TimestampC64XLocal.c"/>
+        <srcFile name="package/rel/ti_uia_family_c64p.tar.gz.dep" src="package/rel/ti_uia_family_c64p.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.C64P"
+            version="ti.targets.C64P{1,0,7.0,0"
+            platform="ti.platforms.evm6472:core0"
+            isa="64P"
+            suffix="64P"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.0.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.C64P_big_endian"
+            version="ti.targets.C64P_big_endian{1,0,7.0,0"
+            platform="ti.platforms.evmDM6437"
+            isa="64P"
+            suffix="64Pe"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.0.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="big"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.C674"
+            version="ti.targets.C674{1,0,7.0,0"
+            platform="ti.uia.examples.platforms.evmTI816X.dsp"
+            isa="674"
+            suffix="674"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.0.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C64P"
+            version="ti.targets.elf.C64P{1,0,7.2,0"
+            platform="ti.platforms.simTCI6498"
+            isa="64P"
+            suffix="e64P"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C66"
+            version="ti.targets.elf.C66{1,0,7.2,0"
+            platform="ti.platforms.evm6678:core0"
+            isa="66"
+            suffix="e66"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C66_big_endian"
+            version="ti.targets.elf.C66_big_endian{1,0,7.2,0"
+            platform="ti.platforms.simTCI6616"
+            isa="66"
+            suffix="e66e"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="big"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C64P_big_endian"
+            version="ti.targets.elf.C64P_big_endian{1,0,7.2,0"
+            platform="ti.platforms.evmDM6437"
+            isa="64P"
+            suffix="e64Pe"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="big"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.2,0"
+            platform="ti.uia.examples.platforms.evmTI816X.dsp"
+            isa="674"
+            suffix="e674"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C64T"
+            version="ti.targets.elf.C64T{1,0,7.2,0"
+            platform="ti.platforms.sdp4430"
+            isa="64T"
+            suffix="e64T"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    <library name="lib/release/ti.uia.family.c64p"
+        pname="lib/release/ti.uia.family.c64p.a64P"
+        profile="release"
+        target="ti.targets.C64P"/>
+    <library name="lib/release/ti.uia.family.c64p"
+        pname="lib/release/ti.uia.family.c64p.a64Pe"
+        profile="release"
+        target="ti.targets.C64P_big_endian"/>
+    <library name="lib/release/ti.uia.family.c64p"
+        pname="lib/release/ti.uia.family.c64p.a674"
+        profile="release"
+        target="ti.targets.C674"/>
+    <library name="lib/release/ti.uia.family.c64p"
+        pname="lib/release/ti.uia.family.c64p.ae64P"
+        profile="release"
+        target="ti.targets.elf.C64P"/>
+    <library name="lib/release/ti.uia.family.c64p"
+        pname="lib/release/ti.uia.family.c64p.ae66"
+        profile="release"
+        target="ti.targets.elf.C66"/>
+    <library name="lib/release/ti.uia.family.c64p"
+        pname="lib/release/ti.uia.family.c64p.ae66e"
+        profile="release"
+        target="ti.targets.elf.C66_big_endian"/>
+    <library name="lib/release/ti.uia.family.c64p"
+        pname="lib/release/ti.uia.family.c64p.ae64Pe"
+        profile="release"
+        target="ti.targets.elf.C64P_big_endian"/>
+    <library name="lib/release/ti.uia.family.c64p"
+        pname="lib/release/ti.uia.family.c64p.ae674"
+        profile="release"
+        target="ti.targets.elf.C674"/>
+    <library name="lib/release/ti.uia.family.c64p"
+        pname="lib/release/ti.uia.family.c64p.ae64T"
+        profile="release"
+        target="ti.targets.elf.C64T"/>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_uia_family_c64p"
+        pname="../../../../../exports/ti_uia_family_c64p.tar.gz"
+        label="default"
+        relScript="scripts/copyright_xml.rel">
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="package.bld"/>
+        <file name="package/package.cfg.xdc.inc"/>
+        <file name="lib/release/ti.uia.family.c64p.a64P"/>
+        <file name="package/package_ti.uia.family.c64p.c"/>
+        <file name="GemTraceSync.c"/>
+        <file name="TimestampC6472Timer.c"/>
+        <file name="TimestampC6474Timer.c"/>
+        <file name="TimestampC64XLocal.c"/>
+        <file name="lib/release/ti.uia.family.c64p.a64Pe"/>
+        <file name="lib/release/ti.uia.family.c64p.a674"/>
+        <file name="lib/release/ti.uia.family.c64p.ae64P"/>
+        <file name="lib/release/ti.uia.family.c64p.ae66"/>
+        <file name="lib/release/ti.uia.family.c64p.ae66e"/>
+        <file name="lib/release/ti.uia.family.c64p.ae64Pe"/>
+        <file name="lib/release/ti.uia.family.c64p.ae674"/>
+        <file name="lib/release/ti.uia.family.c64p.ae64T"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.uia.examples.evmti816x" version="2, 0, 0, 0" producerId="undefined">
+    <units>
+    </units>
+    <sources>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3.c"/>
+        <srcFile name="simpleTask.c"/>
+    </sources>
+    <configscripts>
+        <srcFile name="dspLoggerCircBuf.cfg"/>
+        <srcFile name="dspLoggerSM.cfg"/>
+        <srcFile name="videoM3LoggerCircBuf.cfg"/>
+        <srcFile name="vpssM3LoggerCircBuf.cfg"/>
+        <srcFile name="videoM3LoggerSM.cfg"/>
+        <srcFile name="vpssM3LoggerSM.cfg"/>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674.o674.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674.cfg"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674.oe674.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674.cfg"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674.o674.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674.cfg"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674.oe674.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674.cfg"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3.oem3.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3.cfg"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3.oem3.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3.cfg"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3.oem3.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3.cfg"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3.oem3.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3.dep" src="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3.cfg"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.x674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf/simpleTask.o674.dep" src="simpleTask.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.xe674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf/simpleTask.oe674.dep" src="simpleTask.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.x674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM/simpleTask.o674.dep" src="simpleTask.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.xe674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM/simpleTask.oe674.dep" src="simpleTask.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf.xem3.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf/simpleTask.oem3.dep" src="simpleTask.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf.xem3.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf/simpleTask.oem3.dep" src="simpleTask.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM.xem3.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM/simpleTask.oem3.dep" src="simpleTask.c"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM.xem3.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM/simpleTask.oem3.dep" src="simpleTask.c"/>
+        <srcFile name="package/rel/ti_uia_examples_evmti816x.tar.gz.dep" src="package/rel/ti_uia_examples_evmti816x.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.C674"
+            version="ti.targets.C674{1,0,7.0,0"
+            platform="ti.uia.examples.platforms.evmTI816X.dsp"
+            isa="674"
+            suffix="674"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.0.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.2,0"
+            platform="ti.uia.examples.platforms.evmTI816X.dsp"
+            isa="674"
+            suffix="e674"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.arm.elf.M3"
+            version="ti.targets.arm.elf.M3{1,0,4.9,0"
+            platform="ti.platforms.simDM8168"
+            isa="v7M"
+            suffix="em3"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/arm/4.9.0/Linux"
+            os="undefined"
+            rts="ti.targets.arm.rtsarm">
+            <model endian="little"
+                codeModel="thumb2"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    </libraries>
+    <configurations>
+    <configuration name="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf"
+        pname="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.p674"
+        target="ti.targets.C674"
+        platform="ti.uia.examples.platforms.evmTI816X.dsp"
+        profile="debug"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674"
+        cfgScript="dspLoggerCircBuf.cfg"
+        />
+    <configuration name="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf"
+        pname="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.pe674"
+        target="ti.targets.elf.C674"
+        platform="ti.uia.examples.platforms.evmTI816X.dsp"
+        profile="debug"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674"
+        cfgScript="dspLoggerCircBuf.cfg"
+        />
+    <configuration name="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM"
+        pname="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.p674"
+        target="ti.targets.C674"
+        platform="ti.uia.examples.platforms.evmTI816X.dsp"
+        profile="debug"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674"
+        cfgScript="dspLoggerSM.cfg"
+        />
+    <configuration name="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM"
+        pname="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.pe674"
+        target="ti.targets.elf.C674"
+        platform="ti.uia.examples.platforms.evmTI816X.dsp"
+        profile="debug"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674"
+        cfgScript="dspLoggerSM.cfg"
+        />
+    <configuration name="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf"
+        pname="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf.pem3"
+        target="ti.targets.arm.elf.M3"
+        platform="ti.uia.examples.platforms.evmTI816X.video"
+        profile="debug"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3"
+        cfgScript="videoM3LoggerCircBuf.cfg"
+        />
+    <configuration name="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf"
+        pname="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf.pem3"
+        target="ti.targets.arm.elf.M3"
+        platform="ti.uia.examples.platforms.evmTI816X.vpss"
+        profile="debug"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3"
+        cfgScript="vpssM3LoggerCircBuf.cfg"
+        />
+    <configuration name="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM"
+        pname="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM.pem3"
+        target="ti.targets.arm.elf.M3"
+        platform="ti.uia.examples.platforms.evmTI816X.video"
+        profile="debug"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3"
+        cfgScript="videoM3LoggerSM.cfg"
+        />
+    <configuration name="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM"
+        pname="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM.pem3"
+        target="ti.targets.arm.elf.M3"
+        platform="ti.uia.examples.platforms.evmTI816X.vpss"
+        profile="debug"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3"
+        cfgScript="vpssM3LoggerSM.cfg"
+        />
+    </configurations>
+    <executables>
+    <executable name="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf"
+        pname="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.x674"
+        target="ti.targets.C674"
+        platform="ti.uia.examples.platforms.evmTI816X.dsp"
+        profile="debug"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_p674"
+        cfgScript="dspLoggerCircBuf.cfg"
+        />
+    <executable name="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf"
+        pname="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.xe674"
+        target="ti.targets.elf.C674"
+        platform="ti.uia.examples.platforms.evmTI816X.dsp"
+        profile="debug"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf_pe674"
+        cfgScript="dspLoggerCircBuf.cfg"
+        />
+    <executable name="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM"
+        pname="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.x674"
+        target="ti.targets.C674"
+        platform="ti.uia.examples.platforms.evmTI816X.dsp"
+        profile="debug"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_p674"
+        cfgScript="dspLoggerSM.cfg"
+        />
+    <executable name="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM"
+        pname="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.xe674"
+        target="ti.targets.elf.C674"
+        platform="ti.uia.examples.platforms.evmTI816X.dsp"
+        profile="debug"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM_pe674"
+        cfgScript="dspLoggerSM.cfg"
+        />
+    <executable name="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf"
+        pname="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf.xem3"
+        target="ti.targets.arm.elf.M3"
+        platform="ti.uia.examples.platforms.evmTI816X.video"
+        profile="debug"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf_pem3"
+        cfgScript="videoM3LoggerCircBuf.cfg"
+        />
+    <executable name="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf"
+        pname="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf.xem3"
+        target="ti.targets.arm.elf.M3"
+        platform="ti.uia.examples.platforms.evmTI816X.vpss"
+        profile="debug"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf_pem3"
+        cfgScript="vpssM3LoggerCircBuf.cfg"
+        />
+    <executable name="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM"
+        pname="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM.xem3"
+        target="ti.targets.arm.elf.M3"
+        platform="ti.uia.examples.platforms.evmTI816X.video"
+        profile="debug"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM_pem3"
+        cfgScript="videoM3LoggerSM.cfg"
+        />
+    <executable name="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM"
+        pname="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM.xem3"
+        target="ti.targets.arm.elf.M3"
+        platform="ti.uia.examples.platforms.evmTI816X.vpss"
+        profile="debug"
+        xCfgScript="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3.cfg"
+        xCfgPrefix="package/cfg/ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM_pem3"
+        cfgScript="vpssM3LoggerSM.cfg"
+        />
+    </executables>
+    <tests>
+    <test exeName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.x674"
+        args=""
+        groupName="regress"
+        refOutput="golden/dspLoggerCircBuf.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.x674"
+        args=""
+        groupName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.x674"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.xe674"
+        args=""
+        groupName="regress"
+        refOutput="golden/dspLoggerCircBuf.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.xe674"
+        args=""
+        groupName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerCircBuf.xe674"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.x674"
+        args=""
+        groupName="regress"
+        refOutput="golden/dspLoggerSM.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.x674"
+        args=""
+        groupName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.x674"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.xe674"
+        args=""
+        groupName="regress"
+        refOutput="golden/dspLoggerSM.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.xe674"
+        args=""
+        groupName="ti_uia_examples_platforms_evmTI816X_dsp/debug/dspLoggerSM.xe674"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf.xem3"
+        args=""
+        groupName="regress"
+        refOutput="golden/videoM3LoggerCircBuf.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf.xem3"
+        args=""
+        groupName="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerCircBuf.xem3"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf.xem3"
+        args=""
+        groupName="regress"
+        refOutput="golden/vpssM3LoggerCircBuf.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf.xem3"
+        args=""
+        groupName="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerCircBuf.xem3"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM.xem3"
+        args=""
+        groupName="regress"
+        refOutput="golden/videoM3LoggerSM.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM.xem3"
+        args=""
+        groupName="ti_uia_examples_platforms_evmTI816X_video/debug/videoM3LoggerSM.xem3"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM.xem3"
+        args=""
+        groupName="regress"
+        refOutput="golden/vpssM3LoggerSM.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM.xem3"
+        args=""
+        groupName="ti_uia_examples_platforms_evmTI816X_vpss/debug/vpssM3LoggerSM.xem3"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_uia_examples_evmti816x"
+        pname="../../../../../exports/ti_uia_examples_evmti816x.tar.gz"
+        label="default"
+        relScript="scripts/copyright_xml.rel">
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

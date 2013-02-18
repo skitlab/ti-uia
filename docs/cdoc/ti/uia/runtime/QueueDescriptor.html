@@ -1,0 +1,653 @@
+<html>
+<head>
+<title>module ti.uia.runtime.QueueDescriptor</title>
+<link rel="stylesheet" type="text/css" href="../../../xdoc.css" />
+</head>
+<body><div id="xdocWrapper"><div id="xdocContent">
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">module</span> <span class="xdoc-id">ti.uia.runtime.</span><span class="xdoc-id">QueueDescriptor</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_left.png"/></a></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/package.html" title="package ti.uia.runtime"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/ServiceMgr.html" title="module ServiceMgr"><img class="xdocHdrArrow" src="../../../Arrow_right.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html">index URL</a></div>
+<ul class="xdocToc">
+<li class="xdocToc"><a class="xdocToc" href="#targ-synop">C synopsis</a></li>
+<li class="xdocToc2"><a class="xdocToc" href="#xdocElems">Individual elements</a></li>
+<li class="xdocToc"><a class="xdocToc" href="#meta-synop">XDCscript usage</a></li>
+<li class="xdocToc2"><a class="xdocToc" href="#xdocMetaElems">Individual elements</a></li>
+</ul>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2">C</span></tt> synopsis</td>
+<td class="xdocLabelCenter">target-domain</td>
+<td class="xdocLabelRight">sourced in <a class="xdocLink" href="../../../ti/uia/runtime/QueueDescriptor-src.html"><span class="xdocLabelFile">ti/uia/runtime/QueueDescriptor.xdc</span></a></td>
+</tr></table>
+<div class="xdocSynT">
+<div class="xdocSynCode">
+<tt></tt><span class="xdoc-kw3">#include</span> <span class="xdoc-id">&lt;ti/uia/runtime/QueueDescriptor.h&gt;</span>
+</div>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr><td colspan='2'><div class='xdocSynTblHdr'>Functions</div></td></tr>
+
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><i></i><span class="xdoc-kw2">Void</span>&nbsp;</div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#add.To.List"><span class="xdoc-id">QueueDescriptor_addToList</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Function to add a descriptor to the global list</span></span></a>(<a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Header" title="ti.uia.runtime.QueueDescriptor.Header">QueueDescriptor_Header</a>&nbsp;*<go><span class="xdoc-id">pHdrToAdd</span></go>);</div></td></tr>
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><i></i><span class="xdoc-kw2">Void</span>&nbsp;</div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#init.Header"><span class="xdoc-id">QueueDescriptor_initHeader</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Function initialize a descriptor</span></span></a>(<a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Header" title="ti.uia.runtime.QueueDescriptor.Header">QueueDescriptor_Header</a>&nbsp;*<go><span class="xdoc-id">pHdr</span></go>, <span class="xdoc-kw2">Ptr</span>&nbsp;<go><span class="xdoc-id">start</span></go>, <span class="xdoc-kw2">SizeT</span>&nbsp;<go><span class="xdoc-id">size</span></go>, <span class="xdoc-kw2">UInt</span>&nbsp;<go><span class="xdoc-id">loggerModuleId</span></go>, <span class="xdoc-kw2">UInt</span>&nbsp;<go><span class="xdoc-id">loggerInstanceId</span></go>, <span class="xdoc-kw2">UInt</span>&nbsp;<go><span class="xdoc-id">loggerPriority</span></go>, <a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor_QueueType</a>&nbsp;<go><span class="xdoc-id">type</span></go>, <span class="xdoc-kw2">Ptr</span>&nbsp;<go><span class="xdoc-id">pNumDroppedCtr</span></go>);</div></td></tr>
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><i></i><span class="xdoc-kw2">Void</span>&nbsp;</div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#remove.From.List"><span class="xdoc-id">QueueDescriptor_removeFromList</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Function to remove a descriptor from the global list</span></span></a>(<a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Header" title="ti.uia.runtime.QueueDescriptor.Header">QueueDescriptor_Header</a>&nbsp;*<go><span class="xdoc-id">pHdrToRemove</span></go>);</div></td></tr>
+<tr><td class="xdocSynFxnCat" colspan="2"><div class="xdocSynFxnCat">Functions common to all target modules</div></td></tr>
+
+<tr>
+<td></td>
+<td>
+<div class="xdocSynTblPack">
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">QueueDescriptor_Module_getMask</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Returns the diagnostics mask for this module</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">QueueDescriptor_Module_hasMask</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Test whether this module has a diagnostics mask</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">QueueDescriptor_Module_heap</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;The heap from which this module allocates memory</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">QueueDescriptor_Module_id</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Get this module's unique id</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">QueueDescriptor_Module_setMask</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Set the diagnostics mask for this module</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">QueueDescriptor_Module_startupDone</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Test if this module has completed startup</span></span></a>
+</div>
+</td>
+</tr>
+<tr><td colspan='2'><div class='xdocSynTblHdr'>Typedefs</div></td></tr>
+
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">struct</span> </div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.Header"><span class="xdoc-id">QueueDescriptor_Header</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Structure of the descriptor</span></span></a> ...</div></td></tr>
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">enum</span> </div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.Queue.Type"><span class="xdoc-id">QueueDescriptor_QueueType</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Type of Queue</span></span></a> ...</div></td></tr>
+</table>
+<div class="xdocSynSpacer">&nbsp;</div>
+</div>
+<div id="xdocSep">
+</div>
+<div id="xdocElems">
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".Queue.Type"></a>
+<a class="xdocAnchor" id=".Queue.Type_.N.O.N.E"></a>
+<a class="xdocAnchor" id=".Queue.Type_.T.O.H.O.S.T_.C.M.D_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.F.R.O.M.H.O.S.T_.C.M.D_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.T.O.H.O.S.T_.E.V.E.N.T_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.T.O.H.O.S.T_.E.V.E.N.T_.O.V.E.R.F.L.O.W_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.T.O.H.O.S.T_.D.A.T.A_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.F.R.O.M.H.O.S.T_.D.A.T.A_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">enum</span> <span class="xdoc-id">QueueDescriptor_</span><span class="xdoc-id">QueueType</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#.Queue.Type">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Type of Queue</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">enum</span> <span class="xdoc-id">QueueDescriptor_QueueType</span> {
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">QueueDescriptor_QueueType_NONE</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">QueueDescriptor_QueueType_TOHOST_CMD_CIRCULAR_BUFFER</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">QueueDescriptor_QueueType_FROMHOST_CMD_CIRCULAR_BUFFER</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">QueueDescriptor_QueueType_TOHOST_EVENT_CIRCULAR_BUFFER</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">QueueDescriptor_QueueType_TOHOST_EVENT_OVERFLOW_BUFFER</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">QueueDescriptor_QueueType_TOHOST_DATA_CIRCULAR_BUFFER</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">QueueDescriptor_QueueType_FROMHOST_DATA_CIRCULAR_BUFFER</span>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt>} <span class="xdoc-id">QueueDescriptor_QueueType</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".Header"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">struct</span> <span class="xdoc-id">QueueDescriptor_</span><span class="xdoc-id">Header</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#.Header">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Structure of the descriptor</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">struct</span> <span class="xdoc-id">QueueDescriptor_Header</span> {
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Int</span>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">structSize</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Header" title="ti.uia.runtime.QueueDescriptor.Header">QueueDescriptor_Header</a>&nbsp;*<span class="xdoc-id"><go><span class="xdoc-id">next</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor_QueueType</a>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">queueType</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Bits32</span>&nbsp;*<span class="xdoc-id"><go><span class="xdoc-id">readPtr</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Bits32</span>&nbsp;*<span class="xdoc-id"><go><span class="xdoc-id">writePtr</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Bits32</span>&nbsp;*<span class="xdoc-id"><go><span class="xdoc-id">queueStartAdrs</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">SizeT</span>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">queueSizeInMAUs</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">UInt</span>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">instanceId</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">UInt</span>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">ownerModuleId</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">UInt</span>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">priority</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Bits32</span>&nbsp;*<span class="xdoc-id"><go><span class="xdoc-id">numDroppedCtrAdrs</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt>} <span class="xdoc-id">QueueDescriptor_Header</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">FIELDS</div>
+<div class="xdocChild"><span class="xdocChildId">structSize</span>
+<span class="xdocChildSum">&#151;&nbsp;Used for version control to determine if newer 
+                           fields are available</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">next</span>
+<span class="xdocChildSum">&#151;&nbsp;Pointer to the next Header in the list</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">queueType</span>
+<span class="xdocChildSum">&#151;&nbsp;Identifies the type of queue and thus who owns 
+                           the read and write pointers.</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">readPtr</span>
+<span class="xdocChildSum">&#151;&nbsp;Points to the next (word-aligned) byte to be  
+                           read from the buffer</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">writePtr</span>
+<span class="xdocChildSum">&#151;&nbsp;Points to the next (word-aligned) byte to be  
+                           written into</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">queueStartAdrs</span>
+<span class="xdocChildSum">&#151;&nbsp;Start address of the buffer (word-aligned)</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">queueSizeInMAUs</span>
+<span class="xdocChildSum">&#151;&nbsp;Queue Size in min. addressable units  
+                           (buffer size must be word-aligned)</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">instanceId</span>
+<span class="xdocChildSum">&#151;&nbsp;16b unique ID that identifies the instance of the module  
+                           that owns this queue descriptor.   
+                           b15=1 indicates that the logger was dynamically  
+                           created. Corresponds to the logger instance Id  
+                           in the rta.xml and uia.xml metadata and 
+                           UIAPacket event packet header.</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">ownerModuleId</span>
+<span class="xdocChildSum">&#151;&nbsp;The module ID of the module that owns this  
+                           queue descriptor</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">priority</span>
+<span class="xdocChildSum">&#151;&nbsp;The priority of the queue. 0 is normal priority. 
+                           The higher the number, the higher the priority. 
+                           Used to set the priority field of the UIAPacket  
+                           event packet header.</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">numDroppedCtrAdrs</span>
+<span class="xdocChildSum">&#151;&nbsp;Points to the counter used to count the number 
+                           of dropped events.  NULL if no counter available.</span>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="add.To.List"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-id">QueueDescriptor_</span><span class="xdoc-id">addToList</span>()&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#add.To.List">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Function to add a descriptor to the global list</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><i></i><span class="xdoc-kw2">Void</span>&nbsp;<span class="xdoc-id">QueueDescriptor_addToList</span>(<a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Header" title="ti.uia.runtime.QueueDescriptor.Header">QueueDescriptor_Header</a>&nbsp;*<span class="xdoc-id">pHdrToAdd</span>);
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">ARGUMENTS</div>
+<div class="xdocChild"><span class="xdocChildId">pHdrToAdd</span>
+<span class="xdocChildSum">&#151;&nbsp;Descriptor to add</span>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="init.Header"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-id">QueueDescriptor_</span><span class="xdoc-id">initHeader</span>()&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#init.Header">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Function initialize a descriptor</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><i></i><span class="xdoc-kw2">Void</span>&nbsp;<span class="xdoc-id">QueueDescriptor_initHeader</span>(<a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Header" title="ti.uia.runtime.QueueDescriptor.Header">QueueDescriptor_Header</a>&nbsp;*<span class="xdoc-id">pHdr</span>, <span class="xdoc-kw2">Ptr</span>&nbsp;<span class="xdoc-id">start</span>, <span class="xdoc-kw2">SizeT</span>&nbsp;<span class="xdoc-id">size</span>, <span class="xdoc-kw2">UInt</span>&nbsp;<span class="xdoc-id">loggerModuleId</span>, <span class="xdoc-kw2">UInt</span>&nbsp;<span class="xdoc-id">loggerInstanceId</span>, <span class="xdoc-kw2">UInt</span>&nbsp;<span class="xdoc-id">loggerPriority</span>, <a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor_QueueType</a>&nbsp;<span class="xdoc-id">type</span>, <span class="xdoc-kw2">Ptr</span>&nbsp;<span class="xdoc-id">pNumDroppedCtr</span>);
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">ARGUMENTS</div>
+<div class="xdocChild"><span class="xdocChildId">pHdr</span>
+<span class="xdocChildSum">&#151;&nbsp;Descriptor to initialize</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">start</span>
+<span class="xdocChildSum">&#151;&nbsp;Start address of the buffer</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">size</span>
+<span class="xdocChildSum">&#151;&nbsp;Size of the buffer</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">loggerModuleId</span>
+<span class="xdocChildSum">&#151;&nbsp;module ID of the logger that owns the buffer</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">loggerInstanceId</span>
+<span class="xdocChildSum">&#151;&nbsp;instance ID of the logger that owns the buffer</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">loggerPriority</span>
+<span class="xdocChildSum">&#151;&nbsp;priority of the logger that owns the buffer</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">type</span>
+<span class="xdocChildSum">&#151;&nbsp;Type of descriptor</span>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="remove.From.List"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-id">QueueDescriptor_</span><span class="xdoc-id">removeFromList</span>()&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#remove.From.List">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Function to remove a descriptor from the global list</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><i></i><span class="xdoc-kw2">Void</span>&nbsp;<span class="xdoc-id">QueueDescriptor_removeFromList</span>(<a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Header" title="ti.uia.runtime.QueueDescriptor.Header">QueueDescriptor_Header</a>&nbsp;*<span class="xdoc-id">pHdrToRemove</span>);
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">ARGUMENTS</div>
+<div class="xdocChild"><span class="xdocChildId">pHdrToRemove</span>
+<span class="xdocChildSum">&#151;&nbsp;Descriptor to remove</span>
+</div>
+<a class="xdocAnchor" id="module-wide_built-ins"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdocSynSum">Module-Wide Built-Ins</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#module-wide_built-ins">index URL</a></div>
+<p class="xdocHdrSummary"></p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><a class="xdoc-link" href="../../../xdc/runtime/Types.html#.Module.Id" title="xdc.runtime.Types.ModuleId">Types_ModuleId</a> <span class="xdoc-id">QueueDescriptor_Module_id</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Get this module's unique id</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Bool</span> <span class="xdoc-id">QueueDescriptor_Module_startupDone</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Test if this module has completed startup</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><a class="xdoc-link" href="../../../xdc/runtime/IHeap.html#per-instance_object_types" title="xdc.runtime.IHeap.Handle">IHeap_Handle</a> <span class="xdoc-id">QueueDescriptor_Module_heap</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;The heap from which this module allocates memory</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Bool</span> <span class="xdoc-id">QueueDescriptor_Module_hasMask</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Test whether this module has a diagnostics mask</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Bits16</span> <span class="xdoc-id">QueueDescriptor_Module_getMask</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Returns the diagnostics mask for this module</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Void</span> <span class="xdoc-id">QueueDescriptor_Module_setMask</span>(<span class="xdoc-kw2">Bits16</span> <span class="xdoc-id">mask</span>);
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Set the diagnostics mask for this module</div>
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2">XDCscript</span></tt> usage</td>
+<td class="xdocLabelCenter">meta-domain</td>
+<td class="xdocLabelRight">sourced in <a class="xdocLink" href="../../../ti/uia/runtime/QueueDescriptor-src.html"><span class="xdocLabelFile">ti/uia/runtime/QueueDescriptor.xdc</span></a></td>
+</tr></table>
+<div class="xdocSynM">
+<div class="xdocSynCode">
+<tt></tt><span class="xdoc-kw1">var</span> QueueDescriptor = <span class="xdoc-kw3">xdc.useModule</span>(<span class="xdoc-id">'ti.uia.runtime.QueueDescriptor'</span>);
+</div>
+<div class='xdocSynHdr'>module-wide constants & types</div>
+
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><i>values of type <a class="xdocSynGo" href="#meta.Queue.Type">QueueDescriptor.<span class="xdoc-id">QueueType</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Type of Queue</span></span></a></i>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor.<span class="xdoc-id">QueueType_NONE</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor.<span class="xdoc-id">QueueType_TOHOST_CMD_CIRCULAR_BUFFER</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor.<span class="xdoc-id">QueueType_FROMHOST_CMD_CIRCULAR_BUFFER</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor.<span class="xdoc-id">QueueType_TOHOST_EVENT_CIRCULAR_BUFFER</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor.<span class="xdoc-id">QueueType_TOHOST_EVENT_OVERFLOW_BUFFER</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor.<span class="xdoc-id">QueueType_TOHOST_DATA_CIRCULAR_BUFFER</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor.<span class="xdoc-id">QueueType_FROMHOST_DATA_CIRCULAR_BUFFER</span></a>;
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><span class="xdoc-kw1">var</span> <i>obj</i> = <span class="xdoc-kw1">new</span> <a class="xdocSynGo" href="#meta.Header">QueueDescriptor.<span class="xdoc-id">Header</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Structure of the descriptor</span></span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">structSize</span></a> = <i><span class="xdoc-kw2">Int</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">next</span></a> = <i><a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Header" title="ti.uia.runtime.QueueDescriptor.Header">QueueDescriptor.Header</a>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">queueType</span></a> = <i><a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor.QueueType</a></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">readPtr</span></a> = <i><span class="xdoc-kw2">Bits32</span>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">writePtr</span></a> = <i><span class="xdoc-kw2">Bits32</span>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">queueStartAdrs</span></a> = <i><span class="xdoc-kw2">Bits32</span>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">queueSizeInMAUs</span></a> = <i><span class="xdoc-kw2">SizeT</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">instanceId</span></a> = <i><span class="xdoc-kw2">UInt</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">ownerModuleId</span></a> = <i><span class="xdoc-kw2">UInt</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">priority</span></a> = <i><span class="xdoc-kw2">UInt</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Header" title="ti.uia.runtime.QueueDescriptor.Header"><span class="xdoc-id">numDroppedCtrAdrs</span></a> = <i><span class="xdoc-kw2">Bits32</span>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class='xdocSynHdr'>module-wide config parameters</div>
+
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><a class="xdocSynGo" href="#common$">QueueDescriptor.<span class="xdoc-id">common$</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Common module configuration parameters</span></span></a> = <i><a class="xdoc-link" href="../../../xdc/runtime/Types.html#.Common$" title="xdc.runtime.Types.Common$">Types.Common$</a></i> <span class="xdoc-kw2">undefined</span>;
+</div>
+<div class='xdocSynHdr'>module-wide functions</div>
+
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><a class="xdocSynGo" href="#generate.Instance.Id">QueueDescriptor.<span class="xdoc-id">generateInstanceId</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;</span></span></a>() <i>returns</i> <i><span class="xdoc-kw2">UInt16</span></i>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+</div>
+<div id="xdocSep">
+</div>
+<div id="xdocMetaElems">
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.Queue.Type"></a>
+<a class="xdocAnchor" id=".Queue.Type_.N.O.N.E"></a>
+<a class="xdocAnchor" id=".Queue.Type_.T.O.H.O.S.T_.C.M.D_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.F.R.O.M.H.O.S.T_.C.M.D_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.T.O.H.O.S.T_.E.V.E.N.T_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.T.O.H.O.S.T_.E.V.E.N.T_.O.V.E.R.F.L.O.W_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.T.O.H.O.S.T_.D.A.T.A_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<a class="xdocAnchor" id=".Queue.Type_.F.R.O.M.H.O.S.T_.D.A.T.A_.C.I.R.C.U.L.A.R_.B.U.F.F.E.R"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">enum</span> <span class="xdoc-id">QueueDescriptor.</span><span class="xdoc-id">QueueType</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#.Queue.Type">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Type of Queue</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><i>values of type QueueDescriptor.<span class="xdoc-id">QueueType</span></i>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> QueueDescriptor.<span class="xdoc-id">QueueType_NONE</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> QueueDescriptor.<span class="xdoc-id">QueueType_TOHOST_CMD_CIRCULAR_BUFFER</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> QueueDescriptor.<span class="xdoc-id">QueueType_FROMHOST_CMD_CIRCULAR_BUFFER</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> QueueDescriptor.<span class="xdoc-id">QueueType_TOHOST_EVENT_CIRCULAR_BUFFER</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> QueueDescriptor.<span class="xdoc-id">QueueType_TOHOST_EVENT_OVERFLOW_BUFFER</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> QueueDescriptor.<span class="xdoc-id">QueueType_TOHOST_DATA_CIRCULAR_BUFFER</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> QueueDescriptor.<span class="xdoc-id">QueueType_FROMHOST_DATA_CIRCULAR_BUFFER</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.Queue.Type" title="QueueDescriptor_QueueType">QueueDescriptor_QueueType</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.Header"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">struct</span> <span class="xdoc-id">QueueDescriptor.</span><span class="xdoc-id">Header</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#.Header">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Structure of the descriptor</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">var</span> <i>obj</i> = <span class="xdoc-kw1">new</span> QueueDescriptor.<span class="xdoc-id">Header</span>;
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">structSize</span> = <i><span class="xdoc-kw2">Int</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">next</span> = <i><a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Header" title="ti.uia.runtime.QueueDescriptor.Header">QueueDescriptor.Header</a>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">queueType</span> = <i><a class="xdoc-link" href="../../../ti/uia/runtime/QueueDescriptor.html#.Queue.Type" title="ti.uia.runtime.QueueDescriptor.QueueType">QueueDescriptor.QueueType</a></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">readPtr</span> = <i><span class="xdoc-kw2">Bits32</span>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">writePtr</span> = <i><span class="xdoc-kw2">Bits32</span>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">queueStartAdrs</span> = <i><span class="xdoc-kw2">Bits32</span>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">queueSizeInMAUs</span> = <i><span class="xdoc-kw2">SizeT</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">instanceId</span> = <i><span class="xdoc-kw2">UInt</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">ownerModuleId</span> = <i><span class="xdoc-kw2">UInt</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">priority</span> = <i><span class="xdoc-kw2">UInt</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">numDroppedCtrAdrs</span> = <i><span class="xdoc-kw2">Bits32</span>*</i><b>&nbsp;&nbsp;...</b>
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">FIELDS</div>
+<div class="xdocChild"><span class="xdocChildId">structSize</span>
+<span class="xdocChildSum">&#151;&nbsp;Used for version control to determine if newer 
+                           fields are available</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">next</span>
+<span class="xdocChildSum">&#151;&nbsp;Pointer to the next Header in the list</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">queueType</span>
+<span class="xdocChildSum">&#151;&nbsp;Identifies the type of queue and thus who owns 
+                           the read and write pointers.</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">readPtr</span>
+<span class="xdocChildSum">&#151;&nbsp;Points to the next (word-aligned) byte to be  
+                           read from the buffer</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">writePtr</span>
+<span class="xdocChildSum">&#151;&nbsp;Points to the next (word-aligned) byte to be  
+                           written into</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">queueStartAdrs</span>
+<span class="xdocChildSum">&#151;&nbsp;Start address of the buffer (word-aligned)</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">queueSizeInMAUs</span>
+<span class="xdocChildSum">&#151;&nbsp;Queue Size in min. addressable units  
+                           (buffer size must be word-aligned)</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">instanceId</span>
+<span class="xdocChildSum">&#151;&nbsp;16b unique ID that identifies the instance of the module  
+                           that owns this queue descriptor.   
+                           b15=1 indicates that the logger was dynamically  
+                           created. Corresponds to the logger instance Id  
+                           in the rta.xml and uia.xml metadata and 
+                           UIAPacket event packet header.</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">ownerModuleId</span>
+<span class="xdocChildSum">&#151;&nbsp;The module ID of the module that owns this  
+                           queue descriptor</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">priority</span>
+<span class="xdocChildSum">&#151;&nbsp;The priority of the queue. 0 is normal priority. 
+                           The higher the number, the higher the priority. 
+                           Used to set the priority field of the UIAPacket  
+                           event packet header.</span>
+</div>
+<div class="xdocChild"><span class="xdocChildId">numDroppedCtrAdrs</span>
+<span class="xdocChildSum">&#151;&nbsp;Points to the counter used to count the number 
+                           of dropped events.  NULL if no counter available.</span>
+</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.Header" title="QueueDescriptor_Header">QueueDescriptor_Header</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="common$"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">metaonly </span><span class="xdoc-kw1">config</span> <span class="xdoc-id">QueueDescriptor.</span><span class="xdoc-id">common$</span>&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#common$">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Common module configuration parameters</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt>QueueDescriptor.<span class="xdoc-id">common$</span> = <i><a class="xdoc-link" href="../../../xdc/runtime/Types.html#.Common$" title="xdc.runtime.Types.Common$">Types.Common$</a></i> <span class="xdoc-kw2">undefined</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">DETAILS</div>
+<div class="xdocText">All modules have this configuration parameter.  Its name
+  contains the '$' character to ensure it does not conflict with
+  configuration parameters declared by the module.  This allows
+  new configuration parameters to be added in the future without
+  any chance of breaking existing modules.</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="generate.Instance.Id"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">metaonly </span><span class="xdoc-id">QueueDescriptor.</span><span class="xdoc-id">generateInstanceId</span>()&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/QueueDescriptor.html#generate.Instance.Id">index URL</a></div>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt>QueueDescriptor.<span class="xdoc-id">generateInstanceId</span>() <i>returns</i> <i><span class="xdoc-kw2">UInt16</span></i>
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+</div>
+<div id="xdocDate">generated on Fri, 13 Jul 2012 18:18:16 GMT</div>
+</div></div></body>
+</html>

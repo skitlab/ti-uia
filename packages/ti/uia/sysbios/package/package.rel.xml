@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/release.dtd -->
+<release name="ti_uia_sysbios" label="default" date="1342203150258" buildCount="1" producerId="undefined">
+<package name="ti.uia.sysbios"
+    version="1, 0, 0, 0"/>
+<imports>
+</imports>
+<references>
+    <package name="xdc"
+        version="1, 1, 1, 1332352065835"
+        providerId="xdccore">
+        <file name="IPackage.xdc"/>
+        <file name="IPackage.xs"/>
+        <file name="om2.xs"/>
+        <file name="package.xs"/>
+        <file name="std.h"/>
+        <file name="template.xs"/>
+        <file name="xdc.tci"/>
+        <file name="xmlgen.xs"/>
+        <file name="xmlgen2.xs"/>
+    </package>
+    <package name="xdc.services.global"
+        version="1, 0, 0, 1332352092549"
+        providerId="xdccore">
+        <file name="Clock.xs"/>
+        <file name="Trace.xs"/>
+        <file name="java/package.jar"/>
+    </package>
+    <package name="xdc.bld"
+        version="1, 0, 2, 1332352074135"
+        providerId="xdccore">
+        <file name="BuildEnvironment.xs"/>
+        <file name="Configuration.xs"/>
+        <file name="Executable.xs"/>
+        <file name="ITarget.xs"/>
+        <file name="ITarget2.xs"/>
+        <file name="ITargetFilter.xs"/>
+        <file name="Library.xs"/>
+        <file name="Manifest.xs"/>
+        <file name="PackageContents.xs"/>
+        <file name="Repository.xs"/>
+        <file name="Script.xs"/>
+        <file name="Utils.xs"/>
+        <file name="_gen.xs"/>
+        <file name="bld.js"/>
+        <file name="package.xs"/>
+    </package>
+    <package name="ti.targets"
+        version="1, 0, 3, 1332009804250"
+        providerId="xdccore">
+        <file name="C28_float.xs"/>
+        <file name="C28_large.xs"/>
+        <file name="ITarget.xs"/>
+        <file name="package.xs"/>
+        <file name="select.h"/>
+        <file name="std.h"/>
+    </package>
+    <package name="ti.targets.elf"
+        version="1, 0, 0, 1332009830282"
+        providerId="xdccore">
+        <file name="ITarget.xs"/>
+        <file name="TMS470.xs"/>
+        <file name="package.xs"/>
+        <file name="std.h"/>
+    </package>
+    <package name="ti.targets.arm"
+        version="2, 0, 1, 0, 1332009813724"
+        providerId="xdccore">
+        <file name="package.xs"/>
+    </package>
+    <package name="ti.targets.arm.elf"
+        version="1, 0, 0, 1332009821802"
+        providerId="xdccore">
+        <file name="IArm.xs"/>
+        <file name="package.xs"/>
+        <file name="std.h"/>
+    </package>
+    <package name="gnu.targets"
+        version="1, 0, 1, 1332009746156"
+        providerId="xdccore">
+        <file name="ITarget.xs"/>
+        <file name="Linux86.xs"/>
+        <file name="MVArm9.xs"/>
+        <file name="Mingw.xs"/>
+        <file name="UCArm9.xs"/>
+        <file name="package.xs"/>
+    </package>
+    <package name="gnu.targets.arm"
+        version="1, 0, 0, 0, 1332009753820"
+        providerId="xdccore">
+        <file name="GCArmv6.xs"/>
+        <file name="GCArmv7A.xs"/>
+        <file name="M3.xs"/>
+        <file name="M4.xs"/>
+        <file name="M4F.xs"/>
+        <file name="MVArm9.xs"/>
+        <file name="UCArm9.xs"/>
+        <file name="package.xs"/>
+    </package>
+    <package name="microsoft.targets"
+        version="1, 0, 2, 0, 1332009782662"
+        providerId="xdccore">
+        <file name="ITarget.xs"/>
+        <file name="Win32.xs"/>
+        <file name="_utils.xs"/>
+        <file name="package.xs"/>
+    </package>
+    <package name="ti.targets.msp430"
+        version="1, 0, 0, 1331942555577"
+        providerId="xdccore">
+        <file name="Generic.xs"/>
+        <file name="MSP430.xs"/>
+        <file name="MSP430X.xs"/>
+        <file name="MSP430X_small.xs"/>
+        <file name="package.xs"/>
+    </package>
+    <package name="ti.targets.msp430.elf"
+        version="1, 0, 0, 1331942559571"
+        providerId="xdccore">
+        <file name="MSP430.xs"/>
+        <file name="MSP430X.xs"/>
+        <file name="MSP430X_small.xs"/>
+        <file name="package.xs"/>
+        <file name="std.h"/>
+    </package>
+    <package name="ti.uia.build"
+        version=""
+        providerId="/db/vtree/library/trees/uia/uia-d14/src">
+        <file name="common.bld"/>
+    </package>
+    <package name="tisb.release.filters"
+        version="1, 0, 0, 0, 1339629495041"
+        providerId="/db/toolsrc/library/toolsE18/packages">
+        <file name="libvers.xdt"/>
+    </package>
+    <package name="xdc.runtime"
+        version="2, 1, 0, 1332352089632"
+        providerId="xdccore">
+        <file name="Assert.h"/>
+        <file name="Assert.xdc"/>
+        <file name="Assert__epilogue.h"/>
+        <file name="Assert__prologue.h"/>
+        <file name="Diags.h"/>
+        <file name="Diags__epilogue.h"/>
+        <file name="Diags__prologue.h"/>
+        <file name="Error.h"/>
+        <file name="Error__epilogue.h"/>
+        <file name="Error__prologue.h"/>
+        <file name="Gate.h"/>
+        <file name="Gate__epilogue.h"/>
+        <file name="Gate__prologue.h"/>
+        <file name="IFilterLogger.h"/>
+        <file name="IFilterLogger.xdc"/>
+        <file name="IGateProvider.h"/>
+        <file name="IHeap.h"/>
+        <file name="IInstance.h"/>
+        <file name="ILogger.h"/>
+        <file name="IModule.h"/>
+        <file name="ISystemSupport.h"/>
+        <file name="ITimestampClient.h"/>
+        <file name="ITimestampProvider.h"/>
+        <file name="Log.h"/>
+        <file name="Log__epilogue.h"/>
+        <file name="Log__prologue.h"/>
+        <file name="Main.h"/>
+        <file name="Memory.h"/>
+        <file name="Startup.h"/>
+        <file name="System.h"/>
+        <file name="Text.h"/>
+        <file name="Timestamp.h"/>
+        <file name="Types.h"/>
+        <file name="Types__epilogue.h"/>
+        <file name="Types__prologue.h"/>
+        <file name="package/Main_Module_GateProxy.h"/>
+        <file name="package/Memory_HeapProxy.h"/>
+        <file name="package/System_Module_GateProxy.h"/>
+        <file name="package/System_SupportProxy.h"/>
+        <file name="package/Timestamp_SupportProxy.h"/>
+        <file name="package/package.defs.h"/>
+        <file name="xdc.h"/>
+    </package>
+    <package name="ti.uia.runtime"
+        version="1, 0, 0, 2, 1342203140000"
+        providerId="/db/vtree/library/trees/uia/uia-d14/src">
+        <file name="EventHdr.h"/>
+        <file name="EventHdr__epilogue.h"/>
+        <file name="EventHdr__prologue.h"/>
+        <file name="ILoggerSnapshot.h"/>
+        <file name="ILoggerSnapshot.xdc"/>
+        <file name="IServiceMgrSupport.h"/>
+        <file name="IServiceMgrSupport.xdc"/>
+        <file name="IUIATransfer.h"/>
+        <file name="IUIATransfer.xdc"/>
+        <file name="MultiCoreTypes.h"/>
+        <file name="ServiceMgr.h"/>
+        <file name="ServiceMgr__epilogue.h"/>
+        <file name="ServiceMgr__prologue.h"/>
+        <file name="Transport.h"/>
+        <file name="UIAPacket.h"/>
+        <file name="UIAPacket.xdc"/>
+        <file name="UIAPacket__epilogue.h"/>
+        <file name="UIAPacket__prologue.h"/>
+        <file name="package/ServiceMgr_SupportProxy.h"/>
+        <file name="package/package.defs.h"/>
+    </package>
+    <package name="ti.sysbios.knl"
+        version="2, 0, 0, 0, 1332277407694"
+        providerId="/db/vtree/library/trees/avalaprod/avalaprod-i39/exports/bios_6_33_04_39/packages">
+        <file name="Clock.h"/>
+        <file name="Clock.xdc"/>
+        <file name="Event.h"/>
+        <file name="Event.xdc"/>
+        <file name="Event__epilogue.h"/>
+        <file name="Event__prologue.h"/>
+        <file name="Queue.h"/>
+        <file name="Queue.xdc"/>
+        <file name="Semaphore.h"/>
+        <file name="Semaphore.xdc"/>
+        <file name="Swi.h"/>
+        <file name="Swi.xdc"/>
+        <file name="Task.h"/>
+        <file name="Task.xdc"/>
+        <file name="Task__epilogue.h"/>
+        <file name="Task__prologue.h"/>
+        <file name="package/Task_SupportProxy.h"/>
+        <file name="package/package.defs.h"/>
+    </package>
+    <package name="ti.sysbios.interfaces"
+        version="2, 0, 0, 0, 1332277399448"
+        providerId="/db/vtree/library/trees/avalaprod/avalaprod-i39/exports/bios_6_33_04_39/packages">
+        <file name="IHwi.h"/>
+        <file name="ITaskSupport.h"/>
+        <file name="ITaskSupport.xdc"/>
+        <file name="ITimer.h"/>
+        <file name="ITimer.xdc"/>
+        <file name="package/package.defs.h"/>
+    </package>
+    <package name="ti.sysbios.hal"
+        version="2, 0, 0, 0, 1332277391036"
+        providerId="/db/vtree/library/trees/avalaprod/avalaprod-i39/exports/bios_6_33_04_39/packages">
+        <file name="Hwi.h"/>
+        <file name="Hwi__epilogue.h"/>
+        <file name="Hwi__prologue.h"/>
+        <file name="Timer.h"/>
+        <file name="Timer.xdc"/>
+        <file name="package/Hwi_HwiProxy.h"/>
+        <file name="package/Timer_TimerProxy.h"/>
+        <file name="package/package.defs.h"/>
+    </package>
+    <package name="ti.sysbios.syncs"
+        version="2, 0, 0, 0, 1332277418825"
+        providerId="/db/vtree/library/trees/avalaprod/avalaprod-i39/exports/bios_6_33_04_39/packages">
+        <file name="SyncEvent.h"/>
+        <file name="SyncEvent.xdc"/>
+        <file name="package/package.defs.h"/>
+    </package>
+    <package name="xdc.runtime.knl"
+        version="1, 0, 0, 1332352089790"
+        providerId="xdccore">
+        <file name="ISync.h"/>
+        <file name="ISync.xdc"/>
+        <file name="package/package.defs.h"/>
+    </package>
+    <package name="xdc.shelf"
+        version="1, 0, 0, 1332352111707"
+        providerId="xdccore">
+        <file name="java/antlr.jar"/>
+        <file name="java/ecj.jar"/>
+        <file name="java/js.jar"/>
+        <file name="java/tar.jar"/>
+    </package>
+    <package name="xdc.services.spec"
+        version="1, 0, 0, 0, 1332352105410"
+        providerId="xdccore">
+        <file name="java/package.jar"/>
+    </package>
+    <package name="xdc.services.intern.cmd"
+        version="1, 0, 0, 0, 1332352096035"
+        providerId="xdccore">
+        <file name="java/package.jar"/>
+    </package>
+    <package name="xdc.services.intern.gen"
+        version="1, 0, 0, 0, 1332352096919"
+        providerId="xdccore">
+        <file name="java/package.jar"/>
+    </package>
+    <package name="xdc.services.intern.xsr"
+        version="1, 0, 0, 1332352097179"
+        providerId="xdccore">
+        <file name="java/package.jar"/>
+    </package>
+    <targetRoot base="/db/toolsrc/library/vendors2005/ti/c6x/7.0.0/Linux/"
+        trgs="ti.targets.C64P,ti.targets.C64P_big_endian,ti.targets.C674">
+        <file name="include/c6x.h"/>
+        <file name="include/linkage.h"/>
+        <file name="include/stdarg.h"/>
+        <file name="include/stddef.h"/>
+        <file name="include/stdint.h"/>
+        <file name="include/stdio.h"/>
+        <file name="include/string.h"/>
+    </targetRoot>
+    <package name="ti.ipc"
+        version="1, 0, 0, 0, 1328917430747"
+        providerId="/db/vtree/library/trees/ipc/ipc-h27/exports/ipc_1_24_02_27/packages">
+        <file name="MessageQ.h"/>
+        <file name="MultiProc.h"/>
+        <file name="SharedRegion.h"/>
+    </package>
+    <package name="ti.sysbios"
+        version="2, 0, 0, 0, 1332277266585"
+        providerId="/db/vtree/library/trees/avalaprod/avalaprod-i39/exports/bios_6_33_04_39/packages">
+        <file name="BIOS.h"/>
+        <file name="BIOS__epilogue.h"/>
+        <file name="BIOS__prologue.h"/>
+        <file name="package/BIOS_RtsGateProxy.h"/>
+        <file name="package/package.defs.h"/>
+    </package>
+    <package name="ti.sysbios.family.arm.m3"
+        version="2, 0, 0, 0, 1332277325986"
+        providerId="/db/vtree/library/trees/avalaprod/avalaprod-i39/exports/bios_6_33_04_39/packages">
+        <file name="Hwi.h"/>
+        <file name="Hwi__epilogue.h"/>
+        <file name="Hwi__prologue.h"/>
+        <file name="package/package.defs.h"/>
+    </package>
+    <package name="ti.sysbios.family.c28"
+        version="2, 0, 0, 0, 1332277336507"
+        providerId="/db/vtree/library/trees/avalaprod/avalaprod-i39/exports/bios_6_33_04_39/packages">
+        <file name="Hwi.h"/>
+        <file name="Hwi__epilogue.h"/>
+        <file name="Hwi__prologue.h"/>
+        <file name="package/package.defs.h"/>
+    </package>
+    <package name="ti.ndk"
+        version="2, 01, 00, 1305142355200"
+        providerId="/db/vtree/library/trees/ndkprod/ndkprod-a26/exports/ndk_2_20_04_26/packages">
+        <file name="inc/_netctrl.h"/>
+        <file name="inc/_nettool.h"/>
+        <file name="inc/_stack.h"/>
+        <file name="inc/hal/hal.h"/>
+        <file name="inc/netctrl/netctrl.h"/>
+        <file name="inc/netctrl/netsrv.h"/>
+        <file name="inc/netmain.h"/>
+        <file name="inc/nettools/inc/configif.h"/>
+        <file name="inc/nettools/inc/daemonif.h"/>
+        <file name="inc/nettools/inc/dhcpif.h"/>
+        <file name="inc/nettools/inc/dhcpopts.h"/>
+        <file name="inc/nettools/inc/dhcpsif.h"/>
+        <file name="inc/nettools/inc/dnsif.h"/>
+        <file name="inc/nettools/inc/httpif.h"/>
+        <file name="inc/nettools/inc/inet.h"/>
+        <file name="inc/nettools/inc/ipaddrif.h"/>
+        <file name="inc/nettools/inc/natif.h"/>
+        <file name="inc/nettools/inc/telnetif.h"/>
+        <file name="inc/nettools/inc/tftpif.h"/>
+        <file name="inc/nettools/netcfg.h"/>
+        <file name="inc/nettools/nettools.h"/>
+        <file name="inc/os/osif.h"/>
+        <file name="inc/serrno.h"/>
+        <file name="inc/socket.h"/>
+        <file name="inc/stack/inc/bind6if.h"/>
+        <file name="inc/stack/inc/bindif.h"/>
+        <file name="inc/stack/inc/etherif.h"/>
+        <file name="inc/stack/inc/fdtif.h"/>
+        <file name="inc/stack/inc/icmp6if.h"/>
+        <file name="inc/stack/inc/icmpif.h"/>
+        <file name="inc/stack/inc/igmpif.h"/>
+        <file name="inc/stack/inc/ip6if.h"/>
+        <file name="inc/stack/inc/ipif.h"/>
+        <file name="inc/stack/inc/listlib.h"/>
+        <file name="inc/stack/inc/lli6if.h"/>
+        <file name="inc/stack/inc/lliif.h"/>
+        <file name="inc/stack/inc/mldif.h"/>
+        <file name="inc/stack/inc/natif.h"/>
+        <file name="inc/stack/inc/netdf.h"/>
+        <file name="inc/stack/inc/nimuif.h"/>
+        <file name="inc/stack/inc/nodeif.h"/>
+        <file name="inc/stack/inc/pipeif.h"/>
+        <file name="inc/stack/inc/pppif.h"/>
+        <file name="inc/stack/inc/pppoeif.h"/>
+        <file name="inc/stack/inc/rawethif.h"/>
+        <file name="inc/stack/inc/rawif.h"/>
+        <file name="inc/stack/inc/resif.h"/>
+        <file name="inc/stack/inc/route6if.h"/>
+        <file name="inc/stack/inc/routeif.h"/>
+        <file name="inc/stack/inc/rtcif.h"/>
+        <file name="inc/stack/inc/sockif.h"/>
+        <file name="inc/stack/inc/tcpif.h"/>
+        <file name="inc/stack/inc/udpif.h"/>
+        <file name="inc/stack/inc/vlanif.h"/>
+        <file name="inc/stack/stack.h"/>
+        <file name="inc/stacksys.h"/>
+        <file name="inc/usertype.h"/>
+    </package>
+    <targetRoot base="/db/toolsrc/library/vendors2005/ti/c6x/7.2.0/Linux/"
+        trgs="ti.targets.elf.C64P,ti.targets.elf.C66,ti.targets.elf.C66_big_endian,ti.targets.elf.C64P_big_endian,ti.targets.elf.C674,ti.targets.elf.C64T">
+        <file name="include/c6x.h"/>
+        <file name="include/linkage.h"/>
+        <file name="include/stdarg.h"/>
+        <file name="include/stddef.h"/>
+        <file name="include/stdint.h"/>
+        <file name="include/stdio.h"/>
+        <file name="include/string.h"/>
+        <file name="include/vect.h"/>
+    </targetRoot>
+    <targetRoot base="/db/toolsrc/library/vendors2005/ti/arm/4.9.0/Linux/"
+        trgs="ti.targets.arm.elf.Arm9,ti.targets.arm.elf.M3,ti.targets.arm.elf.M4F,ti.targets.arm.elf.A8F,ti.targets.arm.elf.A8Fnv">
+        <file name="include/linkage.h"/>
+        <file name="include/stdarg.h"/>
+        <file name="include/stddef.h"/>
+        <file name="include/stdint.h"/>
+        <file name="include/stdio.h"/>
+        <file name="include/string.h"/>
+    </targetRoot>
+    <targetRoot base="/db/toolsrc/library/vendors2005/ti/c28/5.2.3/Linux/"
+        trgs="ti.targets.C28_float">
+        <file name="include/linkage.h"/>
+        <file name="include/stdarg.h"/>
+        <file name="include/stddef.h"/>
+        <file name="include/stdint.h"/>
+        <file name="include/stdio.h"/>
+    </targetRoot>
+    <targetRoot base="/db/toolsrc/library/vendors2005/ti/MSP430/4.0.0/Linux/"
+        trgs="ti.targets.msp430.elf.MSP430X">
+        <file name="include/linkage.h"/>
+        <file name="include/stdarg.h"/>
+        <file name="include/stddef.h"/>
+        <file name="include/stdint.h"/>
+        <file name="include/stdio.h"/>
+    </targetRoot>
+    <xdcRoot base="/db/rtree/install/trees/products/xdcprod/xdcprod-p47/product/Linux/xdctools_3_23_02_47/">
+        <file name="/packages/xdc/package.xdc"/>
+        <file name="include/utils.tci"/>
+        <xdcCorePkg version="16, 0, 2, 0, 1332352072643" producerId="/db/ztree/library/trees/xdc/xdc-y23x/src/packages" buildCount="362" releaseName="xdc_corevers" label="default" date="1332352072643"/>
+    </xdcRoot>
+</references>
+<orphans>
+    <file name="/db/vtree/library/trees/uia/uia-d14/src/config.bld"/>
+</orphans>
+</release>

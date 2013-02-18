@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<gep name="LoggerProbePoint" title="LoggerProbePoint Settings" version="1">
+
+<page name="Module" title="Module Settings">
+<html><body><table>
+  <tr>
+    <td>
+      <form>
+        <p>The LoggerProbePoint module is a logger which stores Log events in a non-blocking, streamable circular buffer.</p>
+        <p></p> <!-- create some white space -->
+      </form>
+    </td>
+  </tr>
+  <tr>
+    <td><control type="checkbox" label="Add the LoggerProbePoint module to my configuration" value="value:this.$used" bold="true"/></td>
+  </tr>
+  <tr></tr> <!-- create some white space -->
+
+  <!-- Row 1 (contains 1 columns) -->
+  <tr>
+    <td>
+      <h1>Logging Options</h1>
+
+      <table>
+        <tr>
+          <td><control type="checkbox" label="Flush all logs at system exit" value="value:this.enableFlush" tooltip="value:this.enableFlush.$summary"/></td>
+        </tr>
+        <tr>
+          <td><control type="checkbox" label="Enable timestamp logging" value="value:this.isTimestampEnabled" tooltip="value:this.isTimestampEnabled.$summary"/></td>
+        </tr>
+        <tr>
+          <td><control type="label" label="Status logger" align="left"/></td>
+          <td><control type="droplist" value="value:this.statusLogger" tooltip="value:this.statusLogger.$summary"/></td>
+        </tr>
+        <tr>
+          <td><control type="label" label="Overflow logger" align="left"/></td>
+          <td><control type="droplist" value="value:this.overflowLogger" tooltip="value:this.overflowLogger.$summary"/></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!-- End Row 1 -->
+</table></body></html>
+</page>
+
+<page name="Instance" title="Instance Settings" DPI="10">
+<html><body><table>
+  <!-- instance box section -->
+  <tr>
+    <td>
+      <h1>Logger Instances</h1>
+
+      <table><tr>
+        <td><control type="listbox" id="master" width="10" height="15" align="fill" labels="value:this"/></td>
+        <td>
+          <control type="pushbutton" label="Add ..." align="fill" link="action:New"/>
+		  <control type="pushbutton" label="Remove" align="fill" link="action:Delete" context="value:widget.master.selection"/>
+        </td>
+      </tr></table>
+
+          </td>
+
+      <td context="value:widget.master.selection">
+        <h1>Parameters</h1>
+        <table>
+            <tr>
+              <td>
+                <control type="label"
+                        label="Number of cores"
+                        align="left"/>
+              </td>
+              <td>
+                <control type="editbox" 
+                        value="value:this.numCores"
+                        tooltip="value:this.numCores.$summary"/>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <control type="label"
+                        label="Transfer Buffer Size"
+                        align="left"/>
+              </td>
+              <td>
+                <control type="editbox" 
+                        value="value:this.transferBufSize"
+                        tooltip="value:this.transferBufSize.$summary"/>
+              </td>
+            </tr>
+
+        </table>
+      </td>
+    </tr>
+</table></body></html>
+</page>
+<properties name="Advanced" title="All Options" enabled="true" visible="true" link="this"/>
+</gep>
+

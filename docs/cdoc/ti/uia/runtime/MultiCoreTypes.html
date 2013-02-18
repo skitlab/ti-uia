@@ -1,0 +1,655 @@
+<html>
+<head>
+<title>module ti.uia.runtime.MultiCoreTypes</title>
+<link rel="stylesheet" type="text/css" href="../../../xdoc.css" />
+</head>
+<body><div id="xdocWrapper"><div id="xdocContent">
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">module</span> <span class="xdoc-id">ti.uia.runtime.</span><span class="xdoc-id">MultiCoreTypes</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/LoggerTypes.html" title="module LoggerTypes"><img class="xdocHdrArrow" src="../../../Arrow_left.png"/></a></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/package.html" title="package ti.uia.runtime"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/QueueDescriptor.html" title="module QueueDescriptor"><img class="xdocHdrArrow" src="../../../Arrow_right.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html">index URL</a></div>
+<ul class="xdocToc">
+<li class="xdocToc"><a class="xdocToc" href="#targ-synop">C synopsis</a></li>
+<li class="xdocToc2"><a class="xdocToc" href="#xdocElems">Individual elements</a></li>
+<li class="xdocToc"><a class="xdocToc" href="#meta-synop">XDCscript usage</a></li>
+<li class="xdocToc2"><a class="xdocToc" href="#xdocMetaElems">Individual elements</a></li>
+</ul>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2">C</span></tt> synopsis</td>
+<td class="xdocLabelCenter">target-domain</td>
+<td class="xdocLabelRight">sourced in <a class="xdocLink" href="../../../ti/uia/runtime/MultiCoreTypes-src.html"><span class="xdocLabelFile">ti/uia/runtime/MultiCoreTypes.xdc</span></a></td>
+</tr></table>
+<div class="xdocSynT">
+<div class="xdocSynCode">
+<tt></tt><span class="xdoc-kw3">#include</span> <span class="xdoc-id">&lt;ti/uia/runtime/MultiCoreTypes.h&gt;</span>
+</div>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr><td class="xdocSynFxnCat" colspan="2"><div class="xdocSynFxnCat">Functions common to all target modules</div></td></tr>
+
+<tr>
+<td></td>
+<td>
+<div class="xdocSynTblPack">
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">MultiCoreTypes_Module_getMask</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Returns the diagnostics mask for this module</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">MultiCoreTypes_Module_hasMask</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Test whether this module has a diagnostics mask</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">MultiCoreTypes_Module_heap</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;The heap from which this module allocates memory</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">MultiCoreTypes_Module_id</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Get this module's unique id</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">MultiCoreTypes_Module_setMask</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Set the diagnostics mask for this module</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">MultiCoreTypes_Module_startupDone</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Test if this module has completed startup</span></span></a>
+</div>
+</td>
+</tr>
+<tr><td colspan='2'><div class='xdocSynTblHdr'>Defines</div></td></tr>
+
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw3">#define</span> </div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.M.A.S.T.E.R.N.A.M.E"><span class="xdoc-id">MultiCoreTypes_MASTERNAME</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Master's message queue names</span></span></a>  (<i><span class="xdoc-kw2">String</span></i>)"uiaMaster"</div></td></tr>
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw3">#define</span> </div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.M.A.S.T.E.R.S.T.A.R.T.E.D"><span class="xdoc-id">MultiCoreTypes_MASTERSTARTED</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Master's Started message queue names</span></span></a>  (<i><span class="xdoc-kw2">String</span></i>)"uiaStarted"</div></td></tr>
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw3">#define</span> </div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.S.L.A.V.E.N.A.M.E"><span class="xdoc-id">MultiCoreTypes_SLAVENAME</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Prefix for slave's message queue names</span></span></a>  (<i><span class="xdoc-kw2">String</span></i>)"uiaSlave"</div></td></tr>
+<tr><td colspan='2'><div class='xdocSynTblHdr'>Typedefs</div></td></tr>
+
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">enum</span> </div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.Action"><span class="xdoc-id">MultiCoreTypes_Action</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;The different Actions for router MessageQ</span></span></a> ...</div></td></tr>
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">struct</span> </div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.Register.Msg"><span class="xdoc-id">MultiCoreTypes_RegisterMsg</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Internal register function</span></span></a> ...</div></td></tr>
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">struct</span> </div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.Service.Hdr"><span class="xdoc-id">MultiCoreTypes_ServiceHdr</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;</span></span></a> ...</div></td></tr>
+<tr><td colspan='2'><div class='xdocSynTblHdr'>Constants</div></td></tr>
+
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw1">extern const</span> <a class="xdoc-link" href="../../../xdc/runtime/Assert.html#.Id" title="xdc.runtime.Assert.Id">Assert_Id</a>&nbsp;</div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.A_invalid.Hdr.Type"><span class="xdoc-id">MultiCoreTypes_A_invalidHdrType</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Assert raised an invalid HdrType is specified</span></span></a>;</div></td></tr>
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw1">extern const</span> <a class="xdoc-link" href="../../../xdc/runtime/Assert.html#.Id" title="xdc.runtime.Assert.Id">Assert_Id</a>&nbsp;</div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.A_ipc.Failed"><span class="xdoc-id">MultiCoreTypes_A_ipcFailed</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Assert raised when a MessageQ call fails</span></span></a>;</div></td></tr>
+</table>
+<div class="xdocSynSpacer">&nbsp;</div>
+</div>
+<div id="xdocSep">
+</div>
+<div id="xdocElems">
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".M.A.S.T.E.R.N.A.M.E"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">const</span> <span class="xdoc-id">MultiCoreTypes_</span><span class="xdoc-id">MASTERNAME</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.M.A.S.T.E.R.N.A.M.E">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Master's message queue names</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw3">#define</span> <span class="xdoc-id">MultiCoreTypes_MASTERNAME</span>  (<i><span class="xdoc-kw2">String</span></i>)"uiaMaster"
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".M.A.S.T.E.R.S.T.A.R.T.E.D"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">const</span> <span class="xdoc-id">MultiCoreTypes_</span><span class="xdoc-id">MASTERSTARTED</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.M.A.S.T.E.R.S.T.A.R.T.E.D">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Master's Started message queue names</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw3">#define</span> <span class="xdoc-id">MultiCoreTypes_MASTERSTARTED</span>  (<i><span class="xdoc-kw2">String</span></i>)"uiaStarted"
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".S.L.A.V.E.N.A.M.E"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">const</span> <span class="xdoc-id">MultiCoreTypes_</span><span class="xdoc-id">SLAVENAME</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.S.L.A.V.E.N.A.M.E">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Prefix for slave's message queue names</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw3">#define</span> <span class="xdoc-id">MultiCoreTypes_SLAVENAME</span>  (<i><span class="xdoc-kw2">String</span></i>)"uiaSlave"
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".Action"></a>
+<a class="xdocAnchor" id=".Action_.T.O.H.O.S.T"></a>
+<a class="xdocAnchor" id=".Action_.F.R.O.M.H.O.S.T"></a>
+<a class="xdocAnchor" id=".Action_.R.E.G.I.S.T.E.R"></a>
+<a class="xdocAnchor" id=".Action_.S.T.O.P"></a>
+<a class="xdocAnchor" id=".Action_.S.T.O.P.A.C.K"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">enum</span> <span class="xdoc-id">MultiCoreTypes_</span><span class="xdoc-id">Action</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.Action">index URL</a></div>
+<p class="xdocHdrSummaryDcl">The different Actions for router MessageQ</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">enum</span> <span class="xdoc-id">MultiCoreTypes_Action</span> {
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">MultiCoreTypes_Action_TOHOST</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">MultiCoreTypes_Action_FROMHOST</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">MultiCoreTypes_Action_REGISTER</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">MultiCoreTypes_Action_STOP</span>, 
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-id">MultiCoreTypes_Action_STOPACK</span>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt>} <span class="xdoc-id">MultiCoreTypes_Action</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".Register.Msg"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">struct</span> <span class="xdoc-id">MultiCoreTypes_</span><span class="xdoc-id">RegisterMsg</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.Register.Msg">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Internal register function</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">struct</span> <span class="xdoc-id">MultiCoreTypes_RegisterMsg</span> {
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Char</span>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">msgHdr</span></span></go>[32];
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">UInt32</span>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">remoteMQ</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt>} <span class="xdoc-id">MultiCoreTypes_RegisterMsg</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".Service.Hdr"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">struct</span> <span class="xdoc-id">MultiCoreTypes_</span><span class="xdoc-id">ServiceHdr</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.Service.Hdr">index URL</a></div>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">struct</span> <span class="xdoc-id">MultiCoreTypes_ServiceHdr</span> {
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Char</span>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">msgHdr</span></span></go>[32];
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr" title="ti.uia.runtime.UIAPacket.Hdr">UIAPacket_Hdr</a>&nbsp;<span class="xdoc-id"><go><span class="xdoc-id">packet</span></span></go>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt>} <span class="xdoc-id">MultiCoreTypes_ServiceHdr</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".A_invalid.Hdr.Type"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">config</span> <span class="xdoc-id">MultiCoreTypes_</span><span class="xdoc-id">A_invalidHdrType</span>&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.A_invalid.Hdr.Type">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Assert raised an invalid HdrType is specified</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">extern const</span> <a class="xdoc-link" href="../../../xdc/runtime/Assert.html#.Id" title="xdc.runtime.Assert.Id">Assert_Id</a>&nbsp;<span class="xdoc-id">MultiCoreTypes_A_invalidHdrType</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".A_ipc.Failed"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">config</span> <span class="xdoc-id">MultiCoreTypes_</span><span class="xdoc-id">A_ipcFailed</span>&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.A_ipc.Failed">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Assert raised when a MessageQ call fails</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">extern const</span> <a class="xdoc-link" href="../../../xdc/runtime/Assert.html#.Id" title="xdc.runtime.Assert.Id">Assert_Id</a>&nbsp;<span class="xdoc-id">MultiCoreTypes_A_ipcFailed</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="module-wide_built-ins"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdocSynSum">Module-Wide Built-Ins</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#module-wide_built-ins">index URL</a></div>
+<p class="xdocHdrSummary"></p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><a class="xdoc-link" href="../../../xdc/runtime/Types.html#.Module.Id" title="xdc.runtime.Types.ModuleId">Types_ModuleId</a> <span class="xdoc-id">MultiCoreTypes_Module_id</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Get this module's unique id</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Bool</span> <span class="xdoc-id">MultiCoreTypes_Module_startupDone</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Test if this module has completed startup</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><a class="xdoc-link" href="../../../xdc/runtime/IHeap.html#per-instance_object_types" title="xdc.runtime.IHeap.Handle">IHeap_Handle</a> <span class="xdoc-id">MultiCoreTypes_Module_heap</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;The heap from which this module allocates memory</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Bool</span> <span class="xdoc-id">MultiCoreTypes_Module_hasMask</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Test whether this module has a diagnostics mask</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Bits16</span> <span class="xdoc-id">MultiCoreTypes_Module_getMask</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Returns the diagnostics mask for this module</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Void</span> <span class="xdoc-id">MultiCoreTypes_Module_setMask</span>(<span class="xdoc-kw2">Bits16</span> <span class="xdoc-id">mask</span>);
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Set the diagnostics mask for this module</div>
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2">XDCscript</span></tt> usage</td>
+<td class="xdocLabelCenter">meta-domain</td>
+<td class="xdocLabelRight">sourced in <a class="xdocLink" href="../../../ti/uia/runtime/MultiCoreTypes-src.html"><span class="xdocLabelFile">ti/uia/runtime/MultiCoreTypes.xdc</span></a></td>
+</tr></table>
+<div class="xdocSynM">
+<div class="xdocSynCode">
+<tt></tt><span class="xdoc-kw1">var</span> MultiCoreTypes = <span class="xdoc-kw3">xdc.useModule</span>(<span class="xdoc-id">'ti.uia.runtime.MultiCoreTypes'</span>);
+</div>
+<div class='xdocSynHdr'>module-wide constants & types</div>
+
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.M.A.S.T.E.R.N.A.M.E">MultiCoreTypes.<span class="xdoc-id">MASTERNAME</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Master's message queue names</span></span></a> = "uiaMaster";
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.M.A.S.T.E.R.S.T.A.R.T.E.D">MultiCoreTypes.<span class="xdoc-id">MASTERSTARTED</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Master's Started message queue names</span></span></a> = "uiaStarted";
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.S.L.A.V.E.N.A.M.E">MultiCoreTypes.<span class="xdoc-id">SLAVENAME</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Prefix for slave's message queue names</span></span></a> = "uiaSlave";
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><i>values of type <a class="xdocSynGo" href="#meta.Action">MultiCoreTypes.<span class="xdoc-id">Action</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;The different Actions for router MessageQ</span></span></a></i>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Action" title="ti.uia.runtime.MultiCoreTypes.Action">MultiCoreTypes.<span class="xdoc-id">Action_TOHOST</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Action" title="ti.uia.runtime.MultiCoreTypes.Action">MultiCoreTypes.<span class="xdoc-id">Action_FROMHOST</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Action" title="ti.uia.runtime.MultiCoreTypes.Action">MultiCoreTypes.<span class="xdoc-id">Action_REGISTER</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Action" title="ti.uia.runtime.MultiCoreTypes.Action">MultiCoreTypes.<span class="xdoc-id">Action_STOP</span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> <a class="xdocSynGo" href="#meta.Action" title="ti.uia.runtime.MultiCoreTypes.Action">MultiCoreTypes.<span class="xdoc-id">Action_STOPACK</span></a>;
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><span class="xdoc-kw1">var</span> <i>obj</i> = <span class="xdoc-kw1">new</span> <a class="xdocSynGo" href="#meta.Register.Msg">MultiCoreTypes.<span class="xdoc-id">RegisterMsg</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Internal register function</span></span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Register.Msg" title="ti.uia.runtime.MultiCoreTypes.RegisterMsg"><span class="xdoc-id">msgHdr</span></a> = <i><span class="xdoc-kw2">Char</span>[32]</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Register.Msg" title="ti.uia.runtime.MultiCoreTypes.RegisterMsg"><span class="xdoc-id">remoteMQ</span></a> = <i><span class="xdoc-kw2">UInt32</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><span class="xdoc-kw1">var</span> <i>obj</i> = <span class="xdoc-kw1">new</span> <a class="xdocSynGo" href="#meta.Service.Hdr">MultiCoreTypes.<span class="xdoc-id">ServiceHdr</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;</span></span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Service.Hdr" title="ti.uia.runtime.MultiCoreTypes.ServiceHdr"><span class="xdoc-id">msgHdr</span></a> = <i><span class="xdoc-kw2">Char</span>[32]</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Service.Hdr" title="ti.uia.runtime.MultiCoreTypes.ServiceHdr"><span class="xdoc-id">packet</span></a> = <i><a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr" title="ti.uia.runtime.UIAPacket.Hdr">UIAPacket.Hdr</a></i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class='xdocSynHdr'>module-wide config parameters</div>
+
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><a class="xdocSynGo" href="#meta.A_invalid.Hdr.Type">MultiCoreTypes.<span class="xdoc-id">A_invalidHdrType</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Assert raised an invalid HdrType is specified</span></span></a> = <i><a class="xdoc-link" href="../../../xdc/runtime/Assert.html#.Desc" title="xdc.runtime.Assert.Desc">Assert.Desc</a></i> {
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt>msg: "A_invalidHdrType: Invalid HdrType specified"
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt>};
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><a class="xdocSynGo" href="#meta.A_ipc.Failed">MultiCoreTypes.<span class="xdoc-id">A_ipcFailed</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Assert raised when a MessageQ call fails</span></span></a> = <i><a class="xdoc-link" href="../../../xdc/runtime/Assert.html#.Desc" title="xdc.runtime.Assert.Desc">Assert.Desc</a></i> {
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt>msg: "A_ipcFailed: Unexpected MessageQ failed"
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt>};
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><a class="xdocSynGo" href="#common$">MultiCoreTypes.<span class="xdoc-id">common$</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Common module configuration parameters</span></span></a> = <i><a class="xdoc-link" href="../../../xdc/runtime/Types.html#.Common$" title="xdc.runtime.Types.Common$">Types.Common$</a></i> <span class="xdoc-kw2">undefined</span>;
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+</div>
+<div id="xdocSep">
+</div>
+<div id="xdocMetaElems">
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.M.A.S.T.E.R.N.A.M.E"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">const</span> <span class="xdoc-id">MultiCoreTypes.</span><span class="xdoc-id">MASTERNAME</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.M.A.S.T.E.R.N.A.M.E">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Master's message queue names</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">const</span> MultiCoreTypes.<span class="xdoc-id">MASTERNAME</span> = "uiaMaster";
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.M.A.S.T.E.R.N.A.M.E" title="MultiCoreTypes_MASTERNAME">MultiCoreTypes_MASTERNAME</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.M.A.S.T.E.R.S.T.A.R.T.E.D"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">const</span> <span class="xdoc-id">MultiCoreTypes.</span><span class="xdoc-id">MASTERSTARTED</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.M.A.S.T.E.R.S.T.A.R.T.E.D">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Master's Started message queue names</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">const</span> MultiCoreTypes.<span class="xdoc-id">MASTERSTARTED</span> = "uiaStarted";
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.M.A.S.T.E.R.S.T.A.R.T.E.D" title="MultiCoreTypes_MASTERSTARTED">MultiCoreTypes_MASTERSTARTED</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.S.L.A.V.E.N.A.M.E"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">const</span> <span class="xdoc-id">MultiCoreTypes.</span><span class="xdoc-id">SLAVENAME</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.S.L.A.V.E.N.A.M.E">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Prefix for slave's message queue names</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">const</span> MultiCoreTypes.<span class="xdoc-id">SLAVENAME</span> = "uiaSlave";
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.S.L.A.V.E.N.A.M.E" title="MultiCoreTypes_SLAVENAME">MultiCoreTypes_SLAVENAME</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.Action"></a>
+<a class="xdocAnchor" id=".Action_.T.O.H.O.S.T"></a>
+<a class="xdocAnchor" id=".Action_.F.R.O.M.H.O.S.T"></a>
+<a class="xdocAnchor" id=".Action_.R.E.G.I.S.T.E.R"></a>
+<a class="xdocAnchor" id=".Action_.S.T.O.P"></a>
+<a class="xdocAnchor" id=".Action_.S.T.O.P.A.C.K"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">enum</span> <span class="xdoc-id">MultiCoreTypes.</span><span class="xdoc-id">Action</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.Action">index URL</a></div>
+<p class="xdocHdrSummaryDcl">The different Actions for router MessageQ</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><i>values of type MultiCoreTypes.<span class="xdoc-id">Action</span></i>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> MultiCoreTypes.<span class="xdoc-id">Action_TOHOST</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> MultiCoreTypes.<span class="xdoc-id">Action_FROMHOST</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> MultiCoreTypes.<span class="xdoc-id">Action_REGISTER</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> MultiCoreTypes.<span class="xdoc-id">Action_STOP</span>;
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw1">const</span> MultiCoreTypes.<span class="xdoc-id">Action_STOPACK</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.Action" title="MultiCoreTypes_Action">MultiCoreTypes_Action</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.Register.Msg"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">struct</span> <span class="xdoc-id">MultiCoreTypes.</span><span class="xdoc-id">RegisterMsg</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.Register.Msg">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Internal register function</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">var</span> <i>obj</i> = <span class="xdoc-kw1">new</span> MultiCoreTypes.<span class="xdoc-id">RegisterMsg</span>;
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">msgHdr</span> = <i><span class="xdoc-kw2">Char</span>[32]</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">remoteMQ</span> = <i><span class="xdoc-kw2">UInt32</span></i><b>&nbsp;&nbsp;...</b>
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.Register.Msg" title="MultiCoreTypes_RegisterMsg">MultiCoreTypes_RegisterMsg</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.Service.Hdr"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">struct</span> <span class="xdoc-id">MultiCoreTypes.</span><span class="xdoc-id">ServiceHdr</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.Service.Hdr">index URL</a></div>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">var</span> <i>obj</i> = <span class="xdoc-kw1">new</span> MultiCoreTypes.<span class="xdoc-id">ServiceHdr</span>;
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">msgHdr</span> = <i><span class="xdoc-kw2">Char</span>[32]</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">packet</span> = <i><a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr" title="ti.uia.runtime.UIAPacket.Hdr">UIAPacket.Hdr</a></i><b>&nbsp;&nbsp;...</b>
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.Service.Hdr" title="MultiCoreTypes_ServiceHdr">MultiCoreTypes_ServiceHdr</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.A_invalid.Hdr.Type"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">config</span> <span class="xdoc-id">MultiCoreTypes.</span><span class="xdoc-id">A_invalidHdrType</span>&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.A_invalid.Hdr.Type">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Assert raised an invalid HdrType is specified</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt>MultiCoreTypes.<span class="xdoc-id">A_invalidHdrType</span> = <i><a class="xdoc-link" href="../../../xdc/runtime/Assert.html#.Desc" title="xdc.runtime.Assert.Desc">Assert.Desc</a></i> {
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt>msg: "A_invalidHdrType: Invalid HdrType specified"
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt>};
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.A_invalid.Hdr.Type" title="MultiCoreTypes_A_invalidHdrType">MultiCoreTypes_A_invalidHdrType</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.A_ipc.Failed"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">config</span> <span class="xdoc-id">MultiCoreTypes.</span><span class="xdoc-id">A_ipcFailed</span>&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#.A_ipc.Failed">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Assert raised when a MessageQ call fails</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt>MultiCoreTypes.<span class="xdoc-id">A_ipcFailed</span> = <i><a class="xdoc-link" href="../../../xdc/runtime/Assert.html#.Desc" title="xdc.runtime.Assert.Desc">Assert.Desc</a></i> {
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt>msg: "A_ipcFailed: Unexpected MessageQ failed"
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt>};
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.A_ipc.Failed" title="MultiCoreTypes_A_ipcFailed">MultiCoreTypes_A_ipcFailed</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="common$"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">metaonly </span><span class="xdoc-kw1">config</span> <span class="xdoc-id">MultiCoreTypes.</span><span class="xdoc-id">common$</span>&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/MultiCoreTypes.html" title="module MultiCoreTypes"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/MultiCoreTypes.html#common$">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Common module configuration parameters</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt>MultiCoreTypes.<span class="xdoc-id">common$</span> = <i><a class="xdoc-link" href="../../../xdc/runtime/Types.html#.Common$" title="xdc.runtime.Types.Common$">Types.Common$</a></i> <span class="xdoc-kw2">undefined</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">DETAILS</div>
+<div class="xdocText">All modules have this configuration parameter.  Its name
+  contains the '$' character to ensure it does not conflict with
+  configuration parameters declared by the module.  This allows
+  new configuration parameters to be added in the future without
+  any chance of breaking existing modules.</div>
+</div>
+<div id="xdocDate">generated on Fri, 13 Jul 2012 18:18:16 GMT</div>
+</div></div></body>
+</html>

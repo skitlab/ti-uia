@@ -1,0 +1,98 @@
+Signature-Version: 1.0
+Created-By: 1.5.0_22 (Sun Microsystems Inc.)
+SHA1-Digest-Manifest-Main-Attributes: N+E2an4nH7ORbfnM4pBW37GfVqM=
+SHA1-Digest-Manifest: 7OEGTQ8inryIfWIvrBqg8/pBPDE=
+
+Name: resources/tutorial1/systemAnalyzerTutorial1.gel
+SHA1-Digest: zw74wTAgVRNruUk5gLetq0xxL6s=
+
+Name: resources/evm6472/message.c
+SHA1-Digest: Ao3fxJRx7N+d0D8+xgHqVhK0vbQ=
+
+Name: resources/single/stairstep.c
+SHA1-Digest: 7EaW1L49D07Ba8yfkbpbD264Fa0=
+
+Name: resources/single/stairstep_ProbePoint.cfg
+SHA1-Digest: TUMcK9hPqPfKZDUUggt+hlhqrh8=
+
+Name: resources/evm6472/message.cfg
+SHA1-Digest: JHuKtW54DRu+wQ0aot7jTvc4q2A=
+
+Name: resources/tutorial1/tutorial1c.c
+SHA1-Digest: UiqRXoFTF25REC7KwMgarrIJPYc=
+
+Name: resources/single/logger.c
+SHA1-Digest: QQgkBUwDkjBxOoAepj9D9f2FnCE=
+
+Name: resources/evmti816x/simpleTask.c
+SHA1-Digest: acnyKgNQdZU1xuqFbv6NPty35Dk=
+
+Name: resources/tutorial1/main.c
+SHA1-Digest: wzwbFXvnn+XqdMgmxA6JiX5eV4A=
+
+Name: plugin.properties
+SHA1-Digest: Xa8VQfX60bb3WONXbD3km+vIrS0=
+
+Name: resources/evmti816x/vpssM3LoggerCircBuf.cfg
+SHA1-Digest: 1sEg+YgGGzv7SoPxDu3Ak75Yw54=
+
+Name: resources/evmti816x/dspLoggerSM.cfg
+SHA1-Digest: PrTczhCKSeODc5FFVLZm3GFEK6A=
+
+Name: resources/tutorial2/systemAnalyzerTutorial2.gel
+SHA1-Digest: mbE5C3ezOyUwLqTmdVAVT+dm6Bo=
+
+Name: resources/evmti816x/dspLoggerCircBuf.cfg
+SHA1-Digest: D9wXL0yi6FpLcdd59Oiw9Jz8d6I=
+
+Name: resources/evmti816x/videoM3LoggerSM.cfg
+SHA1-Digest: lEW8msz6anocc2IjOUq5d5gu3Uo=
+
+Name: resources/tutorial1/tutorial1a.c
+SHA1-Digest: fGmshX6EwJuS9cjWvn2NUDSW6qQ=
+
+Name: resources/single/stairstep_JTAGRunMode.cfg
+SHA1-Digest: LkSdiDI6k/YtrrhgLXJkhYTR0t4=
+
+Name: resources/single/stairstep_Simulator.cfg
+SHA1-Digest: DFwo3sR23UE7ggtc8KGF/8vbncs=
+
+Name: resources/single/stairstep_JTAGStopMode.cfg
+SHA1-Digest: fMjPUoV8oups5FaVeXi3ZtNBsRQ=
+
+Name: plugin.xml
+SHA1-Digest: pfE/x/gpw33JZYxUszdZB2jUk0w=
+
+Name: resources/evmti816x/videoM3LoggerCircBuf.cfg
+SHA1-Digest: nRaR2pN0zaQZtaCMhpiKG+Bo750=
+
+Name: resources/evmti816x/vpssM3LoggerSM.cfg
+SHA1-Digest: fKhJCD5PoujsCsZYll5/TG4To+E=
+
+Name: resources/tutorial2/systemAnalyzerTutorial2.cfg
+SHA1-Digest: h9AaKpFFToTA9zGxmGz/1G0DYes=
+
+Name: resources/tutorial1/tutorial1b.c
+SHA1-Digest: cL71L/B12F7KY+xLtfJf3EjZ9PE=
+
+Name: resources/tutorial1/systemAnalyzerTutorial1.cfg
+SHA1-Digest: 9GCJ/6JwriLaiwUQpAxeDhuXm+4=
+
+Name: resources/single/logger.cfg
+SHA1-Digest: urpUzR+RTYCiZphnilHoEViN7A4=
+
+Name: toc.xml
+SHA1-Digest: UuopyVUyVLeQp8Bn/d9fajNPiCQ=
+
+Name: resources/single/stairstep_Ethernet.cfg
+SHA1-Digest: Fp46cEk+3jFyuiA1yit0x0/22vc=
+
+Name: resources/tutorial1/tutorial1d.c
+SHA1-Digest: hEb+zS1ZDZJq8DxCxCS0k77u6Ss=
+
+Name: resources/tutorial2/main.c
+SHA1-Digest: QIJ8Yrfcv65kAwiKdMyz+h+JB7o=
+
+Name: toc_top.xml
+SHA1-Digest: 1Rg33o36xBIoL70bv6Ltxi23c6A=
+

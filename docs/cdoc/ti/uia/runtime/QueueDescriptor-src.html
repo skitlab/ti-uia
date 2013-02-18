@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>module ti.uia.runtime.QueueDescriptor</title>
+<meta name="googlebot" content="noindex,nofollow">
+<link rel="stylesheet" type="text/css" href="../../../src.css"/>
+</head>
+<body>
+<pre class=src>
+     1    <span class="comment">/* --COPYRIGHT--,BSD
+</span>     2    <span class="comment"> * Copyright (c) $(CPYYEAR), Texas Instruments Incorporated
+</span>     3    <span class="comment"> * All rights reserved.
+</span>     4    <span class="comment"> *
+</span>     5    <span class="comment"> * Redistribution and use in source and binary forms, with or without
+</span>     6    <span class="comment"> * modification, are permitted provided that the following conditions
+</span>     7    <span class="comment"> * are met:
+</span>     8    <span class="comment"> *
+</span>     9    <span class="comment"> * *  Redistributions of source code must retain the above copyright
+</span>    10    <span class="comment"> *    notice, this list of conditions and the following disclaimer.
+</span>    11    <span class="comment"> *
+</span>    12    <span class="comment"> * *  Redistributions in binary form must reproduce the above copyright
+</span>    13    <span class="comment"> *    notice, this list of conditions and the following disclaimer in the
+</span>    14    <span class="comment"> *    documentation and/or other materials provided with the distribution.
+</span>    15    <span class="comment"> *
+</span>    16    <span class="comment"> * *  Neither the name of Texas Instruments Incorporated nor the names of
+</span>    17    <span class="comment"> *    its contributors may be used to endorse or promote products derived
+</span>    18    <span class="comment"> *    from this software without specific prior written permission.
+</span>    19    <span class="comment"> *
+</span>    20    <span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+</span>    21    <span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+</span>    22    <span class="comment"> * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+</span>    23    <span class="comment"> * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+</span>    24    <span class="comment"> * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+</span>    25    <span class="comment"> * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+</span>    26    <span class="comment"> * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+</span>    27    <span class="comment"> * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+</span>    28    <span class="comment"> * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+</span>    29    <span class="comment"> * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+</span>    30    <span class="comment"> * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</span>    31    <span class="comment"> * --/COPYRIGHT--*/</span>
+    32    
+    33    <span class="comment">/*
+</span>    34    <span class="comment"> *  ======== QueueDescriptor.xdc ========
+</span>    35    <span class="comment"> *  Module to manage descriptors that are used by an instrumentation host
+</span>    36    <span class="comment"> *
+</span>    37    <span class="comment"> *  The QueueDescriptor module maintains a list of descriptors. Each descriptor
+</span>    38    <span class="comment"> *  contains information that a host tool can use to get debug information 
+</span>    39    <span class="comment"> *  about a debug buffer (e.g. LoggerCircBuf instance buffer).
+</span>    40    <span class="comment"> *
+</span>    41    <span class="comment"> *  The QueueDescriptor module contains two global variables that the host
+</span>    42    <span class="comment"> *  can access.
+</span>    43    <span class="comment"> *  @p(blist)
+</span>    44    <span class="comment"> *   - ti_uia_runtime_QueueDescriptor_gPtrToFirstDescriptor:
+</span>    45    <span class="comment"> *     pointer to the first queue descriptor. The rest of the active descriptors
+</span>    46    <span class="comment"> *     are maintained as list off the first one (via the next pointer in the
+</span>    47    <span class="comment"> *     structure).
+</span>    48    <span class="comment"> *     Global variable needed to manage reading / writing the circular buffer
+</span>    49    <span class="comment"> *     from the DebugServer. Initialized to null.  A non-null value indicates
+</span>    50    <span class="comment"> *     that the descriptor it points to has been fully initialized.
+</span>    51    <span class="comment"> *
+</span>    52    <span class="comment"> *  - ti_uia_runtime_QueueDescriptor_gUpdateCount:  
+</span>    53    <span class="comment"> *     Integer value read by the host to determine whether it needs to walk the
+</span>    54    <span class="comment"> *     list of descriptors
+</span>    55    <span class="comment"> *     Incremented whenever a queue descriptor is modified, added or removed 
+</span>    56    <span class="comment"> *     from the list of descriptors. If the value has not changed, then the host
+</span>    57    <span class="comment"> *     can safely use cached versions of the descriptors.
+</span>    58    <span class="comment"> *  @p
+</span>    59    <span class="comment"> */</span>
+    60    <span class=key>package</span> ti.uia.runtime
+    61    
+    62    
+    63    @CustomHeader
+    64    <span class=key>module</span> QueueDescriptor {
+    65        
+    66        <span class="xdoc">/*!
+</span>    67    <span class="xdoc">     *  ======== QueueType ========
+</span>    68    <span class="xdoc">     *  Type of Queue
+</span>    69    <span class="xdoc">     */</span>
+    70        <span class=key>enum</span> QueueType {
+    71            QueueType_NONE = 0,
+    72            QueueType_TOHOST_CMD_CIRCULAR_BUFFER = 1,
+    73            QueueType_FROMHOST_CMD_CIRCULAR_BUFFER = 2,
+    74            QueueType_TOHOST_EVENT_CIRCULAR_BUFFER = 3,
+    75            QueueType_TOHOST_EVENT_OVERFLOW_BUFFER = 4,
+    76            QueueType_TOHOST_DATA_CIRCULAR_BUFFER = 5,
+    77            QueueType_FROMHOST_DATA_CIRCULAR_BUFFER = 6
+    78        };
+    79    
+    80        <span class="xdoc">/*!
+</span>    81    <span class="xdoc">     *  ======== Header ========
+</span>    82    <span class="xdoc">     *  Structure of the descriptor
+</span>    83    <span class="xdoc">     *
+</span>    84    <span class="xdoc">     *  <b>@field(structSize)</b>       Used for version control to determine if newer
+</span>    85    <span class="xdoc">     *                           fields are available
+</span>    86    <span class="xdoc">     *  <b>@field(next)</b>             Pointer to the next Header in the list
+</span>    87    <span class="xdoc">     *  <b>@field(queueType)</b>        Identifies the type of queue and thus who owns
+</span>    88    <span class="xdoc">     *                           the read and write pointers.
+</span>    89    <span class="xdoc">     *  <b>@field(readPtr)</b>          Points to the next (word-aligned) byte to be 
+</span>    90    <span class="xdoc">     *                           read from the buffer
+</span>    91    <span class="xdoc">     *  <b>@field(writePtr)</b>         Points to the next (word-aligned) byte to be 
+</span>    92    <span class="xdoc">     *                           written into
+</span>    93    <span class="xdoc">     *  <b>@field(queueStartAdrs)</b>   Start address of the buffer (word-aligned)
+</span>    94    <span class="xdoc">     *  <b>@field(queueSizeInMAUs)</b>  Queue Size in min. addressable units 
+</span>    95    <span class="xdoc">     *                           (buffer size must be word-aligned)
+</span>    96    <span class="xdoc">     *  <b>@field(instanceId)</b>       16b unique ID that identifies the instance of the module 
+</span>    97    <span class="xdoc">     *                           that owns this queue descriptor.  
+</span>    98    <span class="xdoc">     *                           b15=1 indicates that the logger was dynamically 
+</span>    99    <span class="xdoc">     *                           created. Corresponds to the logger instance Id 
+</span>   100    <span class="xdoc">     *                           in the rta.xml and uia.xml metadata and
+</span>   101    <span class="xdoc">     *                           UIAPacket event packet header. 
+</span>   102    <span class="xdoc">     *  <b>@field(ownerModuleId)</b>    The module ID of the module that owns this 
+</span>   103    <span class="xdoc">     *                           queue descriptor
+</span>   104    <span class="xdoc">     *  <b>@field(priority)</b>         The priority of the queue. 0 is normal priority.
+</span>   105    <span class="xdoc">     *                           The higher the number, the higher the priority.
+</span>   106    <span class="xdoc">     *                           Used to set the priority field of the UIAPacket 
+</span>   107    <span class="xdoc">     *                           event packet header.
+</span>   108    <span class="xdoc">     *  <b>@field(numDroppedCtrAdrs)</b> Points to the counter used to count the number
+</span>   109    <span class="xdoc">     *                           of dropped events.  NULL if no counter available.
+</span>   110    <span class="xdoc">     */</span>
+   111        <span class=key>struct</span> Header {
+   112            Int structSize;
+   113            Header *next; 
+   114            QueueType queueType;
+   115            Bits32 *readPtr; 
+   116            Bits32 *writePtr;
+   117            Bits32 *queueStartAdrs;        
+   118            SizeT queueSizeInMAUs;
+   119            UInt instanceId;
+   120            UInt ownerModuleId;
+   121            UInt priority;
+   122            Bits32 *numDroppedCtrAdrs;
+   123        };
+   124        
+   125        <span class="xdoc">/*!
+</span>   126    <span class="xdoc">     *  ======== addToList ========
+</span>   127    <span class="xdoc">     *  Function to add a descriptor to the global list.
+</span>   128    <span class="xdoc">     *
+</span>   129    <span class="xdoc">     *  <b>@param(pHdrToAdd)</b> Descriptor to add
+</span>   130    <span class="xdoc">     */</span>
+   131        @DirectCall
+   132        Void addToList(QueueDescriptor.Header *pHdrToAdd);
+   133        
+   134        <span class="comment">/*
+</span>   135    <span class="comment">     *  ======== generateInstanceId ========
+</span>   136    <span class="comment">     *  Returns a unique logger instance ID for use by a logger that
+</span>   137    <span class="comment">     *  implements the IUIATransfer interface. 
+</span>   138    <span class="comment">     *  
+</span>   139    <span class="comment">     *  Note that all Logger Instance Ids must be non-zero.  
+</span>   140    <span class="comment">     *  LoggerInstanceIds with b15=1 are reserved for dynamically created 
+</span>   141    <span class="comment">     *  instances of the logger.
+</span>   142    <span class="comment">     */</span>
+   143        <span class=key>metaonly</span> UInt16 generateInstanceId();
+   144        
+   145        <span class="xdoc">/*!
+</span>   146    <span class="xdoc">     *  ======== initHeader ========
+</span>   147    <span class="xdoc">     *  Function initialize a descriptor
+</span>   148    <span class="xdoc">     *
+</span>   149    <span class="xdoc">     *  <b>@param(pHdr)</b>  Descriptor to initialize
+</span>   150    <span class="xdoc">     *  <b>@param(start)</b> Start address of the buffer
+</span>   151    <span class="xdoc">     *  <b>@param(size)</b>  Size of the buffer
+</span>   152    <span class="xdoc">     *  <b>@param(loggerModuleId)</b> module ID of the logger that owns the buffer
+</span>   153    <span class="xdoc">     *  <b>@param(loggerInstanceId)</b> instance ID of the logger that owns the buffer
+</span>   154    <span class="xdoc">     *  <b>@param(loggerPriority)</b> priority of the logger that owns the buffer
+</span>   155    <span class="xdoc">     *  <b>@param(type)</b>  Type of descriptor
+</span>   156    <span class="xdoc">     */</span>
+   157        @DirectCall
+   158        Void initHeader(QueueDescriptor.Header *pHdr, Ptr start, 
+   159                       SizeT size, UInt loggerModuleId, UInt loggerInstanceId, 
+   160                       UInt loggerPriority, QueueType type, Ptr pNumDroppedCtr);
+   161    
+   162        <span class="xdoc">/*!
+</span>   163    <span class="xdoc">     *  ======== removeFromList ========
+</span>   164    <span class="xdoc">     *  Function to remove a descriptor from the global list.
+</span>   165    <span class="xdoc">     *
+</span>   166    <span class="xdoc">     *  <b>@param(pHdrToRemove)</b> Descriptor to remove
+</span>   167    <span class="xdoc">     */</span>
+   168        @DirectCall
+   169        Void removeFromList(QueueDescriptor.Header *pHdrToRemove);
+   170        
+   171    <span class=key>internal</span>:
+   172        <span class=key>metaonly</span> <span class=key>config</span> Int maxId = 0;
+   173    }
+   174    
+   175    <span class="comment">/*
+</span>   176    <span class="comment"> *! Revision History
+</span>   177    <span class="comment"> *! ================
+</span>   178    <span class="comment"> *! 23-Jun-2010 toddm Started revision history
+</span>   179    <span class="comment"> */</span>
+</pre>
+</body></html>

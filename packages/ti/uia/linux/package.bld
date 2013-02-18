@@ -1,0 +1,46 @@
+/* 
+ * Copyright (c) 2012
+ * Texas Instruments
+ *
+ *  All rights reserved.  Property of Texas Instruments
+ *  Restricted rights to use, duplicate or disclose this code are
+ *  granted through contract.
+ * 
+ * */
+/*
+ *  ======== package.bld ========
+ *
+ */
+
+var commonBld = xdc.loadCapsule("ti/uia/build/common.bld");
+
+var objList = [    
+];
+
+var trgFilter = {
+    field: "isa",
+    list: [
+        "GCArmv5T"
+    ],
+};
+
+arguments = ["profile=debug"];
+
+/* generate makefiles */
+commonBld.buildLibs(objList, undefined, trgFilter, arguments);
+
+Pkg.otherFiles = [ "package.bld", "Makefile", 
+                   "LoggerSM.c", "LoggerSM.h", 
+                   "ServiceMgr.c", "ServiceMgr.h", 
+                   "UIAPacket.h", 
+                   "lib/loggersm.a", "lib/servicemgr.a" ];
+
+/* include source files in the release package */
+Pkg.attrs.exportSrc = true;
+Pkg.attrs.exportCfg = true;
+
+/*
+ *  @(#) ti.uia.linux; 1, 0, 0, 1,1; 7-13-2012 11:12:19; /db/vtree/library/trees/uia/uia-d14/src/ xlibrary
+
+ */
+

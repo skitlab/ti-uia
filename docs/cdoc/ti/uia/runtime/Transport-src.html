@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>module ti.uia.runtime.Transport</title>
+<meta name="googlebot" content="noindex,nofollow">
+<link rel="stylesheet" type="text/css" href="../../../src.css"/>
+</head>
+<body>
+<pre class=src>
+     1    <span class="comment">/* --COPYRIGHT--,BSD
+</span>     2    <span class="comment"> * Copyright (c) $(CPYYEAR), Texas Instruments Incorporated
+</span>     3    <span class="comment"> * All rights reserved.
+</span>     4    <span class="comment"> *
+</span>     5    <span class="comment"> * Redistribution and use in source and binary forms, with or without
+</span>     6    <span class="comment"> * modification, are permitted provided that the following conditions
+</span>     7    <span class="comment"> * are met:
+</span>     8    <span class="comment"> *
+</span>     9    <span class="comment"> * *  Redistributions of source code must retain the above copyright
+</span>    10    <span class="comment"> *    notice, this list of conditions and the following disclaimer.
+</span>    11    <span class="comment"> *
+</span>    12    <span class="comment"> * *  Redistributions in binary form must reproduce the above copyright
+</span>    13    <span class="comment"> *    notice, this list of conditions and the following disclaimer in the
+</span>    14    <span class="comment"> *    documentation and/or other materials provided with the distribution.
+</span>    15    <span class="comment"> *
+</span>    16    <span class="comment"> * *  Neither the name of Texas Instruments Incorporated nor the names of
+</span>    17    <span class="comment"> *    its contributors may be used to endorse or promote products derived
+</span>    18    <span class="comment"> *    from this software without specific prior written permission.
+</span>    19    <span class="comment"> *
+</span>    20    <span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+</span>    21    <span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+</span>    22    <span class="comment"> * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+</span>    23    <span class="comment"> * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+</span>    24    <span class="comment"> * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+</span>    25    <span class="comment"> * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+</span>    26    <span class="comment"> * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+</span>    27    <span class="comment"> * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+</span>    28    <span class="comment"> * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+</span>    29    <span class="comment"> * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+</span>    30    <span class="comment"> * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</span>    31    <span class="comment"> * --/COPYRIGHT--*/</span>
+    32    
+    33    <span class="comment">/*
+</span>    34    <span class="comment"> *  ======== Transport.xdc ========
+</span>    35    <span class="comment"> */</span>
+    36    
+    37    <span class=key>package</span> ti.uia.runtime;
+    38    
+    39    <span class="xdoc">/*!
+</span>    40    <span class="xdoc"> *  ======== Transport ======== 
+</span>    41    <span class="xdoc">  *  Transport function specification module
+</span>    42    <span class="xdoc"> *
+</span>    43    <span class="xdoc"> *  This module defines the function prototypes for the transport functions
+</span>    44    <span class="xdoc"> *  that can be plugged into the ServiceMgr. UIA ships several
+</span>    45    <span class="xdoc"> *  implementations of this interface in the ti/uia/sysbios directory.
+</span>    46    <span class="xdoc"> *
+</span>    47    <span class="xdoc"> *  The implementations do not have to be XDC modules. They are simply standard
+</span>    48    <span class="xdoc"> *  'C' functions (i.e look at ti/uia/sysbios/TransportNdk.c). Only one 
+</span>    49    <span class="xdoc"> *  transport set can be used on a target and it needs to be set up at build 
+</span>    50    <span class="xdoc"> *  time via the {<b>@link</b> ti.uia.runtime.ServiceMgr#transportFxns} parameter. The
+</span>    51    <span class="xdoc"> *  ServiceMgr plugs the transportFxns automatically based on the TransportType
+</span>    52    <span class="xdoc"> *  {<b>@link</b> ti.uia.runtime.ServiceMgr#transportType}. 
+</span>    53    <span class="xdoc"> *
+</span>    54    <span class="xdoc"> *  If someone writes an new transport
+</span>    55    <span class="xdoc"> *  (e.g. RapidIO), they can be plugged in by setting the TransportType
+</span>    56    <span class="xdoc"> *  to {<b>@link</b> ti.uia.runtime.ServiceMgr#TransportType_USER} and then plugging
+</span>    57    <span class="xdoc"> *  the transportFxns manually. It must also set up the following parameters
+</span>    58    <span class="xdoc"> *  as directed by the new transport developer.
+</span>    59    <span class="xdoc"> *  <b>@p(blist)</b>
+</span>    60    <span class="xdoc"> *  -ServiceMgr.supportControl: does the transport support receiving messages
+</span>    61    <span class="xdoc"> *                 from the host. For example TransportFile does not.
+</span>    62    <span class="xdoc"> *  -ServiceMgr.maxEventPacketSize: Max size of an outgoing event packet. For
+</span>    63    <span class="xdoc"> *                 example TransportNdk uses 1472 (emac size minus headers)
+</span>    64    <span class="xdoc"> *  -ServiceMgr.maxCtrlPacketSize: Max size of the message packets. This can
+</span>    65    <span class="xdoc"> *                 be zero if supportControl is false.
+</span>    66    <span class="xdoc"> *  <b>@p</b>
+</span>    67    <span class="xdoc"> *
+</span>    68    <span class="xdoc"> *  Here is an example of plugging the transport XYZ into the ServiceMgr:
+</span>    69    <span class="xdoc"> *  <b>@p(code)</b>
+</span>    70    <span class="xdoc"> *  var ServiceMgr = xdc.useModule('ti.uia.runtime.ServiceMgr');
+</span>    71    <span class="xdoc"> *  ServiceMgr.transportType = ServiceMgr.TransportType_USER;
+</span>    72    <span class="xdoc"> *  var xyzTransport = {
+</span>    73    <span class="xdoc"> *      initFxn: '&amp;TransportXYZ_init',
+</span>    74    <span class="xdoc"> *      startFxn: '&amp;TransportXYZ_start',
+</span>    75    <span class="xdoc"> *      recvFxn: '&amp;TransportXYZ_recv',
+</span>    76    <span class="xdoc"> *      sendFxn: '&amp;TransportXYZ_send',
+</span>    77    <span class="xdoc"> *      stopFxn: '&amp;TransportXYZ_stop',
+</span>    78    <span class="xdoc"> *      exitFxn: '&amp;TransportXYZ_exit',
+</span>    79    <span class="xdoc"> *  };
+</span>    80    <span class="xdoc"> *  ServiceMgr.transportFxns = xyzTransport;
+</span>    81    <span class="xdoc"> *
+</span>    82    <span class="xdoc"> *  ServiceMgr.maxEventPacketSize = 1024
+</span>    83    <span class="xdoc"> *  ServiceMgr.maxCtrlPacketSize  = 1024;
+</span>    84    <span class="xdoc"> *  ServiceMgr.supportControl     = true;
+</span>    85    <span class="xdoc"> *  <b>@p</b>
+</span>    86    <span class="xdoc"> *
+</span>    87    <span class="xdoc"> *  <b>@p(html)</b>
+</span>    88    <span class="xdoc"> *  &lt;a name="transportfxn"&gt;&lt;/a&gt;
+</span>    89    <span class="xdoc"> *
+</span>    90    <span class="xdoc"> *  <b>@a(Transport Functions)</b>
+</span>    91    <span class="xdoc"> *
+</span>    92    <span class="xdoc"> *  The following are the transport functions. Note 
+</span>    93    <span class="xdoc"> *  all of these functions 
+</span>    94    <span class="xdoc"> *  are called by the ServiceMgr. The application should not be calling 
+</span>    95    <span class="xdoc"> *  these functions directly.
+</span>    96    <span class="xdoc"> *  <b>@p(blist)</b>
+</span>    97    <span class="xdoc"> *  -initFxn:  Called during module startup (which is before main()). Minimal 
+</span>    98    <span class="xdoc"> *             actions can take place here since there are no interrupts and 
+</span>    99    <span class="xdoc"> *             the state of the application is just starting up. Generally only
+</span>   100    <span class="xdoc"> *             internal initialization is done in this function.
+</span>   101    <span class="xdoc"> *
+</span>   102    <span class="xdoc"> *  -startFxn: The start function is called at once or twice after the SYS/BIOS
+</span>   103    <span class="xdoc"> *             tasks have started to run. The start
+</span>   104    <span class="xdoc"> *             function is called with UIAPacket_HdrType_EventPkt before any
+</span>   105    <span class="xdoc"> *             events are sent. This allows the transport to initialize 
+</span>   106    <span class="xdoc"> *             anything needed for event transmission. The function returns a
+</span>   107    <span class="xdoc"> *             handle to a transport specific structure (or NULL if not needed).
+</span>   108    <span class="xdoc"> *             This handle is passed into the sendFxn and stopFxn.
+</span>   109    <span class="xdoc"> *
+</span>   110    <span class="xdoc"> *             If the transport supports control messages from a host, the
+</span>   111    <span class="xdoc"> *             start function is called with UIAPacket_HdrType_Msg. 
+</span>   112    <span class="xdoc"> *             This allows the transport to initialize anything needed for 
+</span>   113    <span class="xdoc"> *             msg transmission (both sending and receiving). Again, the
+</span>   114    <span class="xdoc"> *             transport can return a transport specific structure. This
+</span>   115    <span class="xdoc"> *             structure can be different from the one returned in the 
+</span>   116    <span class="xdoc"> *             UIAPacket_HdrType_EventPkt start.
+</span>   117    <span class="xdoc"> *
+</span>   118    <span class="xdoc"> *  -recvFxn:  The recv function is called to receive incoming messages
+</span>   119    <span class="xdoc"> *             from the host. The handle returned from the start is passed
+</span>   120    <span class="xdoc"> *             into the recv. Also passed in is a buffer and its size.
+</span>   121    <span class="xdoc"> *             The buffer is passed in as a double pointer. This allows
+</span>   122    <span class="xdoc"> *             the transport to double-buffer. For example, the recv
+</span>   123    <span class="xdoc"> *             function can return a different buffer than what was
+</span>   124    <span class="xdoc"> *             passed in. This potentially reduces extra copies of the data.
+</span>   125    <span class="xdoc"> *
+</span>   126    <span class="xdoc"> *             The recv can be a blocking call.
+</span>   127    <span class="xdoc"> *
+</span>   128    <span class="xdoc"> *             The recv returns the actual number of bytes that are placed into
+</span>   129    <span class="xdoc"> *             the buffer. If the transport does not
+</span>   130    <span class="xdoc"> *             support control messages, this function can simply return zero. 
+</span>   131    <span class="xdoc"> *
+</span>   132    <span class="xdoc"> *  -sendFxn:  The send function is called to send either events or msgs. If 
+</span>   133    <span class="xdoc"> *             send is called to transmit a event, the first parameter is the
+</span>   134    <span class="xdoc"> *             handle returned from the start(UIAPacket_HdrType_EventPkt).
+</span>   135    <span class="xdoc"> *             Similiarily, if a message is being sent, the first parameter is
+</span>   136    <span class="xdoc"> *             the handle returned from the start(UIAPacket_HdrType_Msg).
+</span>   137    <span class="xdoc"> *             The size of the packet is maintained in the UIAPacket_Hdr.
+</span>   138    <span class="xdoc"> *
+</span>   139    <span class="xdoc"> *             The send can be a blocking call.
+</span>   140    <span class="xdoc"> *
+</span>   141    <span class="xdoc"> *             This function returns whether the send was successful or not.
+</span>   142    <span class="xdoc"> *
+</span>   143    <span class="xdoc"> *             Again a double pointer is used to allow the transport to return
+</span>   144    <span class="xdoc"> *             a different buffer to allow double-buffering.
+</span>   145    <span class="xdoc"> *
+</span>   146    <span class="xdoc"> *  -stopFxn:  The stop function is to counterpart to the start function. The
+</span>   147    <span class="xdoc"> *             stop will be called the same number of times as the start. The
+</span>   148    <span class="xdoc"> *             calls will contain handles returned from the start.
+</span>   149    <span class="xdoc"> *
+</span>   150    <span class="xdoc"> *  -exitFxn:  The exit function is to counterpart to the init function.
+</span>   151    <span class="xdoc"> *  <b>@p</b> 
+</span>   152    <span class="xdoc"> *
+</span>   153    <span class="xdoc"> *  Transport are allowed to have additional functions that can be directly 
+</span>   154    <span class="xdoc"> *  called by the application. For example in ti/uia/sysbiosTransportFile, 
+</span>   155    <span class="xdoc"> *  there is a TransportFile_setFile function. The downside to the extended
+</span>   156    <span class="xdoc"> *  functions is portability.
+</span>   157    <span class="xdoc"> */</span>
+   158    <span class=key>module</span> Transport
+   159    {
+   160        <span class="xdoc">/*! 
+</span>   161    <span class="xdoc">     *  Task hook set type definition. 
+</span>   162    <span class="xdoc">     *
+</span>   163    <span class="xdoc">     *  See {<b>@link</b> #transportfxn Transport Functions} for details. 
+</span>   164    <span class="xdoc">     */</span>
+   165        <span class=key>struct</span> FxnSet {
+   166            Void  (*initFxn)();    
+   167            Ptr   (*startFxn)(UIAPacket.HdrType); 
+   168            SizeT (*recvFxn)(Ptr, UIAPacket.Hdr **, SizeT);
+   169            Bool  (*sendFxn)(Ptr, UIAPacket.Hdr **);
+   170            Void  (*stopFxn)(Ptr);
+   171            Void  (*exitFxn)(Void);
+   172        };
+   173    }
+   174    
+   175    <span class="comment">/*
+</span>   176    <span class="comment"> *! Revision History
+</span>   177    <span class="comment"> *! ================
+</span>   178    <span class="comment"> *! 23-Jun-2010 toddm Started revision history
+</span>   179    <span class="comment"> */</span>
+</pre>
+</body></html>

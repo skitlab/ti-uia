@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.uia.examples.benchmarks" version="2, 0, 0, 0" producerId="undefined">
+    <units>
+    </units>
+    <sources>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674.c"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674.c"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/load_p64P.c"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P.c"/>
+        <srcFile name="loggerCircBuf.c"/>
+        <srcFile name="load.c"/>
+        <srcFile name="loadMP.c"/>
+    </sources>
+    <configscripts>
+        <srcFile name="loggerCircBuf.cfg"/>
+        <srcFile name="load.cfg"/>
+        <srcFile name="loadMP.cfg"/>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674.o674.dep" src="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674.c"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674.dep" src="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674.cfg"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674.oe674.dep" src="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674.c"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674.dep" src="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674.cfg"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/load_p64P.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/load_p64P.o64P.dep" src="package/cfg/ti_platforms_evm6472_core0/release/load_p64P.c"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/load_p64P.dep" src="package/cfg/ti_platforms_evm6472_core0/release/load_p64P.cfg"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P.o64P.dep" src="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P.c"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P.dep" src="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P.cfg"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf.x674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf/loggerCircBuf.o674.dep" src="loggerCircBuf.c"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf.xe674.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf/loggerCircBuf.oe674.dep" src="loggerCircBuf.c"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/load.x64P.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/load/load.o64P.dep" src="load.c"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/loadMP.x64P.mak" src="package.bld"/>
+        <srcFile name="package/cfg/ti_platforms_evm6472_core0/release/loadMP/loadMP.o64P.dep" src="loadMP.c"/>
+        <srcFile name="package/rel/ti_uia_examples_benchmarks.tar.gz.dep" src="package/rel/ti_uia_examples_benchmarks.xdc.inc"/>
+    </makefiles>
+    <targets>
+        <target name="ti.targets.C674"
+            version="ti.targets.C674{1,0,7.0,0"
+            platform="ti.uia.examples.platforms.evmTI816X.dsp"
+            isa="674"
+            suffix="674"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.0.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.elf.C674"
+            version="ti.targets.elf.C674{1,0,7.2,0"
+            platform="ti.uia.examples.platforms.evmTI816X.dsp"
+            isa="674"
+            suffix="e674"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.2.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+        <target name="ti.targets.C64P"
+            version="ti.targets.C64P{1,0,7.0,0"
+            platform="ti.platforms.evm6472:core0"
+            isa="64P"
+            suffix="64P"
+            rootDir="/db/toolsrc/library/tools/vendors/ti/c6x/7.0.0/Linux"
+            os="undefined"
+            rts="ti.targets.rts6000">
+            <model endian="little"
+                codeModel="undefined"
+                dataModel="undefined"/>
+        </target>
+    </targets>
+    <libraries>
+    </libraries>
+    <configurations>
+    <configuration name="ti_platforms_evmDA830/release/loggerCircBuf"
+        pname="ti_platforms_evmDA830/release/loggerCircBuf.p674"
+        target="ti.targets.C674"
+        platform="ti.platforms.evmDA830"
+        profile="release"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674.cfg"
+        xCfgPrefix="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674"
+        cfgScript="loggerCircBuf.cfg"
+        />
+    <configuration name="ti_platforms_evmDA830/release/loggerCircBuf"
+        pname="ti_platforms_evmDA830/release/loggerCircBuf.pe674"
+        target="ti.targets.elf.C674"
+        platform="ti.platforms.evmDA830"
+        profile="release"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674.cfg"
+        xCfgPrefix="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674"
+        cfgScript="loggerCircBuf.cfg"
+        />
+    <configuration name="ti_platforms_evm6472_core0/release/load"
+        pname="ti_platforms_evm6472_core0/release/load.p64P"
+        target="ti.targets.C64P"
+        platform="ti.platforms.evm6472:core0"
+        profile="release"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_platforms_evm6472_core0/release/load_p64P.cfg"
+        xCfgPrefix="package/cfg/ti_platforms_evm6472_core0/release/load_p64P"
+        cfgScript="load.cfg"
+        />
+    <configuration name="ti_platforms_evm6472_core0/release/loadMP"
+        pname="ti_platforms_evm6472_core0/release/loadMP.p64P"
+        target="ti.targets.C64P"
+        platform="ti.platforms.evm6472:core0"
+        profile="release"
+        isPartial="false"
+        xCfgScript="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P.cfg"
+        xCfgPrefix="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P"
+        cfgScript="loadMP.cfg"
+        />
+    </configurations>
+    <executables>
+    <executable name="ti_platforms_evmDA830/release/loggerCircBuf"
+        pname="ti_platforms_evmDA830/release/loggerCircBuf.x674"
+        target="ti.targets.C674"
+        platform="ti.platforms.evmDA830"
+        profile="release"
+        xCfgScript="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674.cfg"
+        xCfgPrefix="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_p674"
+        cfgScript="loggerCircBuf.cfg"
+        />
+    <executable name="ti_platforms_evmDA830/release/loggerCircBuf"
+        pname="ti_platforms_evmDA830/release/loggerCircBuf.xe674"
+        target="ti.targets.elf.C674"
+        platform="ti.platforms.evmDA830"
+        profile="release"
+        xCfgScript="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674.cfg"
+        xCfgPrefix="package/cfg/ti_platforms_evmDA830/release/loggerCircBuf_pe674"
+        cfgScript="loggerCircBuf.cfg"
+        />
+    <executable name="ti_platforms_evm6472_core0/release/load"
+        pname="ti_platforms_evm6472_core0/release/load.x64P"
+        target="ti.targets.C64P"
+        platform="ti.platforms.evm6472:core0"
+        profile="release"
+        xCfgScript="package/cfg/ti_platforms_evm6472_core0/release/load_p64P.cfg"
+        xCfgPrefix="package/cfg/ti_platforms_evm6472_core0/release/load_p64P"
+        cfgScript="load.cfg"
+        />
+    <executable name="ti_platforms_evm6472_core0/release/loadMP"
+        pname="ti_platforms_evm6472_core0/release/loadMP.x64P"
+        target="ti.targets.C64P"
+        platform="ti.platforms.evm6472:core0"
+        profile="release"
+        xCfgScript="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P.cfg"
+        xCfgPrefix="package/cfg/ti_platforms_evm6472_core0/release/loadMP_p64P"
+        cfgScript="loadMP.cfg"
+        />
+    </executables>
+    <tests>
+    <test exeName="ti_platforms_evmDA830/release/loggerCircBuf.x674"
+        args=""
+        groupName="regress"
+        refOutput="golden/loggerCircBuf.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_platforms_evmDA830/release/loggerCircBuf.x674"
+        args=""
+        groupName="ti_platforms_evmDA830/release/loggerCircBuf.x674"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_platforms_evmDA830/release/loggerCircBuf.xe674"
+        args=""
+        groupName="regress"
+        refOutput="golden/loggerCircBuf.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_platforms_evmDA830/release/loggerCircBuf.xe674"
+        args=""
+        groupName="ti_platforms_evmDA830/release/loggerCircBuf.xe674"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_platforms_evm6472_core0/release/load.x64P"
+        args=""
+        groupName="regress"
+        refOutput="golden/load.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_platforms_evm6472_core0/release/load.x64P"
+        args=""
+        groupName="ti_platforms_evm6472_core0/release/load.x64P"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_platforms_evm6472_core0/release/loadMP.x64P"
+        args=""
+        groupName="regress"
+        refOutput="golden/loadMP.k"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    <test exeName="ti_platforms_evm6472_core0/release/loadMP.x64P"
+        args=""
+        groupName="ti_platforms_evm6472_core0/release/loadMP.x64P"
+        refOutput="undefined"
+        refExitCode="0"
+        execArgs="-t%2060"
+        />
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_uia_examples_benchmarks"
+        pname="../../../../../exports/ti_uia_examples_benchmarks.tar.gz"
+        label="default"
+        relScript="scripts/copyright_xml.rel">
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

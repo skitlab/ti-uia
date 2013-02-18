@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--  This file conforms to the DTD xdc/bld/build.dtd -->
+<package name="ti.uia.examples.single" version="2, 0, 0, 0" producerId="undefined">
+    <units>
+    </units>
+    <sources>
+    </sources>
+    <configscripts>
+    </configscripts>
+    <makefiles>
+        <srcFile name="package.mak" src="package.bld"/>
+        <srcFile name="package/package.xdc.dep" src="package.xdc"/>
+        <srcFile name="package/package.cfg.dep" src="package.xdc"/>
+        <srcFile name="package/rel/ti_uia_examples_single.tar.gz.dep" src="package/rel/ti_uia_examples_single.xdc.inc"/>
+    </makefiles>
+    <targets>
+    </targets>
+    <libraries>
+    </libraries>
+    <configurations>
+    </configurations>
+    <executables>
+    </executables>
+    <tests>
+    </tests>
+    <releases relDir="package/rel/">
+    <release name="ti_uia_examples_single"
+        pname="../../../../../exports/ti_uia_examples_single.tar.gz"
+        label="default"
+        relScript="scripts/copyright_xml.rel">
+        <file name="package/package.bld.xml"/>
+        <file name="package/package.ext.xml"/>
+        <file name="package/package.rel.dot"/>
+        <file name="package/build.cfg"/>
+        <file name="package/package.xdc.inc"/>
+        <file name="stairstep.c"/>
+        <file name="package.bld"/>
+        <file name="stairstep_JTAGStopMode.cfg"/>
+        <file name="stairstep_Ethernet.cfg"/>
+        <file name="stairstep_JTAGRunMode.cfg"/>
+        <file name="stairstep_ProbePoint.cfg"/>
+        <file name="stairstep_Simulator.cfg"/>
+        <file name="logger.c"/>
+        <file name="logger.cfg"/>
+        <file name="package/package.cfg.xdc.inc"/>
+    </release>
+    </releases>
+    <repositories>
+    </repositories>
+</package>

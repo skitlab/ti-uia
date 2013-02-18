@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin
+    name="System Analyzer (UIA Target) IDE Support"
+    id="com.ti.uia.product.ui"
+    version="1.1.1.14"
+    provider-name="Texas Instruments">
+
+    <extension point="org.eclipse.help.toc">
+        <toc file="toc_top.xml" primary="true"/>
+        <toc file="toc.xml"/>
+    </extension>
+
+    <extension point="org.eclipse.help.contentProducer">
+        <contentProducer>
+            <producer class="org.eclipse.rtsc.xdctools.ui.help.HelpContentProducer"/>
+        </contentProducer>
+    </extension>
+
+    <extension
+         point="org.eclipse.core.variables.dynamicVariables">
+     <variable 
+        name="COM_TI_UIA_INSTALL_DIR"
+        resolver="org.eclipse.rtsc.xdctools.ui.macros.MacroResolver"
+        description="Installation directory for System Analyzer (UIA Target)">
+     </variable>
+   </extension>
+
+    <extension point="com.ti.common.project.core.projectTemplates">
+        <templateGroup
+            id="ti.uia.examples.root"
+            description="System Analyzer (UIA) Tutorials, Examples and Project Templates"
+            name="System Analyzer (UIA)">
+            <property name="productType" value="com.ti.uia"/>
+        </templateGroup>
+        <templateGroup
+            id="ti.uia.examples.root.level1"
+            description="System Analyzer (UIA) Single-core Examples"
+            name="Single-core Examples">
+            <property name="productType" value="com.ti.uia"/>
+            <group id="ti.uia.examples.root"/>
+        </templateGroup>
+        <templateGroup
+            id="ti.uia.examples.root.level2"
+            description="System Analyzer (UIA) Multi-core Examples"
+            name="Multi-core Projects">
+            <property name="productType" value="com.ti.uia"/>
+            <group id="ti.uia.examples.root"/>
+        </templateGroup>
+        <templateGroup
+            id="ti.uia.examples.root.level3"
+            description="System Analyzer (UIA) Tutorials"
+            name="Tutorials">
+            <property name="productType" value="com.ti.uia"/>
+            <group id="ti.uia.examples.root"/>
+        </templateGroup>
+
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_0_title"
+                 id="com.ti.uia.example_0"
+                 linkerCommandFile=""
+                 description="%example_0_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC;com.ti.rtsc.NDK"/>
+                 <property name="platform" value="ti.platforms.evm6472:core0"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level2"/>
+                 <file path="resources/./evm6472/message.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./evm6472/message.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C2000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_1_title"
+                 id="com.ti.uia.example_1"
+                 linkerCommandFile=""
+                 description="%example_1_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level1"/>
+                 <file path="resources/./single/stairstep.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./single/stairstep_JTAGStopMode.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_2_title"
+                 id="com.ti.uia.example_2"
+                 linkerCommandFile=""
+                 description="%example_2_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC;com.ti.rtsc.NDK"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level1"/>
+                 <file path="resources/./single/stairstep.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./single/stairstep_Ethernet.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_3_title"
+                 id="com.ti.uia.example_3"
+                 linkerCommandFile=""
+                 description="%example_3_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level1"/>
+                 <file path="resources/./single/stairstep.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./single/stairstep_JTAGRunMode.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C2000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_4_title"
+                 id="com.ti.uia.example_4"
+                 linkerCommandFile=""
+                 description="%example_4_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level1"/>
+                 <file path="resources/./single/stairstep.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./single/stairstep_ProbePoint.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C2000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_5_title"
+                 id="com.ti.uia.example_5"
+                 linkerCommandFile=""
+                 description="%example_5_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level1"/>
+                 <file path="resources/./single/logger.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./single/logger.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C2000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_6_title"
+                 id="com.ti.uia.example_6"
+                 linkerCommandFile=""
+                 description="%example_6_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level1"/>
+                 <file path="resources/./single/stairstep.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./single/stairstep_Simulator.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_7_title"
+                 id="com.ti.uia.example_7"
+                 linkerCommandFile=""
+                 description="%example_7_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="platform" value="ti.uia.examples.platforms.evmTI816X.dsp"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level2"/>
+                 <file path="resources/./evmti816x/simpleTask.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./evmti816x/dspLoggerCircBuf.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_8_title"
+                 id="com.ti.uia.example_8"
+                 linkerCommandFile=""
+                 description="%example_8_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="platform" value="ti.uia.examples.platforms.evmTI816X.dsp"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level2"/>
+                 <file path="resources/./evmti816x/simpleTask.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./evmti816x/dspLoggerSM.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_9_title"
+                 id="com.ti.uia.example_9"
+                 linkerCommandFile=""
+                 description="%example_9_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="platform" value="ti.uia.examples.platforms.evmTI816X.video"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level2"/>
+                 <file path="resources/./evmti816x/simpleTask.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./evmti816x/videoM3LoggerCircBuf.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_10_title"
+                 id="com.ti.uia.example_10"
+                 linkerCommandFile=""
+                 description="%example_10_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="platform" value="ti.uia.examples.platforms.evmTI816X.vpss"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level2"/>
+                 <file path="resources/./evmti816x/simpleTask.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./evmti816x/vpssM3LoggerCircBuf.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_11_title"
+                 id="com.ti.uia.example_11"
+                 linkerCommandFile=""
+                 description="%example_11_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="platform" value="ti.uia.examples.platforms.evmTI816X.video"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level2"/>
+                 <file path="resources/./evmti816x/simpleTask.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./evmti816x/videoM3LoggerSM.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_12_title"
+                 id="com.ti.uia.example_12"
+                 linkerCommandFile=""
+                 description="%example_12_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia;com.ti.rtsc.SYSBIOS;com.ti.rtsc.IPC"/>
+                 <property name="platform" value="ti.uia.examples.platforms.evmTI816X.vpss"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level2"/>
+                 <file path="resources/./evmti816x/simpleTask.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./evmti816x/vpssM3LoggerSM.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C2000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="ARM"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_13_title"
+                 id="com.ti.uia.example_13"
+                 linkerCommandFile=""
+                 description="%example_13_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level3"/>
+                 <file path="resources/./tutorial1/main.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./tutorial1/tutorial1a.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./tutorial1/tutorial1b.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./tutorial1/tutorial1c.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./tutorial1/tutorial1d.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./tutorial1/systemAnalyzerTutorial1.gel" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./tutorial1/systemAnalyzerTutorial1.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+        <templateSet>
+            <applicability>
+                <when>
+                    <context 
+                       deviceFamily="C6000"
+                       toolChain="TI"
+                    />
+               </when>
+            </applicability>
+             <template
+                 title="%example_14_title"
+                 id="com.ti.uia.example_14"
+                 linkerCommandFile=""
+                 description="%example_14_description">
+                 <property name="type" value="rtsc"/>
+                 <property name="products" value="com.ti.uia"/>
+                 <property name="buildProfile" value="release"/>
+                 <property name="isHybrid" value="true"/>
+                 <group id="ti.uia.examples.root.level3"/>
+                 <file path="resources/./tutorial2/main.c" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./tutorial2/systemAnalyzerTutorial2.gel" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+                 <file path="resources/./tutorial2/systemAnalyzerTutorial2.cfg" openOnCreation="false" excludeFromBuild="false">
+                 </file>
+             </template>
+        </templateSet>
+    </extension>
+
+
+</plugin>

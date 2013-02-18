@@ -1,0 +1,196 @@
+/*
+ *  Do not modify this file; it is automatically 
+ *  generated and any modifications will be overwritten.
+ *
+ * @(#) xdc-y23
+ */
+
+#ifndef ti_uia_runtime_LoggerProbePoint__INTERNAL__
+#define ti_uia_runtime_LoggerProbePoint__INTERNAL__
+
+#ifndef ti_uia_runtime_LoggerProbePoint__internalaccess
+#define ti_uia_runtime_LoggerProbePoint__internalaccess
+#endif
+
+#include <ti/uia/runtime/LoggerProbePoint.h>
+
+#undef xdc_FILE__
+#ifndef xdc_FILE
+#define xdc_FILE__ NULL
+#else
+#define xdc_FILE__ xdc_FILE
+#endif
+
+/* getTransferType */
+#undef ti_uia_runtime_LoggerProbePoint_getTransferType
+#define ti_uia_runtime_LoggerProbePoint_getTransferType ti_uia_runtime_LoggerProbePoint_getTransferType__F
+
+/* getContents */
+#undef ti_uia_runtime_LoggerProbePoint_getContents
+#define ti_uia_runtime_LoggerProbePoint_getContents ti_uia_runtime_LoggerProbePoint_getContents__E
+
+/* isEmpty */
+#undef ti_uia_runtime_LoggerProbePoint_isEmpty
+#define ti_uia_runtime_LoggerProbePoint_isEmpty ti_uia_runtime_LoggerProbePoint_isEmpty__E
+
+/* getMaxLength */
+#undef ti_uia_runtime_LoggerProbePoint_getMaxLength
+#define ti_uia_runtime_LoggerProbePoint_getMaxLength ti_uia_runtime_LoggerProbePoint_getMaxLength__E
+
+/* getInstanceId */
+#undef ti_uia_runtime_LoggerProbePoint_getInstanceId
+#define ti_uia_runtime_LoggerProbePoint_getInstanceId ti_uia_runtime_LoggerProbePoint_getInstanceId__E
+
+/* getPriority */
+#undef ti_uia_runtime_LoggerProbePoint_getPriority
+#define ti_uia_runtime_LoggerProbePoint_getPriority ti_uia_runtime_LoggerProbePoint_getPriority__E
+
+/* setPriority */
+#undef ti_uia_runtime_LoggerProbePoint_setPriority
+#define ti_uia_runtime_LoggerProbePoint_setPriority ti_uia_runtime_LoggerProbePoint_setPriority__E
+
+/* reset */
+#undef ti_uia_runtime_LoggerProbePoint_reset
+#define ti_uia_runtime_LoggerProbePoint_reset ti_uia_runtime_LoggerProbePoint_reset__F
+
+/* writeMemoryRange */
+#undef ti_uia_runtime_LoggerProbePoint_writeMemoryRange
+#define ti_uia_runtime_LoggerProbePoint_writeMemoryRange ti_uia_runtime_LoggerProbePoint_writeMemoryRange__E
+
+/* setModuleIdToRouteToStatusLogger */
+#undef ti_uia_runtime_LoggerProbePoint_setModuleIdToRouteToStatusLogger
+#define ti_uia_runtime_LoggerProbePoint_setModuleIdToRouteToStatusLogger ti_uia_runtime_LoggerProbePoint_setModuleIdToRouteToStatusLogger__E
+
+/* flushAll */
+#undef ti_uia_runtime_LoggerProbePoint_flushAll
+#define ti_uia_runtime_LoggerProbePoint_flushAll ti_uia_runtime_LoggerProbePoint_flushAll__F
+
+/* flushAllInternal */
+#undef ti_uia_runtime_LoggerProbePoint_flushAllInternal
+#define ti_uia_runtime_LoggerProbePoint_flushAllInternal ti_uia_runtime_LoggerProbePoint_flushAllInternal__E
+
+/* flush */
+#undef ti_uia_runtime_LoggerProbePoint_flush
+#define ti_uia_runtime_LoggerProbePoint_flush ti_uia_runtime_LoggerProbePoint_flush__E
+
+/* getNumDropped */
+#undef ti_uia_runtime_LoggerProbePoint_getNumDropped
+#define ti_uia_runtime_LoggerProbePoint_getNumDropped ti_uia_runtime_LoggerProbePoint_getNumDropped__E
+
+/* enable */
+#undef ti_uia_runtime_LoggerProbePoint_enable
+#define ti_uia_runtime_LoggerProbePoint_enable ti_uia_runtime_LoggerProbePoint_enable__E
+
+/* disable */
+#undef ti_uia_runtime_LoggerProbePoint_disable
+#define ti_uia_runtime_LoggerProbePoint_disable ti_uia_runtime_LoggerProbePoint_disable__E
+
+/* write0 */
+#undef ti_uia_runtime_LoggerProbePoint_write0
+#define ti_uia_runtime_LoggerProbePoint_write0 ti_uia_runtime_LoggerProbePoint_write0__E
+
+/* write1 */
+#undef ti_uia_runtime_LoggerProbePoint_write1
+#define ti_uia_runtime_LoggerProbePoint_write1 ti_uia_runtime_LoggerProbePoint_write1__E
+
+/* write2 */
+#undef ti_uia_runtime_LoggerProbePoint_write2
+#define ti_uia_runtime_LoggerProbePoint_write2 ti_uia_runtime_LoggerProbePoint_write2__E
+
+/* write4 */
+#undef ti_uia_runtime_LoggerProbePoint_write4
+#define ti_uia_runtime_LoggerProbePoint_write4 ti_uia_runtime_LoggerProbePoint_write4__E
+
+/* write8 */
+#undef ti_uia_runtime_LoggerProbePoint_write8
+#define ti_uia_runtime_LoggerProbePoint_write8 ti_uia_runtime_LoggerProbePoint_write8__E
+
+/* setFilterLevel */
+#undef ti_uia_runtime_LoggerProbePoint_setFilterLevel
+#define ti_uia_runtime_LoggerProbePoint_setFilterLevel ti_uia_runtime_LoggerProbePoint_setFilterLevel__E
+
+/* getFilterLevel */
+#undef ti_uia_runtime_LoggerProbePoint_getFilterLevel
+#define ti_uia_runtime_LoggerProbePoint_getFilterLevel ti_uia_runtime_LoggerProbePoint_getFilterLevel__E
+
+/* getFreeSize */
+#undef ti_uia_runtime_LoggerProbePoint_getFreeSize
+#define ti_uia_runtime_LoggerProbePoint_getFreeSize ti_uia_runtime_LoggerProbePoint_getFreeSize__E
+
+/* getUnreadSize */
+#undef ti_uia_runtime_LoggerProbePoint_getUnreadSize
+#define ti_uia_runtime_LoggerProbePoint_getUnreadSize ti_uia_runtime_LoggerProbePoint_getUnreadSize__E
+
+/* readBlockOfMemory */
+#define LoggerProbePoint_readBlockOfMemory ti_uia_runtime_LoggerProbePoint_readBlockOfMemory__I
+
+/* writeBlockOfMemory */
+#define LoggerProbePoint_writeBlockOfMemory ti_uia_runtime_LoggerProbePoint_writeBlockOfMemory__I
+
+/* filterOutEvent */
+#define LoggerProbePoint_filterOutEvent ti_uia_runtime_LoggerProbePoint_filterOutEvent__I
+
+/* postIncrementPtr */
+#define LoggerProbePoint_postIncrementPtr ti_uia_runtime_LoggerProbePoint_postIncrementPtr__I
+
+/* Module_startup */
+#undef ti_uia_runtime_LoggerProbePoint_Module_startup
+#define ti_uia_runtime_LoggerProbePoint_Module_startup ti_uia_runtime_LoggerProbePoint_Module_startup__F
+
+/* Instance_init */
+#undef ti_uia_runtime_LoggerProbePoint_Instance_init
+#define ti_uia_runtime_LoggerProbePoint_Instance_init ti_uia_runtime_LoggerProbePoint_Instance_init__F
+
+/* Instance_finalize */
+#undef ti_uia_runtime_LoggerProbePoint_Instance_finalize
+#define ti_uia_runtime_LoggerProbePoint_Instance_finalize ti_uia_runtime_LoggerProbePoint_Instance_finalize__F
+
+/* module */
+#define LoggerProbePoint_module ((ti_uia_runtime_LoggerProbePoint_Module_State *)(xdc__MODOBJADDR__(ti_uia_runtime_LoggerProbePoint_Module__state__V)))
+#if !defined(__cplusplus) || !defined(ti_uia_runtime_LoggerProbePoint__cplusplus)
+#define module ((ti_uia_runtime_LoggerProbePoint_Module_State *)(xdc__MODOBJADDR__(ti_uia_runtime_LoggerProbePoint_Module__state__V)))
+#endif
+/* per-module runtime symbols */
+#undef Module__MID
+#define Module__MID ti_uia_runtime_LoggerProbePoint_Module__id__C
+#undef Module__DGSINCL
+#define Module__DGSINCL ti_uia_runtime_LoggerProbePoint_Module__diagsIncluded__C
+#undef Module__DGSENAB
+#define Module__DGSENAB ti_uia_runtime_LoggerProbePoint_Module__diagsEnabled__C
+#undef Module__DGSMASK
+#define Module__DGSMASK ti_uia_runtime_LoggerProbePoint_Module__diagsMask__C
+#undef Module__LOGDEF
+#define Module__LOGDEF ti_uia_runtime_LoggerProbePoint_Module__loggerDefined__C
+#undef Module__LOGOBJ
+#define Module__LOGOBJ ti_uia_runtime_LoggerProbePoint_Module__loggerObj__C
+#undef Module__LOGFXN0
+#define Module__LOGFXN0 ti_uia_runtime_LoggerProbePoint_Module__loggerFxn0__C
+#undef Module__LOGFXN1
+#define Module__LOGFXN1 ti_uia_runtime_LoggerProbePoint_Module__loggerFxn1__C
+#undef Module__LOGFXN2
+#define Module__LOGFXN2 ti_uia_runtime_LoggerProbePoint_Module__loggerFxn2__C
+#undef Module__LOGFXN4
+#define Module__LOGFXN4 ti_uia_runtime_LoggerProbePoint_Module__loggerFxn4__C
+#undef Module__LOGFXN8
+#define Module__LOGFXN8 ti_uia_runtime_LoggerProbePoint_Module__loggerFxn8__C
+#undef Module__G_OBJ
+#define Module__G_OBJ ti_uia_runtime_LoggerProbePoint_Module__gateObj__C
+#undef Module__G_PRMS
+#define Module__G_PRMS ti_uia_runtime_LoggerProbePoint_Module__gatePrms__C
+#undef Module__GP_create
+#define Module__GP_create ti_uia_runtime_LoggerProbePoint_Module_GateProxy_create
+#undef Module__GP_delete
+#define Module__GP_delete ti_uia_runtime_LoggerProbePoint_Module_GateProxy_delete
+#undef Module__GP_enter
+#define Module__GP_enter ti_uia_runtime_LoggerProbePoint_Module_GateProxy_enter
+#undef Module__GP_leave
+#define Module__GP_leave ti_uia_runtime_LoggerProbePoint_Module_GateProxy_leave
+#undef Module__GP_query
+#define Module__GP_query ti_uia_runtime_LoggerProbePoint_Module_GateProxy_query
+
+/* Object__sizingError */
+#line 1 "Error_inconsistent_object_size_in_ti.uia.runtime.LoggerProbePoint"
+typedef char ti_uia_runtime_LoggerProbePoint_Object__sizingError[sizeof(ti_uia_runtime_LoggerProbePoint_Object) > sizeof(ti_uia_runtime_LoggerProbePoint_Struct) ? -1 : 1];
+
+
+#endif /* ti_uia_runtime_LoggerProbePoint__INTERNAL____ */

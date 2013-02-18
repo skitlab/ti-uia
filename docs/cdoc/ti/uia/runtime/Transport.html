@@ -1,0 +1,378 @@
+<html>
+<head>
+<title>module ti.uia.runtime.Transport</title>
+<meta name="description" content="Transport function specification module">
+<link rel="stylesheet" type="text/css" href="../../../xdoc.css" />
+</head>
+<body><div id="xdocWrapper"><div id="xdocContent">
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">module</span> <span class="xdoc-id">ti.uia.runtime.</span><span class="xdoc-id">Transport</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/ServiceMgr.html" title="module ServiceMgr"><img class="xdocHdrArrow" src="../../../Arrow_left.png"/></a></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/package.html" title="package ti.uia.runtime"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/UIAMetaData.html" title="module UIAMetaData"><img class="xdocHdrArrow" src="../../../Arrow_right.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/Transport.html">index URL</a></div>
+<p class="xdocHdrSummary">Transport function specification module</p>
+<ul class="xdocToc">
+<li class="xdocToc"><a class="xdocToc" href="#targ-synop">C synopsis</a></li>
+<li class="xdocToc2"><a class="xdocToc" href="#xdocElems">Individual elements</a></li>
+<li class="xdocToc"><a class="xdocToc" href="#xdoc-sect-1">DETAILS</a></li>
+<li class="xdocToc"><a class="xdocToc" href="#xdoc-sect-2">TRANSPORT FUNCTIONS</a></li>
+<li class="xdocToc"><a class="xdocToc" href="#meta-synop">XDCscript usage</a></li>
+<li class="xdocToc2"><a class="xdocToc" href="#xdocMetaElems">Individual elements</a></li>
+</ul>
+<div class="xdocBrief">
+This module defines the function prototypes for the transport functions
+  that can be plugged into the ServiceMgr. UIA ships several
+  implementations of this interface in the ti/uia/sysbios directory.
+[&nbsp;<a class="xdocBrief" href="#xdoc-desc">more</a>&nbsp;...&nbsp;]
+</div>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2">C</span></tt> synopsis</td>
+<td class="xdocLabelCenter">target-domain</td>
+<td class="xdocLabelRight">sourced in <a class="xdocLink" href="../../../ti/uia/runtime/Transport-src.html"><span class="xdocLabelFile">ti/uia/runtime/Transport.xdc</span></a></td>
+</tr></table>
+<div class="xdocSynT">
+<div class="xdocSynCode">
+<tt></tt><span class="xdoc-kw3">#include</span> <span class="xdoc-id">&lt;ti/uia/runtime/Transport.h&gt;</span>
+</div>
+<table cellspacing="0" cellpadding="0" border="0">
+<tr><td class="xdocSynFxnCat" colspan="2"><div class="xdocSynFxnCat">Functions common to all target modules</div></td></tr>
+
+<tr>
+<td></td>
+<td>
+<div class="xdocSynTblPack">
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">Transport_Module_getMask</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Returns the diagnostics mask for this module</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">Transport_Module_hasMask</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Test whether this module has a diagnostics mask</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">Transport_Module_heap</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;The heap from which this module allocates memory</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">Transport_Module_id</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Get this module's unique id</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">Transport_Module_setMask</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Set the diagnostics mask for this module</span></span></a>,
+<a class="xdocSynGo" href="#module-wide_built-ins"><span class="xdoc-id">Transport_Module_startupDone</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Test if this module has completed startup</span></span></a>
+</div>
+</td>
+</tr>
+<tr><td colspan='2'><div class='xdocSynTblHdr'>Typedefs</div></td></tr>
+
+<tr valign="top"><td class="xdocSynDecl" nowrap><div class="xdocSynTblType"><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">struct</span> </div></td><td class="xdocSynDecl"><div class="xdocSynTblDecl"><a class="xdocSynGo" href="#.Fxn.Set"><span class="xdoc-id">Transport_FxnSet</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Task hook set type definition</span></span></a> ...</div></td></tr>
+</table>
+<div class="xdocSynSpacer">&nbsp;</div>
+</div>
+<span id="xdoc-desc"></span>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">DETAILS</div>
+<div class="xdocText">This module defines the function prototypes for the transport functions
+  that can be plugged into the ServiceMgr. UIA ships several
+  implementations of this interface in the ti/uia/sysbios directory.</div>
+<div class="xdocText">The implementations do not have to be XDC modules. They are simply standard
+  'C' functions (i.e look at ti/uia/sysbios/TransportNdk.c). Only one 
+  transport set can be used on a target and it needs to be set up at build 
+  time via the <a class="xdoc-link" href="../../../ti/uia/runtime/ServiceMgr.html#transport.Fxns" title="ti.uia.runtime.ServiceMgr.transportFxns">ti.uia.runtime.ServiceMgr.transportFxns</a> parameter. The
+  ServiceMgr plugs the transportFxns automatically based on the TransportType
+  <a class="xdoc-link" href="../../../ti/uia/runtime/ServiceMgr.html#transport.Type" title="ti.uia.runtime.ServiceMgr.transportType">ti.uia.runtime.ServiceMgr.transportType</a>.</div>
+<div class="xdocText">If someone writes an new transport
+  (e.g. RapidIO), they can be plugged in by setting the TransportType
+  to <a class="xdoc-link" href="../../../ti/uia/runtime/ServiceMgr.html#.Transport.Type_.U.S.E.R" title="ti.uia.runtime.ServiceMgr.TransportType_USER">ti.uia.runtime.ServiceMgr.TransportType_USER</a> and then plugging
+  the transportFxns manually. It must also set up the following parameters
+  as directed by the new transport developer.</div>
+<div class="xdocText"><UL><LI>ServiceMgr.supportControl: does the transport support receiving messages
+                 from the host. For example TransportFile does not.
+</LI><LI>ServiceMgr.maxEventPacketSize: Max size of an outgoing event packet. For
+                 example TransportNdk uses 1472 (emac size minus headers)
+</LI><LI>ServiceMgr.maxCtrlPacketSize: Max size of the message packets. This can
+                 be zero if supportControl is false.
+</LI></UL></div>
+<div class="xdocText">Here is an example of plugging the transport XYZ into the ServiceMgr:</div>
+<div class="xdocText"><PRE class="Example">  var ServiceMgr = xdc.useModule('ti.uia.runtime.ServiceMgr');
+  ServiceMgr.transportType = ServiceMgr.TransportType_USER;
+  var xyzTransport = {
+      initFxn: '&amp;TransportXYZ_init',
+      startFxn: '&amp;TransportXYZ_start',
+      recvFxn: '&amp;TransportXYZ_recv',
+      sendFxn: '&amp;TransportXYZ_send',
+      stopFxn: '&amp;TransportXYZ_stop',
+      exitFxn: '&amp;TransportXYZ_exit',
+  };
+  ServiceMgr.transportFxns = xyzTransport;
+
+  ServiceMgr.maxEventPacketSize = 1024
+  ServiceMgr.maxCtrlPacketSize  = 1024;
+  ServiceMgr.supportControl     = true;
+</PRE></div>
+<div class="xdocText"><a name="transportfxn"></a></div>
+<span id="xdoc-sect-2"></span>
+<div class="xdocSect">TRANSPORT FUNCTIONS</div>
+<div class="xdocText"></div>
+<div class="xdocText">The following are the transport functions. Note 
+  all of these functions 
+  are called by the ServiceMgr. The application should not be calling 
+  these functions directly.</div>
+<div class="xdocText"><UL><LI>initFxn:  Called during module startup (which is before main()). Minimal 
+             actions can take place here since there are no interrupts and 
+             the state of the application is just starting up. Generally only
+             internal initialization is done in this function.
+</LI><LI>startFxn: The start function is called at once or twice after the SYS/BIOS
+             tasks have started to run. The start
+             function is called with UIAPacket_HdrType_EventPkt before any
+             events are sent. This allows the transport to initialize 
+             anything needed for event transmission. The function returns a
+             handle to a transport specific structure (or NULL if not needed).
+             This handle is passed into the sendFxn and stopFxn.
+
+             If the transport supports control messages from a host, the
+             start function is called with UIAPacket_HdrType_Msg. 
+             This allows the transport to initialize anything needed for 
+             msg transmission (both sending and receiving). Again, the
+             transport can return a transport specific structure. This
+             structure can be different from the one returned in the 
+             UIAPacket_HdrType_EventPkt start.
+</LI><LI>recvFxn:  The recv function is called to receive incoming messages
+             from the host. The handle returned from the start is passed
+             into the recv. Also passed in is a buffer and its size.
+             The buffer is passed in as a double pointer. This allows
+             the transport to double-buffer. For example, the recv
+             function can return a different buffer than what was
+             passed in. This potentially reduces extra copies of the data.
+
+             The recv can be a blocking call.
+
+             The recv returns the actual number of bytes that are placed into
+             the buffer. If the transport does not
+             support control messages, this function can simply return zero. 
+</LI><LI>sendFxn:  The send function is called to send either events or msgs. If 
+             send is called to transmit a event, the first parameter is the
+             handle returned from the start(UIAPacket_HdrType_EventPkt).
+             Similiarily, if a message is being sent, the first parameter is
+             the handle returned from the start(UIAPacket_HdrType_Msg).
+             The size of the packet is maintained in the UIAPacket_Hdr.
+
+             The send can be a blocking call.
+
+             This function returns whether the send was successful or not.
+
+             Again a double pointer is used to allow the transport to return
+             a different buffer to allow double-buffering.
+</LI><LI>stopFxn:  The stop function is to counterpart to the start function. The
+             stop will be called the same number of times as the start. The
+             calls will contain handles returned from the start.
+</LI><LI>exitFxn:  The exit function is to counterpart to the init function.
+</LI></UL></div>
+<div class="xdocText">Transport are allowed to have additional functions that can be directly 
+  called by the application. For example in ti/uia/sysbiosTransportFile, 
+  there is a TransportFile_setFile function. The downside to the extended
+  functions is portability.</div>
+<div id="xdocSep">
+</div>
+<div id="xdocElems">
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id=".Fxn.Set"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">struct</span> <span class="xdoc-id">Transport_</span><span class="xdoc-id">FxnSet</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/Transport.html" title="module Transport"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/Transport.html#.Fxn.Set">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Task hook set type definition</p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">typedef</span> <span class="xdoc-kw1">struct</span> <span class="xdoc-id">Transport_FxnSet</span> {
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Void</span>&nbsp;(*<span class="xdoc-id"><go><span class="xdoc-id">initFxn</span></span></go>)();
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Ptr</span>&nbsp;(*<span class="xdoc-id"><go><span class="xdoc-id">startFxn</span></span></go>)(<a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr.Type" title="ti.uia.runtime.UIAPacket.HdrType">UIAPacket_HdrType</a>);
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">SizeT</span>&nbsp;(*<span class="xdoc-id"><go><span class="xdoc-id">recvFxn</span></span></go>)(<span class="xdoc-kw2">Ptr</span>,<a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr" title="ti.uia.runtime.UIAPacket.Hdr">UIAPacket_Hdr</a>**,<span class="xdoc-kw2">SizeT</span>);
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Bool</span>&nbsp;(*<span class="xdoc-id"><go><span class="xdoc-id">sendFxn</span></span></go>)(<span class="xdoc-kw2">Ptr</span>,<a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr" title="ti.uia.runtime.UIAPacket.Hdr">UIAPacket_Hdr</a>**);
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Void</span>&nbsp;(*<span class="xdoc-id"><go><span class="xdoc-id">stopFxn</span></span></go>)(<span class="xdoc-kw2">Ptr</span>);
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><span class="xdoc-kw2">Void</span>&nbsp;(*<span class="xdoc-id"><go><span class="xdoc-id">exitFxn</span></span></go>)(<span class="xdoc-kw2">Void</span>);
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt>} <span class="xdoc-id">Transport_FxnSet</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">DETAILS</div>
+<div class="xdocText">See <a class="xdoc-link" href="Transport.html#transportfxn" title="transportfxn">Transport Functions</a> for details.</div>
+<a class="xdocAnchor" id="module-wide_built-ins"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdocSynSum">Module-Wide Built-Ins</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/Transport.html" title="module Transport"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/Transport.html#module-wide_built-ins">index URL</a></div>
+<p class="xdocHdrSummary"></p>
+<span id='targ-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-targ2dcl">C</span></tt> synopsis</td>
+<td class="xdocLabelRight">target-domain</td>
+</tr></table>
+<div class="xdocSynTdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><a class="xdoc-link" href="../../../xdc/runtime/Types.html#.Module.Id" title="xdc.runtime.Types.ModuleId">Types_ModuleId</a> <span class="xdoc-id">Transport_Module_id</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Get this module's unique id</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Bool</span> <span class="xdoc-id">Transport_Module_startupDone</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Test if this module has completed startup</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><a class="xdoc-link" href="../../../xdc/runtime/IHeap.html#per-instance_object_types" title="xdc.runtime.IHeap.Handle">IHeap_Handle</a> <span class="xdoc-id">Transport_Module_heap</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;The heap from which this module allocates memory</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Bool</span> <span class="xdoc-id">Transport_Module_hasMask</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Test whether this module has a diagnostics mask</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Bits16</span> <span class="xdoc-id">Transport_Module_getMask</span>();
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Returns the diagnostics mask for this module</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw2">Void</span> <span class="xdoc-id">Transport_Module_setMask</span>(<span class="xdoc-kw2">Bits16</span> <span class="xdoc-id">mask</span>);
+</div>
+<div class='xdocSynSum'><tt></tt><tt></tt>//&nbsp;Set the diagnostics mask for this module</div>
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2">XDCscript</span></tt> usage</td>
+<td class="xdocLabelCenter">meta-domain</td>
+<td class="xdocLabelRight">sourced in <a class="xdocLink" href="../../../ti/uia/runtime/Transport-src.html"><span class="xdocLabelFile">ti/uia/runtime/Transport.xdc</span></a></td>
+</tr></table>
+<div class="xdocSynM">
+<div class="xdocSynCode">
+<tt></tt><span class="xdoc-kw1">var</span> Transport = <span class="xdoc-kw3">xdc.useModule</span>(<span class="xdoc-id">'ti.uia.runtime.Transport'</span>);
+</div>
+<div class='xdocSynHdr'>module-wide constants & types</div>
+
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><span class="xdoc-kw1">var</span> <i>obj</i> = <span class="xdoc-kw1">new</span> <a class="xdocSynGo" href="#meta.Fxn.Set">Transport.<span class="xdoc-id">FxnSet</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Task hook set type definition</span></span></a>;
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Fxn.Set" title="ti.uia.runtime.Transport.FxnSet"><span class="xdoc-id">initFxn</span></a> = <i><span class="xdoc-kw2">Void</span>(*)()</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Fxn.Set" title="ti.uia.runtime.Transport.FxnSet"><span class="xdoc-id">startFxn</span></a> = <i><span class="xdoc-kw2">Ptr</span>(*)(<a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr.Type" title="ti.uia.runtime.UIAPacket.HdrType">UIAPacket.HdrType</a>)</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Fxn.Set" title="ti.uia.runtime.Transport.FxnSet"><span class="xdoc-id">recvFxn</span></a> = <i><span class="xdoc-kw2">SizeT</span>(*)(<span class="xdoc-kw2">Ptr</span>,<a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr" title="ti.uia.runtime.UIAPacket.Hdr">UIAPacket.Hdr</a>**,<span class="xdoc-kw2">SizeT</span>)</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Fxn.Set" title="ti.uia.runtime.Transport.FxnSet"><span class="xdoc-id">sendFxn</span></a> = <i><span class="xdoc-kw2">Bool</span>(*)(<span class="xdoc-kw2">Ptr</span>,<a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr" title="ti.uia.runtime.UIAPacket.Hdr">UIAPacket.Hdr</a>**)</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Fxn.Set" title="ti.uia.runtime.Transport.FxnSet"><span class="xdoc-id">stopFxn</span></a> = <i><span class="xdoc-kw2">Void</span>(*)(<span class="xdoc-kw2">Ptr</span>)</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<a class="xdocSynGo" href="#meta.Fxn.Set" title="ti.uia.runtime.Transport.FxnSet"><span class="xdoc-id">exitFxn</span></a> = <i><span class="xdoc-kw2">Void</span>(*)(<span class="xdoc-kw2">Void</span>)</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class='xdocSynHdr'>module-wide config parameters</div>
+
+<div class="xdocSynCode">
+<tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><tt></tt><a class="xdocSynGo" href="#common$">Transport.<span class="xdoc-id">common$</span><span class="xdocSynHoverShadow"><span class="xdocSynHover">//&nbsp;Common module configuration parameters</span></span></a> = <i><a class="xdoc-link" href="../../../xdc/runtime/Types.html#.Common$" title="xdc.runtime.Types.Common$">Types.Common$</a></i> <span class="xdoc-kw2">undefined</span>;
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+</div>
+<div id="xdocSep">
+</div>
+<div id="xdocMetaElems">
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="meta.Fxn.Set"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">struct</span> <span class="xdoc-id">Transport.</span><span class="xdoc-id">FxnSet</span></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/Transport.html" title="module Transport"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/Transport.html#.Fxn.Set">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Task hook set type definition</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt><span class="xdoc-kw1">var</span> <i>obj</i> = <span class="xdoc-kw1">new</span> Transport.<span class="xdoc-id">FxnSet</span>;
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">initFxn</span> = <i><span class="xdoc-kw2">Void</span>(*)()</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">startFxn</span> = <i><span class="xdoc-kw2">Ptr</span>(*)(<a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr.Type" title="ti.uia.runtime.UIAPacket.HdrType">UIAPacket.HdrType</a>)</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">recvFxn</span> = <i><span class="xdoc-kw2">SizeT</span>(*)(<span class="xdoc-kw2">Ptr</span>,<a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr" title="ti.uia.runtime.UIAPacket.Hdr">UIAPacket.Hdr</a>**,<span class="xdoc-kw2">SizeT</span>)</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">sendFxn</span> = <i><span class="xdoc-kw2">Bool</span>(*)(<span class="xdoc-kw2">Ptr</span>,<a class="xdoc-link" href="../../../ti/uia/runtime/UIAPacket.html#.Hdr" title="ti.uia.runtime.UIAPacket.Hdr">UIAPacket.Hdr</a>**)</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">stopFxn</span> = <i><span class="xdoc-kw2">Void</span>(*)(<span class="xdoc-kw2">Ptr</span>)</i><b>&nbsp;&nbsp;...</b>
+</div>
+<div class="xdocSynCode">
+<tt></tt><tt>&nbsp;&nbsp;&nbsp;&nbsp;</tt><i>obj</i>.<span class="xdoc-id">exitFxn</span> = <i><span class="xdoc-kw2">Void</span>(*)(<span class="xdoc-kw2">Void</span>)</i><b>&nbsp;&nbsp;...</b>
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">DETAILS</div>
+<div class="xdocText">See <a class="xdoc-link" href="Transport.html#transportfxn" title="transportfxn">Transport Functions</a> for details.</div>
+<div class="xdocSect">C SYNOPSIS</div>
+<div class="xdocText"><a class="xdoc-link" href="#.Fxn.Set" title="Transport_FxnSet">Transport_FxnSet</a></div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<a class="xdocAnchor" id="common$"></a>
+<table class="xdocHdr"><tr>
+<td class="xdocHdrTitle"><span class="xdoc-kw1">metaonly </span><span class="xdoc-kw1">config</span> <span class="xdoc-id">Transport.</span><span class="xdoc-id">common$</span>&nbsp;&nbsp;<small><span class="xdocSynSum">//&nbsp;module-wide</span></small></td>
+<td class="xdocHdrArrow">
+<a class="xdocHdrLink" href="../../../ti/uia/runtime/Transport.html" title="module Transport"><img class="xdocHdrArrow" src="../../../Arrow_up.png"/></a></td>
+</table>
+<div class=xdocHdrIndex><a class=xdocHdrIndex title="right-click to capture" href="../../../index.html#ti/uia/runtime/Transport.html#common$">index URL</a></div>
+<p class="xdocHdrSummaryDcl">Common module configuration parameters</p>
+<span id='meta-synop'></span>
+<table class="xdocLabel"><tr>
+<td class="xdocLabelLeft"><tt><span class="xdoc-id-meta2dcl">XDCscript</span></tt> usage</td>
+<td class="xdocLabelRight">meta-domain</td>
+</tr></table>
+<div class="xdocSynMdcl">
+<div class="xdocSynCode">
+<tt></tt><tt></tt>Transport.<span class="xdoc-id">common$</span> = <i><a class="xdoc-link" href="../../../xdc/runtime/Types.html#.Common$" title="xdc.runtime.Types.Common$">Types.Common$</a></i> <span class="xdoc-kw2">undefined</span>;
+</div>
+</div>
+<div class="xdocSynSpacer">&nbsp;</div>
+<span id="xdoc-sect-1"></span>
+<div class="xdocSect">DETAILS</div>
+<div class="xdocText">All modules have this configuration parameter.  Its name
+  contains the '$' character to ensure it does not conflict with
+  configuration parameters declared by the module.  This allows
+  new configuration parameters to be added in the future without
+  any chance of breaking existing modules.</div>
+</div>
+<div id="xdocDate">generated on Fri, 13 Jul 2012 18:18:17 GMT</div>
+</div></div></body>
+</html>

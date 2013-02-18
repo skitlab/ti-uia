@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-Name: System Analyzer (UIA Target) Embedded Runtime Content
+Created-By: 1.5.0_22 (Sun Microsystems Inc.)
+Bundle-Activator: org.eclipse.rtsc.xdctools.ui.CCSActivator
+Bundle-Vendor: Texas Instruments
+Bundle-ManifestVersion: 2
+Bundle-Localization: plugin
+Bundle-SymbolicName: com.ti.uia.product_1.1.1.14;singleton:=true
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,org.eclipse.he
+ lp,org.eclipse.rtsc.xdctools.ui
+Bundle-Version: 1.1.1.14
+Eclipse-LazyStart: true
+
+Name: plugin.xml
+SHA1-Digest: tu7rywEbqwtGmki6NkUTPKMCCqY=
+

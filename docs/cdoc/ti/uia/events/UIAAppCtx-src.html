@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>module ti.uia.events.UIAAppCtx</title>
+<meta name="googlebot" content="noindex,nofollow">
+<link rel="stylesheet" type="text/css" href="../../../src.css"/>
+</head>
+<body>
+<pre class=src>
+     1    <span class="comment">/* --COPYRIGHT--,BSD
+</span>     2    <span class="comment"> * Copyright (c) $(CPYYEAR), Texas Instruments Incorporated
+</span>     3    <span class="comment"> * All rights reserved.
+</span>     4    <span class="comment"> *
+</span>     5    <span class="comment"> * Redistribution and use in source and binary forms, with or without
+</span>     6    <span class="comment"> * modification, are permitted provided that the following conditions
+</span>     7    <span class="comment"> * are met:
+</span>     8    <span class="comment"> *
+</span>     9    <span class="comment"> * *  Redistributions of source code must retain the above copyright
+</span>    10    <span class="comment"> *    notice, this list of conditions and the following disclaimer.
+</span>    11    <span class="comment"> *
+</span>    12    <span class="comment"> * *  Redistributions in binary form must reproduce the above copyright
+</span>    13    <span class="comment"> *    notice, this list of conditions and the following disclaimer in the
+</span>    14    <span class="comment"> *    documentation and/or other materials provided with the distribution.
+</span>    15    <span class="comment"> *
+</span>    16    <span class="comment"> * *  Neither the name of Texas Instruments Incorporated nor the names of
+</span>    17    <span class="comment"> *    its contributors may be used to endorse or promote products derived
+</span>    18    <span class="comment"> *    from this software without specific prior written permission.
+</span>    19    <span class="comment"> *
+</span>    20    <span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+</span>    21    <span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+</span>    22    <span class="comment"> * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+</span>    23    <span class="comment"> * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+</span>    24    <span class="comment"> * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+</span>    25    <span class="comment"> * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+</span>    26    <span class="comment"> * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+</span>    27    <span class="comment"> * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+</span>    28    <span class="comment"> * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+</span>    29    <span class="comment"> * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+</span>    30    <span class="comment"> * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</span>    31    <span class="comment"> * --/COPYRIGHT--*/</span>
+    32    
+    33    <span class="comment">/*
+</span>    34    <span class="comment"> *  ======== UIAAppCtx.xdc ========
+</span>    35    <span class="comment"> */</span>
+    36    import xdc.runtime.Types;
+    37    import xdc.runtime.Diags;
+    38    import ti.uia.events.IUIACtx;
+    39    
+    40    <span class="xdoc">/*!
+</span>    41    <span class="xdoc"> * UIA Application Context Instrumentation
+</span>    42    <span class="xdoc"> *
+</span>    43    <span class="xdoc"> * The UIAAppCtx module defines context change events
+</span>    44    <span class="xdoc"> * and methods that allow tooling to identify application context
+</span>    45    <span class="xdoc"> * switches and to enable application-aware filtering, trace and
+</span>    46    <span class="xdoc"> * analysis.
+</span>    47    <span class="xdoc"> *
+</span>    48    <span class="xdoc"> * It inherits IUIACtx, which defines a function pointer to
+</span>    49    <span class="xdoc"> * an isLoggingEnabled function which, if configured to point to
+</span>    50    <span class="xdoc"> * a function, will evaluate the function prior to logging the context
+</span>    51    <span class="xdoc"> * change event and will determine whether to log the event based on the
+</span>    52    <span class="xdoc"> * return value of the function.  If the function is not configured,
+</span>    53    <span class="xdoc"> * logging will be conditional upon ti_uia_runtime_CtxFilter_gIsLoggingEnabled.
+</span>    54    <span class="xdoc"> *
+</span>    55    <span class="xdoc"> *  The generation of UIAAppCtx events is also controlled by a module's diagnostics
+</span>    56    <span class="xdoc"> *  mask, which is described in details in `{<b>@link</b> xdc.runtime.Diags}`.
+</span>    57    <span class="xdoc"> * `UIAAppCtx` events are generated only when the Diags.ANALYSIS bit is set 
+</span>    58    <span class="xdoc"> *  in the module's diagnostics mask. 
+</span>    59    <span class="xdoc"> *
+</span>    60    <span class="xdoc"> *  The following configuration script demonstrates how the application might
+</span>    61    <span class="xdoc"> *  control the logging of ANALYSIS events embedded in the `Mod` module at configuration
+</span>    62    <span class="xdoc"> *  time. In this case, the configuration script arranges for the `Log`
+</span>    63    <span class="xdoc"> *  statements within modules to always generate ANALYSIS events.
+</span>    64    <span class="xdoc"> *  Without these configuration statements, no ANALYSIS events would be generated
+</span>    65    <span class="xdoc"> *  by any modules.
+</span>    66    <span class="xdoc"> *
+</span>    67    <span class="xdoc"> * <b>@a(Examples)</b>
+</span>    68    <span class="xdoc"> * Example 1: This is part of the XDC configuration file for the application:
+</span>    69    <span class="xdoc"> *
+</span>    70    <span class="xdoc"> *  <b>@p(code)</b>
+</span>    71    <span class="xdoc"> *  var LogCtxChg = xdc.useModule('ti.uia.runtime.LogCtxChg');
+</span>    72    <span class="xdoc"> *  var Diags = xdc.useModule('xdc.runtime.Diags');
+</span>    73    <span class="xdoc"> *  var LoggerSys = xdc.useModule('xdc.runtime.LoggerSys');
+</span>    74    <span class="xdoc"> *  var Defaults = xdc.useModule('xdc.runtime.Defaults');
+</span>    75    <span class="xdoc"> *  var logger = LoggerSys.create();
+</span>    76    <span class="xdoc"> *  
+</span>    77    <span class="xdoc"> *  Defaults.common$.diags_ANALYSIS = Diags.ALWAYS_ON; 
+</span>    78    <span class="xdoc"> *  Defaults.common$.logger = logger;
+</span>    79    <span class="xdoc"> *  <b>@p</b>
+</span>    80    <span class="xdoc"> *
+</span>    81    <span class="xdoc"> *  <b>@p(html)</b>
+</span>    82    <span class="xdoc"> *  &lt;hr /&gt;
+</span>    83    <span class="xdoc"> *  <b>@p</b>
+</span>    84    <span class="xdoc"> *
+</span>    85    <span class="xdoc"> *  Example 2: The following example configures a module to support logging
+</span>    86    <span class="xdoc"> *  of ANALYSIS events, but defers the actual activation and deactivation of the
+</span>    87    <span class="xdoc"> *  logging until runtime. See the `{<b>@link</b> Diags#setMask Diags_setMask()}`
+</span>    88    <span class="xdoc"> *  function for details on specifying the control string.
+</span>    89    <span class="xdoc"> *
+</span>    90    <span class="xdoc"> *  This is a part of the XDC configuration file for the application:
+</span>    91    <span class="xdoc"> *
+</span>    92    <span class="xdoc"> *  <b>@p(code)</b>
+</span>    93    <span class="xdoc"> *  var LogCtxChg = xdc.useModule('ti.uia.runtime.LogCtxChg');
+</span>    94    <span class="xdoc"> *  var Diags = xdc.useModule('xdc.runtime.Diags');
+</span>    95    <span class="xdoc"> *  var Mod = xdc.useModule('my.pkg.Mod');
+</span>    96    <span class="xdoc"> *
+</span>    97    <span class="xdoc"> *  Mod.common$.diags_ANALYSIS = Diags.RUNTIME_OFF;
+</span>    98    <span class="xdoc"> *  <b>@p</b>
+</span>    99    <span class="xdoc"> *
+</span>   100    <span class="xdoc"> *  This is a part of the C code for the application:
+</span>   101    <span class="xdoc"> *
+</span>   102    <span class="xdoc"> *  <b>@p(code)</b>
+</span>   103    <span class="xdoc"> *  // turn on logging of ANALYSIS events in the module
+</span>   104    <span class="xdoc"> *  Diags_setMask("my.pkg.Mod+Z");
+</span>   105    <span class="xdoc"> *
+</span>   106    <span class="xdoc"> *  // turn off logging of ANALYSIS events in the module
+</span>   107    <span class="xdoc"> *  Diags_setMask("my.pkg.Mod-Z");
+</span>   108    <span class="xdoc"> *  <b>@p</b>
+</span>   109    <span class="xdoc"> */</span>
+   110    @CustomHeader
+   111    <span class=key>module</span> UIAAppCtx <span class=key>inherits</span> IUIACtx {
+   112    
+   113        <span class="xdoc">/*!
+</span>   114    <span class="xdoc">     *  ======== ctxChg ========
+</span>   115    <span class="xdoc">     *  Application ID Context Change event
+</span>   116    <span class="xdoc">     *
+</span>   117    <span class="xdoc">     *  Used to log switching to a new application.
+</span>   118    <span class="xdoc">     *  Note that this event should not be referenced directly by user code - it is used
+</span>   119    <span class="xdoc">     *  internally by the LogCtxChg_app function, which logs the previous app Id automatically. 
+</span>   120    <span class="xdoc">     *  
+</span>   121    <span class="xdoc">     *  <b>@a(Example)</b>
+</span>   122    <span class="xdoc">     *   The following C code shows how to log a Context Change 
+</span>   123    <span class="xdoc">     *   event that identifies a newly loaded application ID
+</span>   124    <span class="xdoc">     *  
+</span>   125    <span class="xdoc">     *  <b>@p(code)</b>
+</span>   126    <span class="xdoc">     *  #include &lt;ti/uia/runtime/LogCtxChg.h&gt;
+</span>   127    <span class="xdoc">     *  ...
+</span>   128    <span class="xdoc">     *  Void loadApplication(Int newAppId){
+</span>   129    <span class="xdoc">     *    ...
+</span>   130    <span class="xdoc">     *    LogCtxChg_app("New AppID=0x%x",newAppId);
+</span>   131    <span class="xdoc">     *    ...
+</span>   132    <span class="xdoc">     *  }
+</span>   133    <span class="xdoc">     *  <b>@p</b>
+</span>   134    <span class="xdoc">     *  This event prints the Log call site (%$F) and a format string (%$S)
+</span>   135    <span class="xdoc">     *  which is recursively formatted with any addition arguments.
+</span>   136    <span class="xdoc">     *  The following text is an example of what will be displayed for the event:
+</span>   137    <span class="xdoc">     *  <b>@p(code)</b>     
+</span>   138    <span class="xdoc">     *  "AppID Ctx Change at Line 123 in appLoader.c [Prev. AppID = 0x1234] New AppID=0x1235"
+</span>   139    <span class="xdoc">     *
+</span>   140    <span class="xdoc">     *  <b>@param(fmt)</b>   a constant string that describes the context change and provides a format specifier for newAppId
+</span>   141    <span class="xdoc">     *  <b>@param(newAppId)</b>   an integer which uniquely identifies the new application context
+</span>   142    <span class="xdoc">     */</span>
+   143        <span class=key>config</span> xdc.runtime.Log.Event ctxChg = {
+   144            mask: Diags.ANALYSIS,
+   145            msg: <span class="string">"AppID Ctx Change at %$F [Prev. AppID=0x%x] %$S"</span>};
+   146    
+   147        <span class="xdoc">/*!
+</span>   148    <span class="xdoc">     *  ======== metaEventAppCtxChg ========
+</span>   149    <span class="xdoc">     *  Metadata description of the Application Context Change event
+</span>   150    <span class="xdoc">     *
+</span>   151    <span class="xdoc">     *  <b>@_nodoc</b>
+</span>   152    <span class="xdoc">     */</span>
+   153        <span class=key>metaonly</span> <span class=key>config</span> DvtTypes.MetaEventDescriptor metaEventAppCtxChg = {
+   154            versionId: <span class="string">"2.0"</span>,
+   155            analysisType: DvtTypes.DvtAnalysisType_CONTEXTCHANGE,
+   156            displayText: <span class="string">"AppID Ctx Change"</span>,
+   157            tooltipText: <span class="string">"Application ID Context Change"</span>,
+   158            numParameters: 5,
+   159            paramInfo: [
+   160            {   name: <span class="string">'__FILE__'</span>,
+   161                dataDesc: DvtTypes.DvtDataDesc_FILENAMESTR,
+   162                dataTypeName: <span class="string">'String'</span>,
+   163                units: <span class="string">'none'</span>,
+   164                isHidden: <span class=key>false</span>
+   165            },
+   166            {   name: <span class="string">'__LINE__'</span>,
+   167                dataDesc: DvtTypes.DvtDataDesc_LINENUM,
+   168                dataTypeName: <span class="string">'Int'</span>,
+   169                units: <span class="string">'none'</span>,
+   170                isHidden: <span class=key>false</span>
+   171            },
+   172            {   name: <span class="string">'Prev. App ID'</span>,
+   173                dataDesc: DvtTypes.DvtDataDesc_APPID,
+   174                dataTypeName: <span class="string">'Int'</span>,
+   175                units: <span class="string">'none'</span>,
+   176                isHidden: <span class=key>false</span>
+   177            },
+   178            {   name: <span class="string">'fmt'</span>,
+   179                dataDesc: DvtTypes.DvtDataDesc_FMTSTR,
+   180                dataTypeName: <span class="string">'String'</span>,
+   181                units: <span class="string">'none'</span>,
+   182                isHidden: <span class=key>false</span>
+   183            },
+   184            {   name: <span class="string">'New App ID'</span>,
+   185                dataDesc: DvtTypes.DvtDataDesc_APPID,
+   186                dataTypeName: <span class="string">'Int'</span>,
+   187                units: <span class="string">'none'</span>,
+   188                isHidden: <span class=key>false</span>
+   189            }]
+   190    
+   191        };
+   192    
+   193        <span class="xdoc">/*!
+</span>   194    <span class="xdoc">     * ======== getCtxId ========
+</span>   195    <span class="xdoc">     * Get the ID for the current channel
+</span>   196    <span class="xdoc">     *
+</span>   197    <span class="xdoc">     *  <b>@a(returns)</b>
+</span>   198    <span class="xdoc">     *  returns the thread ID logged by the last call to UIAAppCtx_logCtxChg.
+</span>   199    <span class="xdoc">     */</span>
+   200        @Macro Int getCtxId();
+   201    
+   202        <span class="xdoc">/*!
+</span>   203    <span class="xdoc">     * ======== isLoggingEnabled ========
+</span>   204    <span class="xdoc">     * returns true if the new context matches the value to enable logging with.
+</span>   205    <span class="xdoc">     *
+</span>   206    <span class="xdoc">     *  Default implementation of the IUIACtx_IsLoggingEnabledFxn for user context.
+</span>   207    <span class="xdoc">     *  To enable context-aware filtering, assign UIAAppCtx_isLoggingEnabledFxn = &amp;UIAAppCtx_isLoggingEnabled
+</span>   208    <span class="xdoc">     *  in the config script or programmatically, or assign your own implementation of this
+</span>   209    <span class="xdoc">     *  function.
+</span>   210    <span class="xdoc">     *  <b>@param(newChanId)</b> the new channel ID
+</span>   211    <span class="xdoc">     *  <b>@a(returns)</b> true if logging is enabled
+</span>   212    <span class="xdoc">     */</span>
+   213         @DirectCall
+   214         Bool isLoggingEnabled(UInt newAppId);
+   215    
+   216        <span class="xdoc">/*!
+</span>   217    <span class="xdoc">     * ======== setOldValue =========
+</span>   218    <span class="xdoc">     * sets the ti_uia_events_UIAAppCtx_gLastValue to the new value and returns the old value before it was updated.
+</span>   219    <span class="xdoc">     *
+</span>   220    <span class="xdoc">     * <b>@param(newValue)</b> the new value to save in the global variable
+</span>   221    <span class="xdoc">     * <b>@a</b>(return0       the original value of the global variable before it was updated.
+</span>   222    <span class="xdoc">     */</span>
+   223         @DirectCall
+   224         UInt setOldValue(UInt newValue);
+   225    }
+   226    
+   227    <span class="comment">/*
+</span>   228    <span class="comment"> *! Revision History
+</span>   229    <span class="comment"> *! ================
+</span>   230    <span class="comment"> *! 23-Jun-2010 toddm Started revision history
+</span>   231    <span class="comment"> */</span>
+</pre>
+</body></html>

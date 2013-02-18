@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head><title>module ti.uia.runtime.UIAMetaData</title>
+<meta name="googlebot" content="noindex,nofollow">
+<link rel="stylesheet" type="text/css" href="../../../src.css"/>
+</head>
+<body>
+<pre class=src>
+     1    <span class="comment">/* --COPYRIGHT--,BSD
+</span>     2    <span class="comment"> * Copyright (c) $(CPYYEAR), Texas Instruments Incorporated
+</span>     3    <span class="comment"> * All rights reserved.
+</span>     4    <span class="comment"> *
+</span>     5    <span class="comment"> * Redistribution and use in source and binary forms, with or without
+</span>     6    <span class="comment"> * modification, are permitted provided that the following conditions
+</span>     7    <span class="comment"> * are met:
+</span>     8    <span class="comment"> *
+</span>     9    <span class="comment"> * *  Redistributions of source code must retain the above copyright
+</span>    10    <span class="comment"> *    notice, this list of conditions and the following disclaimer.
+</span>    11    <span class="comment"> *
+</span>    12    <span class="comment"> * *  Redistributions in binary form must reproduce the above copyright
+</span>    13    <span class="comment"> *    notice, this list of conditions and the following disclaimer in the
+</span>    14    <span class="comment"> *    documentation and/or other materials provided with the distribution.
+</span>    15    <span class="comment"> *
+</span>    16    <span class="comment"> * *  Neither the name of Texas Instruments Incorporated nor the names of
+</span>    17    <span class="comment"> *    its contributors may be used to endorse or promote products derived
+</span>    18    <span class="comment"> *    from this software without specific prior written permission.
+</span>    19    <span class="comment"> *
+</span>    20    <span class="comment"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+</span>    21    <span class="comment"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+</span>    22    <span class="comment"> * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+</span>    23    <span class="comment"> * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+</span>    24    <span class="comment"> * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+</span>    25    <span class="comment"> * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+</span>    26    <span class="comment"> * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+</span>    27    <span class="comment"> * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+</span>    28    <span class="comment"> * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+</span>    29    <span class="comment"> * OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+</span>    30    <span class="comment"> * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</span>    31    <span class="comment"> * --/COPYRIGHT--*/</span>
+    32    
+    33    <span class="comment">/*
+</span>    34    <span class="comment"> * ======== UIAMetaData.xdc
+</span>    35    <span class="comment"> */</span>
+    36    
+    37    <span class="xdoc">/*!
+</span>    38    <span class="xdoc"> * Unified Arch. Hardware Interrupt Context Instrumentation
+</span>    39    <span class="xdoc"> *
+</span>    40    <span class="xdoc"> * The UIAHWICtx module defines context change events
+</span>    41    <span class="xdoc"> * and methods that allow tooling to identify hardware interrutp context
+</span>    42    <span class="xdoc"> * switches and to enable HWI-aware filtering, trace and
+</span>    43    <span class="xdoc"> * analysis.
+</span>    44    <span class="xdoc"> */</span>
+    45    
+    46    <span class=key>module</span> UIAMetaData {
+    47    
+    48        <span class="xdoc">/*!
+</span>    49    <span class="xdoc">     *  ======== UploadMode ========
+</span>    50    <span class="xdoc">     */</span>
+    51        <span class=key>enum</span> UploadMode {
+    52            UploadMode_SIMULATOR = 1, <span class="comment">/* note that simulators use probe points */</span>
+    53            UploadMode_PROBEPOINT = 2,
+    54            UploadMode_JTAGSTOPMODE = 3,
+    55            UploadMode_JTAGRUNMODE = 4,
+    56            UploadMode_NONJTAGTRANSPORT = 5,        
+    57            UploadMode_CUSTOM = 6
+    58        }
+    59        
+    60        <span class=key>metaonly</span> <span class=key>function</span> generateXML();
+    61    
+    62        <span class="xdoc">/*!
+</span>    63    <span class="xdoc">     *  ======== genXmlEntry ========
+</span>    64    <span class="xdoc">     *  write an entry into an xml file
+</span>    65    <span class="xdoc">     *
+</span>    66    <span class="xdoc">     *  e.g. &lt;myTag&gt;myValue&lt;/myTag&gt;\n
+</span>    67    <span class="xdoc">     */</span>
+    68        <span class=key>metaonly</span> <span class=key>function</span> genXmlEntry(indent, tag, value);
+    69        
+    70        <span class="xdoc">/*!
+</span>    71    <span class="xdoc">     *  ======== genXmlEntryOpen ========
+</span>    72    <span class="xdoc">     *  write an entry into an xml file with a key field
+</span>    73    <span class="xdoc">     *
+</span>    74    <span class="xdoc">     *  e.g. &lt;myTag myKeyName=myKeyValue&gt;
+</span>    75    <span class="xdoc">     */</span>
+    76        <span class=key>metaonly</span> <span class=key>function</span>  genXmlEntryOpen(indent,  tag);
+    77        
+    78        <span class="xdoc">/*!
+</span>    79    <span class="xdoc">     *  ======== genXmlEntryOpenWithKey ========
+</span>    80    <span class="xdoc">     *  write an entry into an xml file with a key field
+</span>    81    <span class="xdoc">     *
+</span>    82    <span class="xdoc">     *  e.g. &lt;myTag myKeyName=myKeyValue&gt;
+</span>    83    <span class="xdoc">     */</span>
+    84        <span class=key>metaonly</span> <span class=key>function</span>  genXmlEntryOpenWithKey(indent,tag,keyName,keyValue,value);
+    85        
+    86        <span class="xdoc">/*!
+</span>    87    <span class="xdoc">     *  ======== genXmlEntryWithKey ========
+</span>    88    <span class="xdoc">     *  write an entry into an xml file with a key field
+</span>    89    <span class="xdoc">     *
+</span>    90    <span class="xdoc">     *  e.g. &lt;myTag myKeyName=myKeyValue&gt;myValue&lt;/myTag&gt;\n
+</span>    91    <span class="xdoc">     */</span>
+    92         <span class=key>metaonly</span> <span class=key>function</span>  genXmlEntryWithKey(indent,tag,keyName,keyValue,value);
+    93         
+    94         <span class="xdoc">/*!
+</span>    95    <span class="xdoc">      *  ======== genXmlComment ========
+</span>    96    <span class="xdoc">      *  add an XML style comment to the active xml file
+</span>    97    <span class="xdoc">      */</span>
+    98         <span class=key>metaonly</span> <span class=key>function</span>  genXmlComment(indent,  comment);
+    99        <span class="xdoc">/*!
+</span>   100    <span class="xdoc">     *  ======== genXmlEntryClose ========
+</span>   101    <span class="xdoc">     *  write an entry into an xml file with a key field
+</span>   102    <span class="xdoc">     *
+</span>   103    <span class="xdoc">     *  e.g. &lt;/myTag&gt;\n
+</span>   104    <span class="xdoc">     */</span>
+   105        <span class=key>metaonly</span> <span class=key>function</span>  genXmlEntryClose(indent,  tag);
+   106        
+   107        <span class="xdoc">/*!
+</span>   108    <span class="xdoc">     *  ======== setTransportFields ========
+</span>   109    <span class="xdoc">     *  Function to populate the transport fields
+</span>   110    <span class="xdoc">     *
+</span>   111    <span class="xdoc">     *  This function is used to populate the UIA XML file with
+</span>   112    <span class="xdoc">     *  transport information. It  writes &lt;transport2&gt; entries. 
+</span>   113    <span class="xdoc">     *  The &lt;transport2&gt; is supported by System Analyzer in 5.2 
+</span>   114    <span class="xdoc">     *  and later.
+</span>   115    <span class="xdoc">     *  
+</span>   116    <span class="xdoc">     *  The parameters map directly to individual fields in the
+</span>   117    <span class="xdoc">     *  &lt;transport2&gt; entries. For example
+</span>   118    <span class="xdoc">     *
+</span>   119    <span class="xdoc">     *  <b>@a(Example)</b>
+</span>   120    <span class="xdoc">     *  UIAMetaData.setTransportFields(false, "UART", "UIAPACKET", 
+</span>   121    <span class="xdoc">     *                      true, "timestamps=32bits,sequence=disabled");
+</span>   122    <span class="xdoc">     *
+</span>   123    <span class="xdoc">     *  would yield
+</span>   124    <span class="xdoc">     *
+</span>   125    <span class="xdoc">     * &lt;transport2&gt;
+</span>   126    <span class="xdoc">     *    &lt;isMultiCoreTransport&gt;false&lt;/isMultiCoreTransport&gt;
+</span>   127    <span class="xdoc">     *    &lt;supportControl&gt;true&lt;/supportControl&gt;
+</span>   128    <span class="xdoc">     *    &lt;format&gt;UIAPacket&lt;/format&gt;
+</span>   129    <span class="xdoc">     *    &lt;transportType&gt;UART&lt;/transportType&gt;
+</span>   130    <span class="xdoc">     *    &lt;customFields&gt;
+</span>   131    <span class="xdoc">     *       &lt;timestamps&gt;32bits&lt;/timestamps&gt;
+</span>   132    <span class="xdoc">     *       &lt;sequence&gt;disabled&lt;/sequence&gt;
+</span>   133    <span class="xdoc">     *    &lt;/customFields&gt;
+</span>   134    <span class="xdoc">     * &lt;/transport2&gt;
+</span>   135    <span class="xdoc">     *  <b>@p</b>
+</span>   136    <span class="xdoc">     *
+</span>   137    <span class="xdoc">     *  This function can be called multiple times.
+</span>   138    <span class="xdoc">     *
+</span>   139    <span class="xdoc">     *  <b>@param(isMultiCoreTransport)</b> Boolean whether it is a multicore
+</span>   140    <span class="xdoc">     *                               transport. If true, then multiple
+</span>   141    <span class="xdoc">     *                               cores route their events through
+</span>   142    <span class="xdoc">     *                               the transport on this core.
+</span>   143    <span class="xdoc">     *  <b>@param(transportType)</b>        The type of transport (e.g. UART)
+</span>   144    <span class="xdoc">     *  <b>@param(format)</b>               The format of the data (e.g. UIAPACKET)
+</span>   145    <span class="xdoc">     *  <b>@param(supportControl)</b>       Boolean whether the transport can receive
+</span>   146    <span class="xdoc">     *                               control messages from the instrumentation
+</span>   147    <span class="xdoc">     *                               host.
+</span>   148    <span class="xdoc">     *  <b>@param(customFields)</b>         Custom fields. Fields are comma separated.
+</span>   149    <span class="xdoc">     *                               Field name/values are separated by an 
+</span>   150    <span class="xdoc">     *                               '='.
+</span>   151    <span class="xdoc">     */</span>
+   152        <span class=key>metaonly</span> <span class=key>function</span> setTransportFields(isMultiCoreTransport, uploadMode,
+   153                                             transportType, format, supportControl,
+   154                                             customFields);                                         
+   155        
+   156        <span class="xdoc">/*! <b>@_nodoc</b>
+</span>   157    <span class="xdoc">     * ======== setLoggingSetupConfigured ========
+</span>   158    <span class="xdoc">     * Called by the LoggingSetup module to indicate it is in the .cfg file
+</span>   159    <span class="xdoc">     * 
+</span>   160    <span class="xdoc">     * Sets an internal metaonly flag that is used to determine the transport used.
+</span>   161    <span class="xdoc">     */</span>
+   162        <span class=key>metaonly</span> <span class=key>function</span> setLoggingSetupConfigured();
+   163        
+   164        <span class="xdoc">/*! <b>@_nodoc</b>
+</span>   165    <span class="xdoc">     * ======== isLoggingSetupConfigured ========
+</span>   166    <span class="xdoc">     * Called by other modules to see if the LoggingSetup module is in the .cfg file
+</span>   167    <span class="xdoc">     * 
+</span>   168    <span class="xdoc">     * Returns true if the LoggingSetup module can be used to determine the transport used.
+</span>   169    <span class="xdoc">     */</span>
+   170        <span class=key>metaonly</span> <span class=key>function</span> isLoggingSetupConfigured();
+   171            
+   172        <span class="xdoc">/*! <b>@_nodoc</b>
+</span>   173    <span class="xdoc">     * ======== setLogSyncInfo ========
+</span>   174    <span class="xdoc">     * Called by the LogSync module to provide the module name and isEnabled flag
+</span>   175    <span class="xdoc">     */</span>
+   176        <span class=key>metaonly</span> <span class=key>function</span> setLogSyncInfo(moduleName, isEnabled);
+   177            
+   178        <span class="xdoc">/*! <b>@_nodoc</b>
+</span>   179    <span class="xdoc">     * ======== setLoggingSetupName ========
+</span>   180    <span class="xdoc">     * Called by the LoggingSetup module to provide it's module name 
+</span>   181    <span class="xdoc">     */</span>
+   182            <span class=key>metaonly</span> <span class=key>function</span> setLoggingSetupName(moduleName);
+   183    }
+   184    
+   185    
+   186    
+</pre>
+</body></html>
