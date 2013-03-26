@@ -43,8 +43,9 @@ endif
 IPC_INSTALL_DIR ?= /db/vtree/library/trees/ipc/ipc-h27/exports/ipc_1_24_02_27/packages
 SYSLINK_INSTALL_DIR ?= /db/atree/library/trees/sl/sl-c20/exports/syslink_2_10_03_20/packages
 
-CC = /db/toolsrc/library/tools/vendors/cs/arm/arm-2009q1-203/bin/arm-none-linux-gnueabi-gcc
-CPPFLAGS = -O2 -g -Wall -fno-strict-aliasing -I. -I../runtime -I../../.. -I$(SYSLINK_INSTALL_DIR) -I$(IPC_INSTALL_DIR)
+CC = $(CROSS_COMPILE)gcc
+
+CPPFLAGS = -fPIC -O2 -g -Wall -fno-strict-aliasing -I. -I../runtime -I../../.. -I$(SYSLINK_INSTALL_DIR)/packages -I$(IPC_INSTALL_DIR)/packages
 
 OUTPUT_OPTION = -o lib/$@
 
@@ -53,7 +54,7 @@ AR = $(CROSS_COMPILE)ar
 servicemgr_srcs = ServiceMgr.c 
 loggersm_srcs = LoggerSM.c
 
-RANLIB = /db/toolsrc/library/tools/vendors/cs/arm/arm-2009q1-203/bin/arm-none-linux-gnueabi-ranlib
+RANLIB = $(CROSS_COMPILE)ranlib
 
 all: lib/servicemgr.a lib/loggersm.a
 
