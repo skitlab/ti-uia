@@ -48,7 +48,7 @@ SERVICEMGR_LIBS = ../../linux/lib/servicemgr.a
 LOGGERSM_LIBS = ../../linux/lib/loggersm.a
 STDLIBS = -lpthread -lrt -lm
 
-CC = /db/toolsrc/library/tools/vendors/cs/arm/arm-2009q1-203/bin/arm-none-linux-gnueabi-gcc
+CC = $(CROSS_COMPILE)gcc
 
 CPPFLAGS = -g -O2 -Wall -I. -I../../../.. -I$(SYSLINK_INSTALL_DIR) -I$(IPC_INSTALL_DIR)
 
