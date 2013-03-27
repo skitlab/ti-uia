@@ -1,0 +1,8 @@
+. $1
+
+make -f uia.mak \
+ DESTDIR=$THIRD_PARTY_DIR/devkit \
+ XDC_INSTALL_DIR=$THIRD_PARTY_DIR/xdctools \
+ BIOS_INSTALL_DIR=$THIRD_PARTY_DIR/bios \
+ IPC_INSTALL_DIR=$THIRD_PARTY_DIR/ipc \
+clean
